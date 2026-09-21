@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Buenos Aires · Mi Decreto</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%230f1830'/%3E%3Cg fill='%23d4a13d'%3E%3Ccircle cx='50' cy='50' r='20'/%3E%3Cg%3E%3Cpath d='M50 8 L55 22 L45 22 Z'/%3E%3Cpath d='M50 92 L55 78 L45 78 Z'/%3E%3Cpath d='M8 50 L22 55 L22 45 Z'/%3E%3Cpath d='M92 50 L78 55 L78 45 Z'/%3E%3Cpath d='M18 18 L29 26 L26 29 Z'/%3E%3Cpath d='M82 82 L71 74 L74 71 Z'/%3E%3Cpath d='M82 18 L71 26 L74 29 Z'/%3E%3Cpath d='M18 82 L29 74 L26 71 Z'/%3E%3C/g%3E%3C/g%3E%3Ccircle cx='50' cy='50' r='20' fill='none' stroke='%234FA8E0' stroke-width='2'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230f1830'/%3E%3Cg fill='%23d4a13d'%3E%3Ccircle cx='50' cy='50' r='22'/%3E%3Cg%3E%3Cpath d='M50 4 L57 20 L43 20 Z'/%3E%3Cpath d='M50 96 L57 80 L43 80 Z'/%3E%3Cpath d='M4 50 L20 57 L20 43 Z'/%3E%3Cpath d='M96 50 L80 57 L80 43 Z'/%3E%3Cpath d='M14 14 L28 24 L24 28 Z'/%3E%3Cpath d='M86 86 L72 76 L76 72 Z'/%3E%3Cpath d='M86 14 L72 24 L76 28 Z'/%3E%3Cpath d='M14 86 L28 76 L24 72 Z'/%3E%3C/g%3E%3C/g%3E%3Ccircle cx='50' cy='50' r='22' fill='none' stroke='%234FA8E0' stroke-width='2.5'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#0f1830">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Mi Decreto">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Caveat:wght@500;700&family=Work+Sans:ital,wght@0,400;0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0f1830; --navy-deep:#0a1122; --paper:#f6ecd9; --paper-soft:#efe1c4;
+    --celeste:#4FA8E0; --celeste-soft:#8ec9ed; --gold:#d4a13d; --ink:#2a2418; --ink-soft:#5a5340;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html,body{height:100%;}
+  body{
+    background:var(--navy); color:var(--paper); font-family:'Work Sans',sans-serif;
+    background-image:radial-gradient(circle at 15% 10%, rgba(79,168,224,0.10), transparent 40%),
+      radial-gradient(circle at 85% 90%, rgba(212,161,61,0.10), transparent 40%);
+    padding-bottom: calc(72px + env(safe-area-inset-bottom,0px));
+  }
+  .scroll-frame{max-width:480px; margin:0 auto;}
+  header{padding:22px 22px 10px; text-align:center; padding-top: calc(22px + env(safe-area-inset-top,0px));}
+  .eyebrow{font-size:10.5px; letter-spacing:4px; text-transform:uppercase; color:var(--gold); font-weight:600;}
+  h1.hero-title{
+    font-family:'Bebas Neue'; font-size:42px; line-height:0.95; letter-spacing:1px; margin:6px 0 4px;
+    background:linear-gradient(180deg, var(--paper) 30%, var(--gold) 120%);
+    -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+  }
+  .hero-sub{font-size:11.5px; color:var(--celeste-soft);}
+  .flourish{width:100%; height:14px; display:flex; align-items:center; justify-content:center; opacity:0.85;}
+  .flourish svg{height:11px; width:80%;}
+  .countdown-card{
+    margin:12px 18px 6px; background:linear-gradient(160deg, var(--paper) 0%, var(--paper-soft) 100%);
+    color:var(--ink); border-radius:4px; padding:14px 14px 12px; position:relative;
+    box-shadow:0 10px 22px rgba(0,0,0,0.3); border:1px solid rgba(212,161,61,0.5);
+  }
+  .cd-grid{display:flex; justify-content:center; gap:6px; margin:6px 0 4px;}
+  .cd-unit{text-align:center; min-width:42px;}
+  .cd-num{font-family:'Bebas Neue'; font-size:24px; line-height:1; color:var(--celeste);}
+  .cd-label{font-size:7.5px; letter-spacing:1.2px; text-transform:uppercase; color:var(--ink-soft); margin-top:2px;}
+  .cd-sep{font-family:'Bebas Neue'; font-size:20px; color:var(--gold);}
+  .cd-big-msg{font-family:'Bebas Neue'; font-size:22px; color:var(--celeste); text-align:center; padding:6px 0;}
+  .phrase-box{text-align:center; min-height:30px; display:flex; align-items:center; justify-content:center;}
+  .phrase{font-family:'Caveat'; font-size:19px; font-weight:700; color:var(--celeste); transition:opacity 0.6s ease;}
+  .phrase.fade{opacity:0;}
+  .live-strip{display:grid; grid-template-columns:1fr 1fr; gap:6px; margin:10px 18px 4px;}
+  .live-tile{background:rgba(246,236,217,0.06); border:1px solid rgba(212,161,61,0.25); border-radius:6px; padding:8px 7px; text-align:center;}
+  .live-tile .lt-label{font-size:8px; letter-spacing:1.2px; text-transform:uppercase; color:var(--celeste-soft); font-weight:700;}
+  .live-tile .lt-value{font-family:'Bebas Neue'; font-size:19px; color:var(--paper); margin-top:2px;}
+  .live-tile .lt-sub{font-size:9px; color:#c7c3ad; margin-top:1px;}
+  .moon-tile .lt-value{font-size:22px;}
+  .tz-note{text-align:center; font-size:9px; color:#8a8568; margin:5px 18px 10px; font-style:italic;}
+
+  main{padding:4px 16px 24px;}
+  .tab-panel{display:none; animation:rise .3s ease;}
+  .tab-panel.active{display:block;}
+  @keyframes rise{from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:translateY(0);}}
+  .section-title{font-family:'Bebas Neue'; font-size:21px; letter-spacing:1px; color:var(--gold); margin:16px 0 10px; display:flex; align-items:center; gap:8px;}
+  .section-title:first-child{margin-top:6px;}
+  .subsection-title{font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--celeste-soft); font-weight:700; margin:14px 0 8px;}
+
+  .info-card{background:linear-gradient(160deg, var(--paper) 0%, var(--paper-soft) 100%); color:var(--ink); border-radius:6px; padding:15px; margin-bottom:12px; box-shadow:0 6px 16px rgba(0,0,0,0.25);}
+  .info-card h3{font-family:'Bebas Neue'; font-size:18px; color:var(--ink); margin-bottom:7px;}
+  .info-row{display:flex; justify-content:space-between; font-size:12.5px; padding:4px 0; border-bottom:1px dashed rgba(42,36,24,0.15);}
+  .info-row:last-child{border-bottom:none;}
+  .info-row span:first-child{color:var(--ink-soft);}
+  .info-row span:last-child{font-weight:600; text-align:right;}
+  .note{font-size:11.5px; color:var(--ink-soft); margin-top:6px; line-height:1.4;}
+  .tip{margin-top:10px; font-size:11.5px; color:var(--ink-soft); font-style:italic; background:rgba(79,168,224,0.1); padding:8px 10px; border-radius:4px; border-left:2px solid var(--celeste);}
+  .badge{display:inline-block; font-size:9.5px; padding:2px 7px; border-radius:999px; font-weight:700;}
+  .badge.ok{background:var(--celeste); color:white;}
+
+  .day-card{background:rgba(246,236,217,0.06); border:1px solid rgba(212,161,61,0.25); border-radius:6px; margin-bottom:10px; overflow:hidden;}
+  .acc-card{background:rgba(246,236,217,0.06); border:1px solid rgba(212,161,61,0.25); border-radius:6px; margin-bottom:10px; overflow:hidden;}
+  .acc-head{display:flex; justify-content:space-between; align-items:center; padding:13px 15px; cursor:pointer;}
+  .acc-head-title{font-family:'Bebas Neue'; font-size:17px; letter-spacing:0.5px; color:var(--gold);}
+  .acc-body{max-height:0; overflow:hidden; transition:max-height .4s ease; padding:0 15px;}
+  .acc-card.open .acc-body{max-height:1400px; padding-bottom:15px;}
+  .acc-card.open .chevron{transform:rotate(90deg);}
+  .day-head{display:flex; justify-content:space-between; align-items:center; padding:11px 13px; cursor:pointer;}
+  .day-head-left{display:flex; align-items:baseline; gap:9px;}
+  .day-num{font-family:'Bebas Neue'; font-size:24px; color:var(--celeste);}
+  .day-date{font-size:10px; color:#c7c3ad;}
+  .day-zone{font-size:12px; color:var(--paper); font-weight:600;}
+  .chevron{transition:transform .25s ease; color:var(--gold); font-size:13px;}
+  .day-card.open .chevron{transform:rotate(90deg);}
+  .day-body{max-height:0; overflow:hidden; transition:max-height .4s ease; padding:0 13px;}
+  .day-card.open .day-body{max-height:1200px; padding-bottom:13px;}
+  .slot{margin-top:11px; padding-left:11px; border-left:2px solid rgba(212,161,61,0.4);}
+  .slot-label{font-size:9.5px; letter-spacing:1.8px; text-transform:uppercase; color:var(--celeste-soft); font-weight:700;}
+  .slot-text{font-size:12.5px; color:#ece6d3; line-height:1.5; margin-top:2px;}
+  .places-row{display:flex; gap:6px; margin-top:12px;}
+  .places-row input{flex:1; padding:7px 9px; font-size:11.5px; border-radius:4px; border:1px solid rgba(79,168,224,0.3); background:rgba(255,255,255,0.07); color:var(--paper);}
+  .places-row input::placeholder{color:#7a765f;}
+  .places-add{background:var(--celeste); color:white; border:none; width:30px; border-radius:4px; font-size:15px; cursor:pointer; flex-shrink:0;}
+  .places-tags{margin-top:7px; display:flex; flex-wrap:wrap; gap:5px;}
+  .place-tag{background:rgba(79,168,224,0.15); color:var(--celeste-soft); font-size:10px; padding:3px 8px 3px 9px; border-radius:999px; display:flex; align-items:center; gap:5px;}
+  .place-tag .rm{cursor:pointer; color:#8a8568; font-size:11px;}
+
+  .check-group{margin-bottom:14px;}
+  .check-item{display:flex; align-items:center; gap:9px; padding:7px 0; border-bottom:1px solid rgba(255,255,255,0.06); cursor:pointer;}
+  .check-item input{width:17px; height:17px; accent-color:var(--celeste); flex-shrink:0;}
+  .check-item label{font-size:12.5px; color:#ece6d3; cursor:pointer;}
+  .check-item.checked label{color:#7a765f; text-decoration:line-through;}
+  .progress-wrap{margin:6px 0 14px;}
+  .progress-bar-bg{background:rgba(255,255,255,0.08); border-radius:999px; height:7px; overflow:hidden;}
+  .progress-bar-fill{background:linear-gradient(90deg, var(--celeste), var(--gold)); height:100%; width:0%; transition:width .4s ease; border-radius:999px;}
+  .progress-txt{font-size:10px; color:#c7c3ad; margin-top:5px; text-align:right;}
+
+  .noche-card{background:rgba(246,236,217,0.06); border:1px solid rgba(212,161,61,0.25); border-radius:6px; padding:11px 13px; margin-bottom:9px;}
+  .noche-head{display:flex; align-items:center; gap:8px;}
+  .noche-icon{font-size:20px;}
+  .noche-name{font-family:'Bebas Neue'; font-size:18px; color:var(--paper);}
+  .noche-tag{display:inline-block; font-size:8.5px; letter-spacing:1px; text-transform:uppercase; font-weight:700; padding:2px 7px; border-radius:999px; margin:3px 5px 2px 0;}
+  .tag-club{background:rgba(79,168,224,0.25); color:var(--celeste-soft);}
+  .tag-bar{background:rgba(212,161,61,0.25); color:var(--gold);}
+  .tag-cultura{background:rgba(246,236,217,0.15); color:#ece6d3;}
+  .noche-note{font-size:11px; color:#c7c3ad; margin-top:4px; line-height:1.4;}
+  .noche-footer{display:flex; justify-content:space-between; align-items:center; margin-top:8px;}
+  .maps-link{font-size:10.5px; color:var(--celeste-soft); font-weight:700; text-decoration:none; border:1px solid var(--celeste); padding:4px 9px; border-radius:999px;}
+  .noche-check{display:flex; align-items:center; gap:5px; font-size:9px; color:#8a8568;}
+  .noche-check input{width:16px; height:16px; accent-color:var(--celeste);}
+  .noche-action{display:flex; align-items:center; gap:6px; font-size:10px; color:var(--gold); margin-top:8px; padding-top:8px; border-top:1px dashed rgba(212,161,61,0.25);}
+  .noche-action input{width:15px; height:15px; accent-color:var(--gold);}
+
+  .budget-table{width:100%; border-collapse:collapse; font-size:12px;}
+  .budget-table th{text-align:left; font-size:8.5px; letter-spacing:1.2px; text-transform:uppercase; color:var(--gold); padding-bottom:7px; border-bottom:1px solid rgba(212,161,61,0.3);}
+  .budget-table td{padding:8px 3px; border-bottom:1px solid rgba(255,255,255,0.06); vertical-align:top;}
+  .b-real{color:var(--celeste-soft); font-weight:700; font-size:10.5px;}
+  .b-aprox{color:#c7c3ad; font-size:10.5px;}
+  .budget-total{margin-top:14px; background:rgba(79,168,224,0.15); border:1px solid rgba(79,168,224,0.4); border-radius:6px; padding:12px; display:flex; justify-content:space-between; align-items:center;}
+  .budget-total .lbl{font-size:10px; letter-spacing:1px; text-transform:uppercase; color:var(--celeste-soft);}
+  .budget-total .amt{font-family:'Bebas Neue'; font-size:22px; color:var(--paper);}
+
+  .form-row{display:flex; gap:7px; align-items:center; margin-bottom:9px;}
+  .form-row input[type="number"], .form-row input[type="text"]{flex:1; padding:9px 11px; border-radius:5px; border:1px solid rgba(42,36,24,0.25); font-size:14px; font-weight:600; color:var(--ink); background:#fffdf7;}
+  .form-row select{padding:9px 8px; border-radius:5px; border:1px solid rgba(42,36,24,0.25); font-size:12px; font-weight:600; color:var(--ink); background:#fffdf7;}
+  .btn{background:var(--celeste); color:white; border:none; padding:9px 16px; border-radius:5px; font-size:12.5px; font-weight:700; cursor:pointer;}
+  .btn-outline{background:transparent; border:1px solid var(--celeste); color:var(--celeste); padding:8px 14px; border-radius:5px; font-size:11.5px; font-weight:700; cursor:pointer;}
+  .conv-result-row{display:flex; justify-content:space-between; padding:9px 11px; background:rgba(79,168,224,0.1); border-radius:5px; margin-bottom:6px; font-size:13px;}
+  .conv-result-row .val{font-weight:700; color:var(--celeste);}
+  .rate-toggle{font-size:10.5px; color:var(--ink-soft); text-align:center; margin-top:8px; cursor:pointer; text-decoration:underline;}
+  .rate-edit{display:none; margin-top:8px; padding-top:8px; border-top:1px dashed rgba(42,36,24,0.2);}
+  .rate-edit.show{display:block;}
+  .rate-edit-row{display:flex; justify-content:space-between; align-items:center; margin-bottom:7px; font-size:11.5px;}
+  .rate-edit-row input{width:85px; padding:6px 7px; border-radius:4px; border:1px solid rgba(42,36,24,0.25); font-size:12px; text-align:right;}
+
+  .expense-item{display:flex; justify-content:space-between; align-items:center; padding:8px 0; border-bottom:1px dashed rgba(42,36,24,0.15); font-size:12px;}
+  .expense-item .meta{color:var(--ink-soft); font-size:10px; display:block;}
+  .expense-item .del{color:#a33; cursor:pointer; font-size:11px; margin-left:8px;}
+  .pay-badge{font-size:8.5px; background:rgba(79,168,224,0.15); color:var(--celeste); padding:1px 6px; border-radius:999px; font-weight:700;}
+
+  .doc-slot{background:linear-gradient(160deg, var(--paper) 0%, var(--paper-soft) 100%); border-radius:6px; padding:14px; margin-bottom:12px; color:var(--ink);}
+  .doc-slot-head{display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; gap:8px;}
+  .doc-slot-title{font-family:'Bebas Neue'; font-size:17px; color:var(--ink);}
+  .doc-slot-title-input{font-family:'Work Sans'; font-size:13px; font-weight:700; color:var(--ink); border:none; border-bottom:1px dashed rgba(42,36,24,0.3); background:transparent; padding:3px 0; width:60%;}
+  .doc-thumb{width:100%; max-height:160px; object-fit:cover; border-radius:5px; margin-top:8px; cursor:pointer; display:none;}
+  .doc-thumb.show{display:block;}
+  .doc-pdf-link{display:none; margin-top:8px; font-size:12px; color:var(--celeste); font-weight:700; text-decoration:underline; cursor:pointer;}
+  .doc-pdf-link.show{display:inline-block;}
+  .doc-upload-label{display:inline-block; font-size:11.5px; color:var(--celeste); border:1px solid var(--celeste); padding:6px 12px; border-radius:5px; cursor:pointer; font-weight:700; flex-shrink:0;}
+  .doc-upload-label input{display:none;}
+  .doc-empty-note{font-size:11px; color:var(--ink-soft); margin-top:6px;}
+
+  #imgModal{display:none; position:fixed; inset:0; background:rgba(0,0,0,0.9); z-index:999; align-items:center; justify-content:center; padding:20px;}
+  #imgModal.show{display:flex;}
+  #imgModal img{max-width:100%; max-height:85vh; border-radius:6px;}
+  #imgModal .close-modal{position:absolute; top:20px; right:20px; color:white; font-size:28px; cursor:pointer;}
+
+  footer{text-align:center; padding:22px 20px 4px; font-family:'Caveat'; font-size:18px; color:var(--gold);}
+  .version-tag{text-align:center; padding:8px 20px 18px; font-size:13px; color:var(--celeste); font-weight:700; letter-spacing:0.3px;}
+
+  .bottom-nav{
+    position:fixed; bottom:0; left:0; right:0; background:var(--navy-deep);
+    border-top:1px solid rgba(212,161,61,0.3); display:flex; z-index:100;
+    padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+  .nav-btn{flex:1; background:none; border:none; color:#8a8568; padding:9px 2px 8px; display:flex; flex-direction:column; align-items:center; gap:2px; cursor:pointer;}
+  .nav-btn .nav-icon{font-size:19px;}
+  .nav-btn .nav-label{font-size:8.5px; letter-spacing:0.3px; font-weight:600;}
+  .nav-btn.active{color:var(--gold);}
+</style>
+</head>
+<body>
+<div class="scroll-frame">
+  <header>
+    <div class="eyebrow">Santiago · Buenos Aires</div>
+    <h1 class="hero-title">MI DECRETO</h1>
+    <div class="hero-sub" id="heroSub">Buenos Aires, ida y vuelta hacia mí</div>
+  </header>
+
+  <div class="flourish">
+    <svg viewBox="0 0 300 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 7 Q 30 -4 60 7 T 120 7 T 180 7 T 240 7 T 300 7" stroke="#d4a13d" stroke-width="1.4"/>
+      <circle cx="150" cy="7" r="3" fill="#4FA8E0"/>
+    </svg>
+  </div>
+
+  <div class="countdown-card" id="countdownCard"></div>
+
+  <div class="live-strip">
+    <div class="live-tile"><div class="lt-label">Santiago</div><div class="lt-value" id="clockCL">--:--</div><div class="lt-sub" id="dateCL">—</div></div>
+    <div class="live-tile"><div class="lt-label">Buenos Aires</div><div class="lt-value" id="clockAR">--:--</div><div class="lt-sub" id="dateAR">—</div></div>
+    <div class="live-tile moon-tile"><div class="lt-label">Luna hoy</div><div class="lt-value" id="moonToday">🌙</div><div class="lt-sub" id="moonTodayName">—</div></div>
+    <div class="live-tile"><div class="lt-label">Clima esperado nov.</div><div class="lt-value" style="font-size:16px;">17–25°C</div><div class="lt-sub">Primavera</div></div>
+  </div>
+  <div class="tz-note">Horarios en vivo · hoy comparten huso horario, se ajusta solo según temporada</div>
+
+  <main>
+    <div class="tab-panel active" id="tab-prep">
+      <div class="section-title">🎒 Preparación</div>
+
+      <div class="acc-card open" id="acc-equipaje">
+        <div class="acc-head"><span class="acc-head-title">Equipaje</span><span class="chevron">▶</span></div>
+        <div class="acc-body">
+          <div class="progress-wrap"><div class="progress-bar-bg"><div class="progress-bar-fill" id="progressFill"></div></div><div class="progress-txt" id="progressTxt">0 de 0 listo</div></div>
+          <div id="checklistContainer"></div>
+        </div>
+      </div>
+
+      <div class="acc-card" id="acc-pendientes">
+        <div class="acc-head"><span class="acc-head-title">Pendientes</span><span class="chevron">▶</span></div>
+        <div class="acc-body">
+          <div class="progress-wrap"><div class="progress-bar-bg"><div class="progress-bar-fill" id="progressFillPend"></div></div><div class="progress-txt" id="progressTxtPend">0 de 0 listo</div></div>
+          <div id="pendientesContainer"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-panel" id="tab-docs">
+      <div class="section-title">📄 Documentos</div>
+
+      <div class="acc-card open" id="acc-docsfijos">
+        <div class="acc-head"><span class="acc-head-title">Vuelo, hostal y seguro</span><span class="chevron">▶</span></div>
+        <div class="acc-body"><div id="fixedDocsContainer"></div></div>
+      </div>
+
+      <div class="acc-card" id="acc-aeropuertos">
+        <div class="acc-head"><span class="acc-head-title">Guía de aeropuertos</span><span class="chevron">▶</span></div>
+        <div class="acc-body">
+          <div class="info-card"><h3>SCL — Salida (1 nov, madrugada)</h3><div class="note">1. Uber te deja en Terminal de Salidas, primer piso.<br>2. Control Policía Internacional (PDI) — cédula.<br>3. Control de seguridad.<br>4. Embarque: 2° y 3° piso.</div></div>
+          <div class="info-card"><h3>AEP — Llegada (1 nov, 11:20)</h3><div class="note">1. Carteles "Llegadas Internacionales" (planta baja).<br>2. Migraciones argentinas — cédula.<br>3. Sin equipaje facturado, sales directo.<br>4. Zona Arribos para tu Uber.</div></div>
+          <div class="info-card"><h3>AEP — Salida (7 nov, noche)</h3><div class="note">1. Planta baja → primer piso (salidas).<br>2. Sector internacional, seguridad.<br>3. Migraciones — sello de salida.<br>4. Duty Free.<br>5. Pre-embarque, esperas puerta.</div></div>
+          <div class="info-card"><h3>SCL — Llegada (8 nov, 00:42)</h3><div class="note">1. Carteles "Llegadas Internacionales".<br>2. Control PDI — entras a Chile.<br>3. Sales directo, sin espera.<br>4. Uber de vuelta a casa.</div><div class="tip">✦ Sigue siempre "Salidas/Llegadas Internacionales" y "Migraciones" — constantes aunque cambien mostradores.</div></div>
+        </div>
+      </div>
+
+      <div class="acc-card" id="acc-misdocs">
+        <div class="acc-head"><span class="acc-head-title">Mis documentos</span><span class="chevron">▶</span></div>
+        <div class="acc-body"><div id="customDocsContainer"></div></div>
+      </div>
+    </div>
+
+    <div class="tab-panel" id="tab-itin">
+      <div class="section-title">🗓️ Día a día</div>
+      <div id="daysContainer"></div>
+    </div>
+
+    <div class="tab-panel" id="tab-budget">
+      <div class="section-title">💰 Presupuesto <span id="eyeToggle" style="cursor:pointer; font-size:16px; margin-left:6px;">👁️</span></div>
+
+      <div class="info-card" style="border:1px solid rgba(79,168,224,0.4);">
+        <div class="subsection-title" style="margin-top:0; color:var(--ink-soft);">💱 Conversor rápido</div>
+        <div class="form-row"><input type="number" id="convAmount" value="1000" min="0"><select id="convFrom"><option value="CLP">CLP</option><option value="USD">USD</option><option value="ARS">ARS</option></select></div>
+        <div id="convResults"></div>
+        <div class="rate-toggle" id="rateToggle">Ajustar tipo de cambio</div>
+        <div class="rate-edit" id="rateEdit">
+          <div class="rate-edit-row"><span>1 USD = ? CLP</span><input type="number" id="rateUsdClp" value="930"></div>
+          <div class="rate-edit-row"><span>1 USD = ? ARS</span><input type="number" id="rateUsdArs" value="1485"></div>
+        </div>
+      </div>
+
+      <div class="acc-card open" id="acc-gastosreales">
+        <div class="acc-head"><span class="acc-head-title">Registro de gastos reales</span><span class="chevron">▶</span></div>
+        <div class="acc-body">
+          <div class="info-card">
+            <div class="form-row"><input type="text" id="expConcept" placeholder="Concepto (ej: cena)"></div>
+            <div class="form-row">
+              <input type="number" id="expAmount" placeholder="Monto">
+              <select id="expCurrency"><option value="CLP">CLP</option><option value="ARS">ARS</option><option value="USD">USD</option></select>
+            </div>
+            <div class="form-row">
+              <select id="expMethod" style="flex:1;"><option>Débito Global66</option><option>Efectivo ARS</option><option>Efectivo USD</option><option>Débito BCI</option></select>
+              <button class="btn" id="expAddBtn">Agregar</button>
+            </div>
+            <div id="expenseList"></div>
+            <div class="info-row" style="margin-top:8px; font-weight:700;"><span>Total gastado (CLP aprox.)</span><span class="money" id="expTotal">$0</span></div>
+            <div class="info-row"><span>Te queda</span><span class="money" id="expRemaining">—</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="acc-card open" id="acc-fijo">
+        <div class="acc-head"><span class="acc-head-title">🎯 Presupuesto fijo</span><span class="chevron">▶</span></div>
+        <div class="acc-body">
+          <div class="info-card">
+            <div class="form-row"><input type="number" id="fixedBudgetInput" placeholder="Monto fijo en CLP"><button class="btn" id="fixedBudgetBtn">Fijar</button></div>
+            <div id="fixedBudgetConversions"></div>
+            <div class="note" id="fixedBudgetNote">Aún no has fijado un presupuesto — hazlo cuando inicies el viaje. Puedes modificarlo cuantas veces quieras.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="acc-card" id="acc-gastos">
+        <div class="acc-head"><span class="acc-head-title">Gastos del viaje (estimado)</span><span class="chevron">▶</span></div>
+        <div class="acc-body">
+          <table class="budget-table"><thead><tr><th>Concepto</th><th>Real</th><th>Aprox.</th></tr></thead><tbody id="budgetBody"></tbody></table>
+          <div class="budget-total"><div><div class="lbl">Total estimado</div></div><div class="amt money" id="budgetTotalAmt">$677.000 – $778.000</div></div>
+        </div>
+      </div>
+
+      <div class="acc-card" id="acc-arg">
+        <div class="acc-head"><span class="acc-head-title">🇦🇷 ¿Cuántos ARS llevar?</span><span class="chevron">▶</span></div>
+        <div class="acc-body">
+          <div class="info-card">
+            <div class="info-row"><span>Presupuesto restante (aprox.)</span><span class="money">$289.083 – $390.083 CLP</span></div>
+            <div class="info-row"><span>Equivalente en ARS</span><span class="money">≈ 474.000 – 640.000</span></div>
+            <div class="info-row"><span>Sugerido en efectivo (40-50%)</span><span class="money">≈ 190.000 – 320.000</span></div>
+            <div class="note">Efectivo: ferias, kioscos, propinas, depósito hostal. Tarjeta: restaurantes, Uber, entradas. Convierte de a poco allá.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-panel" id="tab-noche">
+      <div class="section-title">🌙 Vida nocturna</div>
+
+      <div class="acc-card open" id="acc-noche-club">
+        <div class="acc-head"><span class="acc-head-title">🎧 Clubes</span><span class="chevron">▶</span></div>
+        <div class="acc-body"><div id="nocheContainerClub"></div></div>
+      </div>
+
+      <div class="acc-card" id="acc-noche-bar">
+        <div class="acc-head"><span class="acc-head-title">🍸 Bares</span><span class="chevron">▶</span></div>
+        <div class="acc-body"><div id="nocheContainerBar"></div></div>
+      </div>
+
+      <div class="acc-card" id="acc-noche-cultura">
+        <div class="acc-head"><span class="acc-head-title">🥁 Cultura</span><span class="chevron">▶</span></div>
+        <div class="acc-body"><div id="nocheContainerCultura"></div></div>
+      </div>
+
+      <div class="tip">✦ Revisa el line-up real de la semana en Resident Advisor antes de elegir — los horarios y DJs cambian seguido.</div>
+    </div>
+
+    <div class="tab-panel" id="tab-souv">
+      <div class="section-title">🎁 Souvenirs</div>
+
+      <div class="acc-card open" id="acc-souv-exclusivo">
+        <div class="acc-head"><span class="acc-head-title">Exclusivo de Argentina</span><span class="chevron">▶</span></div>
+        <div class="acc-body">
+          <div class="info-card"><h3>🥃 Fernet Branca</h3><div class="note">El trago nacional — no se consigue igual en Chile. Cualquier supermercado o vinoteca.</div></div>
+          <div class="info-card"><h3>👡 Alpargatas</h3><div class="note">Calzado tradicional argentino, muy distinto a lo que se vende en Chile.</div></div>
+          <div class="info-card"><h3>🎨 Fileteado porteño</h3><div class="note">Cuadros, imanes o llaveros con esta ornamentación típica — San Telmo o Caminito.</div></div>
+          <div class="info-card"><h3>⚽ Camiseta Boca/River</h3><div class="note">Oficial, en tiendas de club o en Calle Florida.</div></div>
+        </div>
+      </div>
+
+      <div class="acc-card" id="acc-souv-clasicos">
+        <div class="acc-head"><span class="acc-head-title">Clásicos para comer y beber</span><span class="chevron">▶</span></div>
+        <div class="acc-body">
+          <div class="info-card"><h3>🍬 Arcor Center</h3><div class="info-row"><span>Dirección</span><span>Av. Corrientes 1335</span></div><div class="note">Golosinas a granel — día 2 de Microcentro.</div></div>
+          <div class="info-card"><h3>🍮 Dulce de leche</h3><div class="info-row"><span>La Serenísima / Chimbote</span><span>Cualquier súper</span></div></div>
+          <div class="info-card"><h3>🥜 Mantecol</h3><div class="info-row"><span>Georgalos</span><span>Kiosco o súper</span></div></div>
+          <div class="info-card"><h3>🍪 Alfajores</h3><div class="info-row"><span>Balcarce / Cofler / Guaymallén</span><span>Kiosco</span></div><div class="info-row"><span>Alfajor de maicena</span><span>En confiterías</span></div></div>
+          <div class="info-card"><h3>🧉 Mate + yerba</h3><div class="info-row"><span>Yerba: Rosamonte / Taragüi / CBSé</span><span>Súper</span></div><div class="note">El mate y su bolsito: Feria de San Telmo o una talabartería.</div></div>
+          <div class="info-card"><h3>🍷 Vino Malbec</h3><div class="info-row"><span>Trapiche / Norton / Luigi Bosca</span><span>Vinoteca o duty-free</span></div><div class="note">Cómpralo en el duty-free al volver — evitas el límite de líquidos.</div></div>
+          <div class="tip">✦ Franquicia aduanera chilena: hasta USD 4.050 sin impuestos. Con souvenirs normales no te acercas a ese límite.</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>Rinasco a modo mio 🧡</footer>
+  <div class="version-tag">v2.4 · actualizada 9 ago 2026 · Creado por Melitalove</div>
+</div>
+
+<nav class="bottom-nav">
+  <button class="nav-btn active" data-tab="prep"><span class="nav-icon">🎒</span><span class="nav-label">Prep.</span></button>
+  <button class="nav-btn" data-tab="docs"><span class="nav-icon">📄</span><span class="nav-label">Docs</span></button>
+  <button class="nav-btn" data-tab="itin"><span class="nav-icon">🗓️</span><span class="nav-label">Itin.</span></button>
+  <button class="nav-btn" data-tab="budget"><span class="nav-icon">💰</span><span class="nav-label">$</span></button>
+  <button class="nav-btn" data-tab="noche"><span class="nav-icon">🌙</span><span class="nav-label">Noche</span></button>
+  <button class="nav-btn" data-tab="souv"><span class="nav-icon">🎁</span><span class="nav-label">Souv.</span></button>
+</nav>
+
+<div id="imgModal"><span class="close-modal" id="closeModal">&times;</span><img id="modalImg" src=""></div>
+
+<script>
+function lsGet(key, fb){ try{ const v=localStorage.getItem(key); return v?JSON.parse(v):fb; }catch(e){ return fb; } }
+function lsSet(key, v){ try{ localStorage.setItem(key, JSON.stringify(v)); }catch(e){} }
+
+let idbInstance=null;
+function openIDB(){ return new Promise((res,rej)=>{ if(idbInstance){res(idbInstance);return;} const req=indexedDB.open('mi-decreto-db',1); req.onupgradeneeded=e=>e.target.result.createObjectStore('images'); req.onsuccess=e=>{idbInstance=e.target.result; res(idbInstance);}; req.onerror=rej; }); }
+async function idbSaveImage(key, dataUrl){ const db=await openIDB(); return new Promise((res,rej)=>{ const tx=db.transaction('images','readwrite'); tx.objectStore('images').put(dataUrl,key); tx.oncomplete=res; tx.onerror=rej; }); }
+async function idbGetImage(key){ const db=await openIDB(); return new Promise(res=>{ const tx=db.transaction('images','readonly'); const req=tx.objectStore('images').get(key); req.onsuccess=()=>res(req.result||null); req.onerror=()=>res(null); }); }
+
+document.querySelectorAll('.nav-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-'+btn.dataset.tab).classList.add('active');
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+});
+
+/* ---------- Countdown with trip states ---------- */
+const tripStart = new Date("2026-11-01T09:13:00-04:00").getTime();
+const tripEnd = new Date("2026-11-08T01:30:00-04:00").getTime();
+const phrases = ["Il mio decreto, la mia libertà","Oggi decido io","Rinasco a modo mio","Libera di essere me stessa"];
+let phraseIdx=0;
+const countdownCard = document.getElementById('countdownCard');
+
+function renderCountdownShell(){
+  countdownCard.innerHTML = `
+    <div class="cd-grid">
+      <div class="cd-unit"><div class="cd-num" id="cd-days">--</div><div class="cd-label">Días</div></div>
+      <div class="cd-sep">:</div>
+      <div class="cd-unit"><div class="cd-num" id="cd-hours">--</div><div class="cd-label">Horas</div></div>
+      <div class="cd-sep">:</div>
+      <div class="cd-unit"><div class="cd-num" id="cd-min">--</div><div class="cd-label">Min</div></div>
+      <div class="cd-sep">:</div>
+      <div class="cd-unit"><div class="cd-num" id="cd-sec">--</div><div class="cd-label">Seg</div></div>
+    </div>
+    <div class="phrase-box"><div class="phrase" id="phrase">${phrases[0]}</div></div>
+  `;
+}
+function renderDuringTrip(){
+  const dayNum = Math.min(7, Math.max(1, Math.floor((Date.now()-tripStart)/86400000)+1));
+  countdownCard.innerHTML = `<div class="cd-big-msg">Día ${dayNum} de 7 — ¡lo estás viviendo! 🧡</div><div class="phrase-box"><div class="phrase" id="phrase">${phrases[0]}</div></div>`;
+}
+function renderAfterTrip(){
+  countdownCard.innerHTML = `<div class="cd-big-msg">Ya lo viviste. Rinasco cumplido 🧡</div><div class="phrase-box"><div class="phrase" id="phrase">Il mio decreto, la mia libertà</div></div>`;
+}
+function refreshCountdownState(){
+  const now = Date.now();
+  if(now < tripStart){ renderCountdownShell(); updateCountdown(); }
+  else if(now < tripEnd){ renderDuringTrip(); }
+  else{ renderAfterTrip(); }
+}
+function updateCountdown(){
+  const el = document.getElementById('cd-days'); if(!el) return;
+  let diff = tripStart - Date.now(); if(diff<0) diff=0;
+  document.getElementById('cd-days').textContent = Math.floor(diff/86400000);
+  document.getElementById('cd-hours').textContent = String(Math.floor((diff/3600000)%24)).padStart(2,'0');
+  document.getElementById('cd-min').textContent = String(Math.floor((diff/60000)%60)).padStart(2,'0');
+  document.getElementById('cd-sec').textContent = String(Math.floor((diff/1000)%60)).padStart(2,'0');
+}
+setInterval(()=>{
+  const p = document.getElementById('phrase'); if(!p) return;
+  p.classList.add('fade');
+  setTimeout(()=>{ phraseIdx=(phraseIdx+1)%phrases.length; if(document.getElementById('phrase')) document.getElementById('phrase').textContent=phrases[phraseIdx]; if(p) p.classList.remove('fade'); }, 600);
+}, 4200);
+refreshCountdownState();
+setInterval(()=>{ updateCountdown(); }, 1000);
+setInterval(refreshCountdownState, 60000);
+
+/* ---------- Clocks ---------- */
+function updateClocks(){
+  const now=new Date(); const ot={hour:'2-digit',minute:'2-digit',hour12:false}, od={day:'numeric',month:'short'};
+  document.getElementById('clockCL').textContent = now.toLocaleTimeString('es-CL',{...ot, timeZone:'America/Santiago'});
+  document.getElementById('dateCL').textContent = now.toLocaleDateString('es-CL',{...od, timeZone:'America/Santiago'});
+  document.getElementById('clockAR').textContent = now.toLocaleTimeString('es-AR',{...ot, timeZone:'America/Argentina/Buenos_Aires'});
+  document.getElementById('dateAR').textContent = now.toLocaleDateString('es-AR',{...od, timeZone:'America/Argentina/Buenos_Aires'});
+}
+updateClocks(); setInterval(updateClocks, 30000);
+
+/* ---------- Moon ---------- */
+function moonPhase(date){ const s=29.53058867, k=Date.UTC(2000,0,6,18,14,0); let p=((date.getTime()-k)/86400000 % s)/s; if(p<0)p+=1; return p; }
+function moonInfo(p){ const st=[{max:0.03,icon:'🌑',name:'Luna Nueva'},{max:0.22,icon:'🌒',name:'Creciente'},{max:0.28,icon:'🌓',name:'Cuarto Creciente'},{max:0.47,icon:'🌔',name:'Gibosa Creciente'},{max:0.53,icon:'🌕',name:'Luna Llena'},{max:0.72,icon:'🌖',name:'Gibosa Menguante'},{max:0.78,icon:'🌗',name:'Cuarto Menguante'},{max:0.97,icon:'🌘',name:'Menguante'},{max:1.01,icon:'🌑',name:'Luna Nueva'}]; for(const s2 of st){if(p<=s2.max)return s2;} return st[0]; }
+const tm=moonInfo(moonPhase(new Date())); document.getElementById('moonToday').textContent=tm.icon; document.getElementById('moonTodayName').textContent=tm.name;
+
+/* ---------- Checklist ---------- */
+const checklistData = {
+  "Documentos y dinero": ["Cédula de identidad","Comprobante hostal","Pase de abordar","Póliza de seguro","Tarjeta Global66","Débito BCI activada p/ extranjero","Efectivo pesos + USD 10"],
+  "Electrónica": ["Celular + cargador","Power bank Anker (comprimida)","Auriculares","Bolsa impermeable celular"],
+  "Ropa": ["Poleras livianas x4","Pantalón/jeans","Abrigo liviano","Sweater","Outfits de noche","Outfit cumpleaños","Zapatillas + calzado noche","Pantuflas outdoor"],
+  "Neceser": ["Toallas de microfibra","Cepillo/pasta dientes","Protector solar","Botiquín básico"],
+  "Hostal": ["Candado para locker"],
+  "Extras": ["Organizadores de equipaje","Bolsa ropa sucia"]
+};
+const checklistContainer=document.getElementById('checklistContainer');
+let allItems=[];
+Object.entries(checklistData).forEach(([group,items])=>{
+  const g=document.createElement('div'); g.className='check-group'; g.innerHTML=`<div class="subsection-title">${group}</div>`;
+  items.forEach(item=>{ const id='chk-'+item.replace(/[^a-zA-Z0-9]/g,''); allItems.push(id);
+    const row=document.createElement('div'); row.className='check-item'; row.innerHTML=`<input type="checkbox" id="${id}"><label for="${id}">${item}</label>`; g.appendChild(row); });
+  checklistContainer.appendChild(g);
+});
+function loadChecklist(){ const s=lsGet('packing-checklist',{}); allItems.forEach(id=>{ if(s[id]){document.getElementById(id).checked=true; document.getElementById(id).closest('.check-item').classList.add('checked');} }); updateProgress(); }
+function saveChecklist(){ const s={}; allItems.forEach(id=>s[id]=document.getElementById(id).checked); lsSet('packing-checklist',s); }
+function updateProgress(){ const t=allItems.length, d=allItems.filter(id=>document.getElementById(id).checked).length; document.getElementById('progressFill').style.width=(d/t*100)+'%'; document.getElementById('progressTxt').textContent=`${d} de ${t} listo`; }
+checklistContainer.addEventListener('change', e=>{ if(e.target.type==='checkbox'){ e.target.closest('.check-item').classList.toggle('checked', e.target.checked); updateProgress(); saveChecklist(); } });
+loadChecklist();
+
+/* ---------- Pendientes (mate y niceto/RA movidos fuera) ---------- */
+const pendientesData = [
+  "Hacer check-in online vuelo de IDA (24-48h antes del 1 nov)",
+  "Hacer check-in online vuelo de VUELTA (24-48h antes del 7 nov)",
+  "Guardar ambas tarjetas de embarque en el celular",
+  "Guardar N° de póliza y teléfono de emergencia del seguro en Documentos",
+  "Revisar vigencia del roaming Claro unos días antes de viajar",
+  "Descargar app Mi Claro (monitoreo de datos)",
+  "Sacar efectivo (ARS) para el depósito de garantía del hostal (USD 10)",
+  "Lavar la toalla de microfibra antes de usarla",
+  "Revisar el pronóstico real la semana antes de viajar",
+  "Avisar a alguien de confianza tu itinerario completo"
+];
+const pendContainer=document.getElementById('pendientesContainer');
+let pendItems=[];
+pendientesData.forEach(item=>{ const id='pend-'+item.replace(/[^a-zA-Z0-9]/g,'').slice(0,40); pendItems.push(id);
+  const row=document.createElement('div'); row.className='check-item'; row.innerHTML=`<input type="checkbox" id="${id}"><label for="${id}">${item}</label>`; pendContainer.appendChild(row); });
+function loadPendientes(){ const s=lsGet('pending-tasks',{}); pendItems.forEach(id=>{ if(s[id]){document.getElementById(id).checked=true; document.getElementById(id).closest('.check-item').classList.add('checked');} }); updateProgressPend(); }
+function savePendientes(){ const s={}; pendItems.forEach(id=>s[id]=document.getElementById(id).checked); lsSet('pending-tasks',s); }
+function updateProgressPend(){ const t=pendItems.length, d=pendItems.filter(id=>document.getElementById(id).checked).length; document.getElementById('progressFillPend').style.width=(d/t*100)+'%'; document.getElementById('progressTxtPend').textContent=`${d} de ${t} listo`; }
+pendContainer.addEventListener('change', e=>{ if(e.target.type==='checkbox'){ e.target.closest('.check-item').classList.toggle('checked', e.target.checked); updateProgressPend(); savePendientes(); } });
+loadPendientes();
+
+/* ---------- Documentos: Ida/Vuelta separados + custom con imagen o PDF ---------- */
+const fixedDocs = [
+  {key:'doc-vuelo-ida', title:'✈️ Vuelo — Ida', sub:'1 nov, 09:13 SCL → 11:20 AEP'},
+  {key:'doc-vuelo-vuelta', title:'✈️ Vuelo — Vuelta', sub:'7 nov, 22:20 AEP → 00:42 SCL (+1)'},
+  {key:'doc-hostal', title:'🏠 Hostal (Play Garden)', sub:'Paraguay 4539, Palermo · se paga al llegar'},
+  {key:'doc-seguro', title:'🛡️ Seguro (Latam 35)', sub:'Cobertura USD 35.000 · vigencia 1-8 nov'}
+];
+function renderModal(dataUrl){ document.getElementById('modalImg').src=dataUrl; document.getElementById('imgModal').classList.add('show'); }
+document.getElementById('closeModal').addEventListener('click', ()=>document.getElementById('imgModal').classList.remove('show'));
+document.getElementById('imgModal').addEventListener('click', e=>{ if(e.target.id==='imgModal') e.currentTarget.classList.remove('show'); });
+function fileToDataUrl(file){ return new Promise((res,rej)=>{ const r=new FileReader(); r.onload=()=>res(r.result); r.onerror=rej; r.readAsDataURL(file); }); }
+
+async function buildDocSlot(container, key, titleHtml, subNote, editableTitle){
+  const wrap=document.createElement('div'); wrap.className='doc-slot'; const uid='upload-'+key;
+  wrap.innerHTML = `
+    <div class="doc-slot-head">
+      ${editableTitle ? `<input type="text" class="doc-slot-title-input" id="title-${key}" value="${titleHtml}" placeholder="Título del documento">` : `<div class="doc-slot-title">${titleHtml}</div>`}
+      <label class="doc-upload-label">Subir<input type="file" accept="image/*,application/pdf" id="${uid}"></label>
+    </div>
+    ${subNote?`<div class="note">${subNote}</div>`:''}
+    <img class="doc-thumb" id="thumb-${key}">
+    <a class="doc-pdf-link" id="pdflink-${key}">📄 Ver PDF guardado</a>
+    <div class="doc-empty-note" id="empty-${key}">Sin documento guardado todavía. Acepta JPG, PNG o PDF.</div>
+  `;
+  container.appendChild(wrap);
+  const existing = await idbGetImage(key);
+  const thumb=document.getElementById('thumb-'+key), pdfLink=document.getElementById('pdflink-'+key), emptyNote=document.getElementById('empty-'+key);
+  function applyPreview(dataUrl){
+    if(dataUrl.startsWith('data:application/pdf')){ pdfLink.href=dataUrl; pdfLink.target='_blank'; pdfLink.classList.add('show'); thumb.classList.remove('show'); emptyNote.style.display='none'; }
+    else{ thumb.src=dataUrl; thumb.classList.add('show'); pdfLink.classList.remove('show'); emptyNote.style.display='none'; }
+  }
+  if(existing) applyPreview(existing);
+  document.getElementById(uid).addEventListener('change', async e=>{
+    const file=e.target.files[0]; if(!file) return;
+    const dataUrl=await fileToDataUrl(file); await idbSaveImage(key, dataUrl); applyPreview(dataUrl);
+  });
+  thumb.addEventListener('click', ()=>{ if(thumb.src) renderModal(thumb.src); });
+  if(editableTitle){
+    const ti=document.getElementById('title-'+key);
+    ti.addEventListener('input', ()=>{ const t=lsGet('custom-doc-titles',{}); t[key]=ti.value; lsSet('custom-doc-titles',t); });
+  }
+}
+const fixedDocsContainer=document.getElementById('fixedDocsContainer');
+fixedDocs.forEach(d=>buildDocSlot(fixedDocsContainer, d.key, d.title, d.sub, false));
+const customDocsContainer=document.getElementById('customDocsContainer');
+const savedTitles=lsGet('custom-doc-titles',{});
+for(let i=1;i<=4;i++){ const key='doc-custom-'+i; buildDocSlot(customDocsContainer, key, savedTitles[key]||`Documento ${i}`, '', true); }
+
+/* ---------- Itinerario ---------- */
+const days = [
+  {num:1, date:"Dom 1 nov", zone:"Llegada · Palermo", slots:[
+    {label:"Mañana", text:"Vuelo SCL→AEP (09:13-11:20). Traslado al hostel Play Garden en Palermo Soho."},
+    {label:"Almuerzo", text:"Algo liviano cerca del hostel."},
+    {label:"Tarde", text:"Caminata de reconocimiento por Plaza Serrano."},
+    {label:"Tarde (opcional)", text:"Feria de San Telmo (Plaza Dorrego) — cierra tipo 18-19h los domingos. Si sales del hostal antes de las 17h, alcanzas el final."},
+    {label:"🍦 Helado del día", text:"Persicco — Honduras 4900, Palermo."},
+    {label:"Noche", text:"Cena de pastas."}
+  ]},
+  {num:2, date:"Lun 2 nov", zone:"Microcentro · Historia y arquitectura", slots:[
+    {label:"Mañana", text:"Café Tortoni, Obelisco, Plaza de Mayo (Casa Rosada, Cabildo, Catedral)."},
+    {label:"Almuerzo", text:"Pizzería Güerrín o Paulín sobre Av. Corrientes."},
+    {label:"Tarde", text:"Palacio Barolo (tour guiado)."},
+    {label:"🍦 Helado del día", text:"Cadore — Av. Corrientes 1695."},
+    {label:"Noche", text:"Confitería La Ideal."}
+  ]},
+  {num:3, date:"Mar 3 nov · Cumpleaños 🎂", zone:"Recoleta", slots:[
+    {label:"Mañana", text:"Cementerio de la Recoleta + Centro Cultural Recoleta."},
+    {label:"Almuerzo", text:"Algo en Recoleta."},
+    {label:"Tarde", text:"El Ateneo Grand Splendid + Floralis Genérica + El Cuartito."},
+    {label:"🍦 Helado del día", text:"Rapanui — Uruguay 1284, Recoleta."},
+    {label:"♏ Tu decreto de cumpleaños", text:"Escorpio · La Muerte (transformación): 'Hoy cierro un ciclo y abro otro. Decreto que este año es mío, y lo vivo sin pedir permiso.'"},
+    {label:"Noche", text:"Cena especial de cumpleaños."}
+  ]},
+  {num:4, date:"Mié 4 nov", zone:"San Telmo + La Boca", slots:[
+    {label:"Mañana", text:"San Telmo — Plaza Dorrego, Paseo de la Historieta."},
+    {label:"Almuerzo", text:"Hierro Parrilla San Telmo."},
+    {label:"Tarde", text:"La Boca — Caminito, Pizzería Angelin."},
+    {label:"🍦 Helado del día", text:"Nonna Bianca — Estados Unidos 425, San Telmo."},
+    {label:"Noche", text:"Volver a Palermo."}
+  ]},
+  {num:5, date:"Jue 5 nov", zone:"Palermo a fondo", slots:[
+    {label:"Mañana", text:"Bosques de Palermo + El Rosedal + Jardín Japonés."},
+    {label:"Almuerzo", text:"Palermo Hollywood."},
+    {label:"Tarde", text:"MALBA."},
+    {label:"🍦 Helado del día", text:"Rapanui — Malabia 2014, Palermo."},
+    {label:"Noche", text:"Cena en Conchinchina, Niño Gordo o La Carnicería."}
+  ]},
+  {num:6, date:"Vie 6 nov", zone:"Palermo · Noche electrónica", slots:[
+    {label:"Mañana", text:"Libre / descanso."},
+    {label:"Tarde", text:"Shopping o Distrito Arcos."},
+    {label:"🍦 Helado del día", text:"Freddo — Arenales 3360, Palermo."},
+    {label:"Alternativa", text:"Tour interior del Teatro Colón (verifica horario esa semana) si prefieres una noche más tranquila antes de salir."},
+    {label:"Noche", text:"Atis Bar → Puticlú o Artlab."}
+  ]},
+  {num:7, date:"Sáb 7 nov", zone:"Libre + vuelo de regreso", slots:[
+    {label:"Mañana", text:"Checkout 11:00 — deja mochila en recepción."},
+    {label:"Tarde", text:"Últimas compras, souvenirs."},
+    {label:"Alternativa", text:"Puerto Madero y Puente de la Mujer — caminata final con vista al río antes del aeropuerto."},
+    {label:"🍦 Helado del día", text:"Vuelve a tu favorita de la semana."},
+    {label:"Noche", text:"Vuelo AEP→SCL, 22:20 → 00:42 (+1)."}
+  ]}
+];
+const daysContainer=document.getElementById('daysContainer');
+days.forEach((d,i)=>{
+  const card=document.createElement('div'); card.className='day-card'+(i===0?' open':'');
+  card.innerHTML = `
+    <div class="day-head"><div class="day-head-left"><div class="day-num">${String(d.num).padStart(2,'0')}</div><div><div class="day-zone">${d.zone}</div><div class="day-date">${d.date}</div></div></div><div class="chevron">▶</div></div>
+    <div class="day-body">
+      ${d.slots.map(s=>`<div class="slot"><div class="slot-label">${s.label}</div><div class="slot-text">${s.text}</div></div>`).join('')}
+      <div class="places-row"><input type="text" id="place-input-${d.num}" placeholder="📍 Agrega un lugar que visitaste"><button class="places-add" id="place-add-${d.num}">+</button></div>
+      <div class="places-tags" id="places-tags-${d.num}"></div>
+    </div>
+  `;
+  card.querySelector('.day-head').addEventListener('click', ()=>card.classList.toggle('open'));
+  daysContainer.appendChild(card);
+});
+function renderPlaces(dayNum){
+  const list = lsGet('day-places-'+dayNum, []);
+  const cont = document.getElementById('places-tags-'+dayNum);
+  cont.innerHTML = list.map((p,i)=>`<span class="place-tag">${p}<span class="rm" data-day="${dayNum}" data-idx="${i}">✕</span></span>`).join('');
+  cont.querySelectorAll('.rm').forEach(el=> el.addEventListener('click', ()=>{
+    const dn=el.dataset.day; const l=lsGet('day-places-'+dn, []); l.splice(parseInt(el.dataset.idx),1); lsSet('day-places-'+dn, l); renderPlaces(dn);
+  }));
+}
+days.forEach(d=>{
+  renderPlaces(d.num);
+  document.getElementById('place-add-'+d.num).addEventListener('click', ()=>{
+    const inp=document.getElementById('place-input-'+d.num); const val=inp.value.trim(); if(!val) return;
+    const l=lsGet('day-places-'+d.num, []); l.push(val); lsSet('day-places-'+d.num, l); inp.value=''; renderPlaces(d.num);
+  });
+  document.getElementById('place-input-'+d.num).addEventListener('keypress', e=>{ if(e.key==='Enter') document.getElementById('place-add-'+d.num).click(); });
+});
+
+/* ---------- Presupuesto ---------- */
+const budget = [
+  {c:"Vuelo (JetSmart, ida/vuelta)", real:"$201.561", aprox:"", status:""},
+  {c:"Hostal (6 noches)", real:"$132.540", aprox:"", status:"Reservado — se paga al llegar"},
+  {c:"Power bank", real:"$23.867", aprox:"", status:""},
+  {c:"Seguro de viaje", real:"$29.949", aprox:"", status:""},
+  {c:"Depósito garantía hostal", real:"", aprox:"$9.300", status:""},
+  {c:"Comida + heladerías (7 días)", real:"", aprox:"$130.000 – $163.000", status:""},
+  {c:"Transporte interno", real:"", aprox:"$42.000 – $51.000", status:""},
+  {c:"Vida nocturna", real:"", aprox:"$14.000 – $32.500", status:""},
+  {c:"Cena de cumpleaños", real:"", aprox:"$23.000 – $37.000", status:""},
+  {c:"Efectivo de respaldo", real:"", aprox:"$37.000 – $56.000", status:""},
+  {c:"Souvenirs", real:"", aprox:"$30.000 – $50.000", status:""},
+];
+const budgetBody=document.getElementById('budgetBody');
+budget.forEach(b=>{ const tr=document.createElement('tr'); const nc=b.status?`${b.c}<br><span style="font-size:9px; color:var(--gold); font-weight:600;">${b.status}</span>`:b.c;
+  tr.innerHTML=`<td>${nc}</td><td>${b.real?'<span class="b-real money">'+b.real+'</span>':'—'}</td><td>${b.aprox?'<span class="b-aprox money">'+b.aprox+'</span>':'—'}</td>`; budgetBody.appendChild(tr); });
+
+/* ---------- Ojito: ocultar/mostrar montos ---------- */
+let amountsHidden = lsGet('amounts-hidden', false);
+function maskMoneyElements(){
+  document.querySelectorAll('.money').forEach(el=>{
+    if(amountsHidden){
+      if(!el.dataset.real) el.dataset.real = el.textContent;
+      el.textContent = '••••••';
+    } else {
+      if(el.dataset.real) el.textContent = el.dataset.real;
+    }
+  });
+}
+document.getElementById('eyeToggle').addEventListener('click', ()=>{
+  amountsHidden = !amountsHidden;
+  lsSet('amounts-hidden', amountsHidden);
+  document.getElementById('eyeToggle').textContent = amountsHidden ? '🙈' : '👁️';
+  maskMoneyElements();
+});
+document.getElementById('eyeToggle').textContent = amountsHidden ? '🙈' : '👁️';
+
+/* ---------- Accordion (todas las secciones) ---------- */
+document.querySelectorAll('.acc-head').forEach(head=>{
+  head.addEventListener('click', ()=> head.closest('.acc-card').classList.toggle('open'));
+});
+
+/* Presupuesto fijo con conversión automática */
+function loadFixedBudget(){ return lsGet('fixed-budget', null); }
+function currentRates(){ return { uc: parseFloat(document.getElementById('rateUsdClp')?.value)||930, ua: parseFloat(document.getElementById('rateUsdArs')?.value)||1485 }; }
+function renderFixedBudget(){
+  const fb = loadFixedBudget();
+  const note = document.getElementById('fixedBudgetNote');
+  const conv = document.getElementById('fixedBudgetConversions');
+  const btn = document.getElementById('fixedBudgetBtn');
+  if(fb){
+    const {uc,ua} = currentRates();
+    const usd = fb/uc, ars = usd*ua;
+    conv.innerHTML = `<div class="info-row"><span>Equivalente USD</span><span>$${usd.toFixed(2)}</span></div><div class="info-row"><span>Equivalente ARS</span><span>$${Math.round(ars).toLocaleString('es-CL')}</span></div>`;
+    note.textContent = 'Puedes modificar este monto cuando quieras, incluso estando de viaje.';
+    document.getElementById('fixedBudgetInput').value = fb;
+    btn.textContent = 'Actualizar';
+  } else {
+    conv.innerHTML = '';
+    note.textContent = 'Aún no has fijado un presupuesto — hazlo cuando inicies el viaje. Puedes modificarlo cuantas veces quieras.';
+    btn.textContent = 'Fijar';
+  }
+  maskMoneyElements();
+}
+document.getElementById('fixedBudgetBtn').addEventListener('click', ()=>{
+  const v = parseFloat(document.getElementById('fixedBudgetInput').value); if(!v) return;
+  lsSet('fixed-budget', v); renderFixedBudget(); renderExpenses();
+});
+renderFixedBudget();
+
+/* Gastos reales con moneda y forma de pago */
+function loadExpenses(){ return lsGet('expense-log', []); }
+function saveExpenses(l){ lsSet('expense-log', l); }
+function toCLP(amount, currency){
+  const uc=parseFloat(document.getElementById('rateUsdClp')?.value)||930, ua=parseFloat(document.getElementById('rateUsdArs')?.value)||1485;
+  if(currency==='CLP') return amount;
+  if(currency==='USD') return amount*uc;
+  return (amount/ua)*uc; // ARS -> USD -> CLP
+}
+function renderExpenses(){
+  const list=loadExpenses(); const container=document.getElementById('expenseList');
+  container.innerHTML = list.map((e,i)=>`<div class="expense-item"><span>${e.concept}<span class="meta">${e.amount.toLocaleString('es-CL')} ${e.currency} <span class="pay-badge">${e.method}</span></span></span><span class="del" data-idx="${i}">✕</span></div>`).join('');
+  const totalCLP = list.reduce((s,e)=> s+toCLP(e.amount, e.currency), 0);
+  document.getElementById('expTotal').textContent = '$'+Math.round(totalCLP).toLocaleString('es-CL');
+  const fb = loadFixedBudget();
+  const remEl = document.getElementById('expRemaining');
+  if(fb){ remEl.textContent = '$'+Math.max(0, fb-totalCLP).toLocaleString('es-CL')+' de tu presupuesto fijo'; }
+  else{ remEl.textContent = '$'+Math.max(0,289083-totalCLP).toLocaleString('es-CL')+' – $'+Math.max(0,390083-totalCLP).toLocaleString('es-CL')+' (rango estimado)'; }
+  container.querySelectorAll('.del').forEach(el=> el.addEventListener('click', ()=>{ const l=loadExpenses(); l.splice(parseInt(el.dataset.idx),1); saveExpenses(l); renderExpenses(); }));
+  maskMoneyElements();
+}
+document.getElementById('expAddBtn').addEventListener('click', ()=>{
+  const concept=document.getElementById('expConcept').value.trim();
+  const amount=parseFloat(document.getElementById('expAmount').value);
+  const currency=document.getElementById('expCurrency').value;
+  const method=document.getElementById('expMethod').value;
+  if(!concept||!amount) return;
+  const l=loadExpenses(); l.push({concept, amount, currency, method}); saveExpenses(l);
+  document.getElementById('expConcept').value=''; document.getElementById('expAmount').value='';
+  renderExpenses();
+});
+renderExpenses();
+
+/* ---------- Conversor ---------- */
+const convAmount=document.getElementById('convAmount'), convFrom=document.getElementById('convFrom'), convResults=document.getElementById('convResults');
+const rateUsdClp=document.getElementById('rateUsdClp'), rateUsdArs=document.getElementById('rateUsdArs');
+document.getElementById('rateToggle').addEventListener('click', ()=>document.getElementById('rateEdit').classList.toggle('show'));
+function toUSD(a,c){ const uc=parseFloat(rateUsdClp.value)||930, ua=parseFloat(rateUsdArs.value)||1485; if(c==='USD')return a; if(c==='CLP')return a/uc; return a/ua; }
+function fromUSD(u,c){ const uc=parseFloat(rateUsdClp.value)||930, ua=parseFloat(rateUsdArs.value)||1485; if(c==='USD')return u; if(c==='CLP')return u*uc; return u*ua; }
+function fmt(n,c){ return c==='USD'?n.toFixed(2):Math.round(n).toLocaleString('es-CL'); }
+function renderConversion(){ const a=parseFloat(convAmount.value)||0, f=convFrom.value, u=toUSD(a,f); convResults.innerHTML=['CLP','USD','ARS'].filter(c=>c!==f).map(c=>`<div class="conv-result-row"><span>${c}</span><span class="val">${fmt(fromUSD(u,c),c)} ${c}</span></div>`).join(''); }
+[convAmount, convFrom, rateUsdClp, rateUsdArs].forEach(el=>el.addEventListener('input', ()=>{ renderConversion(); lsSet('exchange-rates',{usdClp:rateUsdClp.value, usdArs:rateUsdArs.value}); renderExpenses(); renderFixedBudget(); }));
+(function(){ const s=lsGet('exchange-rates', null); if(s){ rateUsdClp.value=s.usdClp; rateUsdArs.value=s.usdArs; } renderConversion(); renderFixedBudget(); })();
+
+/* ---------- Noche con íconos por tipo + acciones de evento ---------- */
+const nocheData = [
+  {name:"Niceto Club", tag:"club", icon:"🎧", zone:"Palermo", addr:"Cnel. Niceto Vega 5510", note:"Line-ups locales e internacionales.", hasCortesia:true},
+  {name:"Bahrein", tag:"club", icon:"🎧", zone:"Microcentro", addr:"Lavalle 345", note:"Clásico histórico de la escena electrónica."},
+  {name:"Crobar", tag:"club", icon:"🎧", zone:"Palermo", addr:"Av. Libertador 3883", note:"Histórico, buena opción de fin de semana."},
+  {name:"Club Araoz", tag:"club", icon:"🎧", zone:"Palermo", addr:"Costa Rica 4508", note:"Ambiente under."},
+  {name:"La Biblioteca", tag:"club", icon:"🎧", zone:"Palermo", addr:"Verificar en Instagram", note:"Venue chico y under."},
+  {name:"Puticlú", tag:"club", icon:"🎧", zone:"Villa Crespo/Chacarita", addr:"Verificar en Instagram", note:"Club queer/underground techno-house."},
+  {name:"Deseo Club", tag:"club", icon:"🎧", zone:"Palermo", addr:"Verificar en Instagram", note:""},
+  {name:"Artlab", tag:"club", icon:"🎧", zone:"Palermo", addr:"Verificar en Instagram", note:""},
+  {name:"Atis Bar", tag:"bar", icon:"🍸", zone:"Palermo", addr:"Verificar en Instagram", note:"Cocktail bar, antes de salir a bailar."},
+  {name:"Frank's", tag:"bar", icon:"🍸", zone:"Palermo Hollywood", addr:"Arévalo 1445", note:"Speakeasy años 20, contraseña semanal."},
+  {name:"Uptown BA", tag:"bar", icon:"🍸", zone:"Palermo Hollywood", addr:"Arévalo 2030", note:"Estación de subte NY, pista tras medianoche."},
+  {name:"Victoria Brown", tag:"bar", icon:"🍸", zone:"Palermo", addr:"Costa Rica 4827", note:"Speakeasy steampunk/victoriano."},
+  {name:"Harrison", tag:"bar", icon:"🍸", zone:"Palermo", addr:"Malabia 1764", note:"Speakeasy clásico."},
+  {name:"La Bomba de Tiempo", tag:"cultura", icon:"🥁", zone:"Ciudad Cultural Konex", addr:"Sarmiento 3131", note:"Percusión en vivo — lunes."},
+  {name:"Una milonga", tag:"cultura", icon:"💃", zone:"Varias zonas", addr:"Según la milonga", note:"Clase de tango + show."}
+];
+const nocheContainerClub=document.getElementById('nocheContainerClub');
+const nocheContainerBar=document.getElementById('nocheContainerBar');
+const nocheContainerCultura=document.getElementById('nocheContainerCultura');
+const nocheTargets = {club: nocheContainerClub, bar: nocheContainerBar, cultura: nocheContainerCultura};
+nocheData.forEach((v,i)=>{
+  const id='noche-'+i;
+  const mapsUrl='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(v.name+' '+v.addr+' Buenos Aires');
+  const card=document.createElement('div'); card.className='noche-card';
+  card.innerHTML = `
+    <div class="noche-head"><span class="noche-icon">${v.icon}</span><div class="noche-name">${v.name}</div></div>
+    <span class="noche-tag tag-${v.tag}">${v.tag}</span><span class="noche-tag" style="background:rgba(255,255,255,0.08); color:#c7c3ad;">${v.zone}</span>
+    <div class="noche-note">📍 ${v.addr}</div>
+    ${v.note?`<div class="noche-note">${v.note}</div>`:''}
+    <div class="noche-footer"><a class="maps-link" href="${mapsUrl}" target="_blank" rel="noopener">Abrir en Maps</a><label class="noche-check"><input type="checkbox" id="${id}"> Fui</label></div>
+    ${v.hasCortesia ? `<div class="noche-action"><input type="checkbox" id="niceto-cortesia"><label for="niceto-cortesia">Escribí por Instagram por cortesía de cumpleaños</label></div><div class="noche-action"><input type="checkbox" id="niceto-ra"><label for="niceto-ra">Revisé Resident Advisor el line-up del 3 de nov</label></div>` : ''}
+  `;
+  nocheTargets[v.tag].appendChild(card);
+});
+function loadNoche(){
+  const s=lsGet('noche-visited',{}); nocheData.forEach((v,i)=>{ const el=document.getElementById('noche-'+i); if(s['noche-'+i]) el.checked=true; });
+  const ex=lsGet('noche-extra',{}); ['niceto-cortesia','niceto-ra'].forEach(id=>{ const el=document.getElementById(id); if(el && ex[id]) el.checked=true; });
+}
+[nocheContainerClub, nocheContainerBar, nocheContainerCultura].forEach(cont=> cont.addEventListener('change', ()=>{
+  const s={}; nocheData.forEach((v,i)=> s['noche-'+i]=document.getElementById('noche-'+i).checked); lsSet('noche-visited', s);
+  const ex={}; ['niceto-cortesia','niceto-ra'].forEach(id=>{ const el=document.getElementById(id); if(el) ex[id]=el.checked; }); lsSet('noche-extra', ex);
+}));
+loadNoche();
+maskMoneyElements();
+</script>
+</body>
+</html>
