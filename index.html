@@ -123,7 +123,8 @@
   .tag-cultura{background:rgba(246,236,217,0.15); color:#ece6d3;}
   .noche-note{font-size:11px; color:#c7c3ad; margin-top:4px; line-height:1.4;}
   .noche-footer{display:flex; justify-content:space-between; align-items:center; margin-top:8px;}
-  .maps-link{font-size:10.5px; color:var(--celeste-soft); font-weight:700; text-decoration:none; border:1px solid var(--celeste); padding:4px 9px; border-radius:999px;}
+  .noche-footer .maps-link{margin-top:0;}
+  .maps-link{font-size:10.5px; color:var(--celeste-soft); font-weight:700; text-decoration:none; border:1px solid var(--celeste); padding:4px 9px; border-radius:999px; display:inline-block; margin-top:8px;}
   .noche-check{display:flex; align-items:center; gap:5px; font-size:9px; color:#8a8568;}
   .noche-check input{width:16px; height:16px; accent-color:var(--celeste);}
   .noche-action{display:flex; align-items:center; gap:6px; font-size:10px; color:var(--gold); margin-top:8px; padding-top:8px; border-top:1px dashed rgba(212,161,61,0.25);}
@@ -151,10 +152,12 @@
   .rate-edit-row{display:flex; justify-content:space-between; align-items:center; margin-bottom:7px; font-size:11.5px;}
   .rate-edit-row input{width:85px; padding:6px 7px; border-radius:4px; border:1px solid rgba(42,36,24,0.25); font-size:12px; text-align:right;}
 
-  .expense-item{display:flex; justify-content:space-between; align-items:center; padding:8px 0; border-bottom:1px dashed rgba(42,36,24,0.15); font-size:12px;}
+  .expense-item{display:flex; justify-content:space-between; align-items:center; padding:8px 0; border-bottom:1px dashed rgba(42,36,24,0.15); font-size:12px; cursor:pointer;}
   .expense-item .meta{color:var(--ink-soft); font-size:10px; display:block;}
   .expense-item .del{color:#a33; cursor:pointer; font-size:11px; margin-left:8px;}
   .pay-badge{font-size:8.5px; background:rgba(79,168,224,0.15); color:var(--celeste); padding:1px 6px; border-radius:999px; font-weight:700;}
+  .low-balance{color:#c1272d !important; font-weight:700;}
+  .ticket-icon{font-size:11px; margin-left:4px;}
 
   .doc-slot{background:linear-gradient(160deg, var(--paper) 0%, var(--paper-soft) 100%); border-radius:6px; padding:14px; margin-bottom:12px; color:var(--ink);}
   .doc-slot-head{display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; gap:8px;}
@@ -236,24 +239,19 @@
     <div class="tab-panel" id="tab-docs">
       <div class="section-title">📄 Documentos</div>
 
-      <div class="acc-card open" id="acc-docsfijos">
-        <div class="acc-head"><span class="acc-head-title">Vuelo, hostal y seguro</span><span class="chevron">▶</span></div>
-        <div class="acc-body"><div id="fixedDocsContainer"></div></div>
+      <div class="acc-card open" id="acc-misdocs">
+        <div class="acc-head"><span class="acc-head-title">Mis documentos</span><span class="chevron">▶</span></div>
+        <div class="acc-body"><div id="fixedDocsContainer"></div><div id="customDocsContainer"></div></div>
       </div>
 
       <div class="acc-card" id="acc-aeropuertos">
         <div class="acc-head"><span class="acc-head-title">Guía de aeropuertos</span><span class="chevron">▶</span></div>
         <div class="acc-body">
-          <div class="info-card"><h3>SCL — Salida (1 nov, madrugada)</h3><div class="note">1. Uber te deja en Terminal de Salidas, primer piso.<br>2. Control Policía Internacional (PDI) — cédula.<br>3. Control de seguridad.<br>4. Embarque: 2° y 3° piso.</div></div>
+          <div class="info-card"><h3>SCL — Salida (1 nov, madrugada)</h3><div class="note">1. Uber/Transvip te deja en Terminal de Salidas, primer piso.<br>2. Control Policía Internacional (PDI) — cédula.<br>3. Control de seguridad.<br>4. Embarque: 2° y 3° piso.</div></div>
           <div class="info-card"><h3>AEP — Llegada (1 nov, 11:20)</h3><div class="note">1. Carteles "Llegadas Internacionales" (planta baja).<br>2. Migraciones argentinas — cédula.<br>3. Sin equipaje facturado, sales directo.<br>4. Zona Arribos para tu Uber.</div></div>
           <div class="info-card"><h3>AEP — Salida (7 nov, noche)</h3><div class="note">1. Planta baja → primer piso (salidas).<br>2. Sector internacional, seguridad.<br>3. Migraciones — sello de salida.<br>4. Duty Free.<br>5. Pre-embarque, esperas puerta.</div></div>
           <div class="info-card"><h3>SCL — Llegada (8 nov, 00:42)</h3><div class="note">1. Carteles "Llegadas Internacionales".<br>2. Control PDI — entras a Chile.<br>3. Sales directo, sin espera.<br>4. Uber de vuelta a casa.</div><div class="tip">✦ Sigue siempre "Salidas/Llegadas Internacionales" y "Migraciones" — constantes aunque cambien mostradores.</div></div>
         </div>
-      </div>
-
-      <div class="acc-card" id="acc-misdocs">
-        <div class="acc-head"><span class="acc-head-title">Mis documentos</span><span class="chevron">▶</span></div>
-        <div class="acc-body"><div id="customDocsContainer"></div></div>
       </div>
     </div>
 
@@ -276,6 +274,22 @@
         </div>
       </div>
 
+      <div class="acc-card open" id="acc-saldos">
+        <div class="acc-head"><span class="acc-head-title">🎯 Saldos por forma de pago</span><span class="chevron">▶</span></div>
+        <div class="acc-body">
+          <div class="info-card">
+            <div class="note" style="margin-top:0;">Registra cuánto llevas en cada forma de pago al iniciar el viaje. Editable siempre, aunque ya estés viajando.</div>
+            <div class="tip" style="margin:0 0 10px;">✦ El hostal ($132.540, se paga al llegar) lo cubrirás con Global66. Dos formas de reflejarlo: descuéntalo tú misma al calcular tu saldo inicial de Global66, o regístralo como tu primer gasto (concepto "Hostal", forma de pago Global66) el mismo 1 de noviembre — así queda automático.</div>
+            <div class="form-row"><span style="flex:1.3; font-size:12.5px; font-weight:600;">💳 Global66 (CLP)</span><input type="number" id="balGlobal66" placeholder="0"></div>
+            <div class="form-row"><span style="flex:1.3; font-size:12.5px; font-weight:600;">💵 Efectivo USD</span><input type="number" id="balUSD" placeholder="0"></div>
+            <div class="form-row"><span style="flex:1.3; font-size:12.5px; font-weight:600;">🇦🇷 Efectivo ARS</span><input type="number" id="balARS" placeholder="0"></div>
+            <div class="form-row"><span style="flex:1.3; font-size:12.5px; font-weight:600;">💳 Débito BCI (CLP)</span><input type="number" id="balBCI" placeholder="0"></div>
+            <button class="btn" id="saveBalancesBtn" style="width:100%;">Guardar saldos</button>
+            <div id="balancesTable" style="margin-top:12px;"></div>
+          </div>
+        </div>
+      </div>
+
       <div class="acc-card open" id="acc-gastosreales">
         <div class="acc-head"><span class="acc-head-title">Registro de gastos reales</span><span class="chevron">▶</span></div>
         <div class="acc-body">
@@ -287,42 +301,25 @@
             </div>
             <div class="form-row">
               <select id="expMethod" style="flex:1;"><option>Débito Global66</option><option>Efectivo ARS</option><option>Efectivo USD</option><option>Débito BCI</option></select>
-              <button class="btn" id="expAddBtn">Agregar</button>
+              <input type="date" id="expDate">
             </div>
+            <div class="form-row"><button class="btn" id="expAddBtn" style="width:100%;">Agregar</button></div>
+            <div class="note" style="margin-top:0;">Toca un gasto de la lista para editarlo.</div>
             <div id="expenseList"></div>
             <div class="info-row" style="margin-top:8px; font-weight:700;"><span>Total gastado (CLP aprox.)</span><span class="money" id="expTotal">$0</span></div>
-            <div class="info-row"><span>Te queda</span><span class="money" id="expRemaining">—</span></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="acc-card open" id="acc-fijo">
-        <div class="acc-head"><span class="acc-head-title">🎯 Presupuesto fijo</span><span class="chevron">▶</span></div>
-        <div class="acc-body">
-          <div class="info-card">
-            <div class="form-row"><input type="number" id="fixedBudgetInput" placeholder="Monto fijo en CLP"><button class="btn" id="fixedBudgetBtn">Fijar</button></div>
-            <div id="fixedBudgetConversions"></div>
-            <div class="note" id="fixedBudgetNote">Aún no has fijado un presupuesto — hazlo cuando inicies el viaje. Puedes modificarlo cuantas veces quieras.</div>
           </div>
         </div>
       </div>
 
       <div class="acc-card" id="acc-gastos">
-        <div class="acc-head"><span class="acc-head-title">Gastos del viaje (estimado)</span><span class="chevron">▶</span></div>
+        <div class="acc-head"><span class="acc-head-title">Gastos estimados + cuánto ARS llevar</span><span class="chevron">▶</span></div>
         <div class="acc-body">
           <table class="budget-table"><thead><tr><th>Concepto</th><th>Real</th><th>Aprox.</th></tr></thead><tbody id="budgetBody"></tbody></table>
-          <div class="budget-total"><div><div class="lbl">Total estimado</div></div><div class="amt money" id="budgetTotalAmt">$677.000 – $778.000</div></div>
-        </div>
-      </div>
-
-      <div class="acc-card" id="acc-arg">
-        <div class="acc-head"><span class="acc-head-title">🇦🇷 ¿Cuántos ARS llevar?</span><span class="chevron">▶</span></div>
-        <div class="acc-body">
-          <div class="info-card">
-            <div class="info-row"><span>Presupuesto restante (aprox.)</span><span class="money">$289.083 – $390.083 CLP</span></div>
-            <div class="info-row"><span>Equivalente en ARS</span><span class="money">≈ 474.000 – 640.000</span></div>
-            <div class="info-row"><span>Sugerido en efectivo (40-50%)</span><span class="money">≈ 190.000 – 320.000</span></div>
-            <div class="note">Efectivo: ferias, kioscos, propinas, depósito hostal. Tarjeta: restaurantes, Uber, entradas. Convierte de a poco allá.</div>
+          <div class="budget-total"><div><div class="lbl">Total estimado</div></div><div class="amt money" id="budgetTotalAmt">$607.840 – $782.840</div></div>
+          <div class="info-card" style="margin-top:12px;">
+            <div class="info-row"><span>Equivalente en ARS</span><span class="money">≈ 997.000 – 1.307.000</span></div>
+            <div class="info-row"><span>Sugerido en efectivo (40-50%)</span><span class="money">≈ 243.000 – 391.000</span></div>
+            <div class="note">Efectivo: ferias, kioscos, propinas, depósito hostal, entradas. Tarjeta: restaurantes, Uber, clubes. Convierte de a poco allá.</div>
           </div>
         </div>
       </div>
@@ -357,19 +354,19 @@
         <div class="acc-body">
           <div class="info-card"><h3>🥃 Fernet Branca</h3><div class="note">El trago nacional — no se consigue igual en Chile. Cualquier supermercado o vinoteca.</div></div>
           <div class="info-card"><h3>👡 Alpargatas</h3><div class="note">Calzado tradicional argentino, muy distinto a lo que se vende en Chile.</div></div>
-          <div class="info-card"><h3>🎨 Fileteado porteño</h3><div class="note">Cuadros, imanes o llaveros con esta ornamentación típica — San Telmo o Caminito.</div></div>
-          <div class="info-card"><h3>⚽ Camiseta Boca/River</h3><div class="note">Oficial, en tiendas de club o en Calle Florida.</div></div>
+          <div class="info-card"><h3>🎨 Fileteado porteño</h3><div class="note">Cuadros, imanes o llaveros con esta ornamentación típica — San Telmo o Caminito.</div><a class="maps-link" href="https://www.google.com/maps/search/?api=1&query=Feria+de+San+Telmo+Buenos+Aires" target="_blank" rel="noopener">Abrir en Maps</a></div>
+          <div class="info-card"><h3>⚽ Camiseta Boca/River</h3><div class="note">Oficial, en tiendas de club o en Calle Florida.</div><a class="maps-link" href="https://www.google.com/maps/search/?api=1&query=Calle+Florida+Buenos+Aires" target="_blank" rel="noopener">Abrir en Maps</a></div>
         </div>
       </div>
 
       <div class="acc-card" id="acc-souv-clasicos">
         <div class="acc-head"><span class="acc-head-title">Clásicos para comer y beber</span><span class="chevron">▶</span></div>
         <div class="acc-body">
-          <div class="info-card"><h3>🍬 Arcor Center</h3><div class="info-row"><span>Dirección</span><span>Av. Corrientes 1335</span></div><div class="note">Golosinas a granel — día 2 de Microcentro.</div></div>
+          <div class="info-card"><h3>🍬 Arcor Center</h3><div class="info-row"><span>Dirección</span><span>Av. Corrientes 1335</span></div><div class="note">Golosinas a granel — día 2 de Microcentro.</div><a class="maps-link" href="https://www.google.com/maps/search/?api=1&query=Arcor+Center+Av+Corrientes+1335+Buenos+Aires" target="_blank" rel="noopener">Abrir en Maps</a></div>
           <div class="info-card"><h3>🍮 Dulce de leche</h3><div class="info-row"><span>La Serenísima / Chimbote</span><span>Cualquier súper</span></div></div>
           <div class="info-card"><h3>🥜 Mantecol</h3><div class="info-row"><span>Georgalos</span><span>Kiosco o súper</span></div></div>
           <div class="info-card"><h3>🍪 Alfajores</h3><div class="info-row"><span>Balcarce / Cofler / Guaymallén</span><span>Kiosco</span></div><div class="info-row"><span>Alfajor de maicena</span><span>En confiterías</span></div></div>
-          <div class="info-card"><h3>🧉 Mate + yerba</h3><div class="info-row"><span>Yerba: Rosamonte / Taragüi / CBSé</span><span>Súper</span></div><div class="note">El mate y su bolsito: Feria de San Telmo o una talabartería.</div></div>
+          <div class="info-card"><h3>🧉 Mate + yerba</h3><div class="info-row"><span>Yerba: Rosamonte / Taragüi / CBSé</span><span>Súper</span></div><div class="note">El mate y su bolsito: Feria de San Telmo o una talabartería.</div><a class="maps-link" href="https://www.google.com/maps/search/?api=1&query=Feria+de+San+Telmo+Buenos+Aires" target="_blank" rel="noopener">Abrir en Maps</a></div>
           <div class="info-card"><h3>🍷 Vino Malbec</h3><div class="info-row"><span>Trapiche / Norton / Luigi Bosca</span><span>Vinoteca o duty-free</span></div><div class="note">Cómpralo en el duty-free al volver — evitas el límite de líquidos.</div></div>
           <div class="tip">✦ Franquicia aduanera chilena: hasta USD 4.050 sin impuestos. Con souvenirs normales no te acercas a ese límite.</div>
         </div>
@@ -378,7 +375,7 @@
   </main>
 
   <footer>Rinasco a modo mio 🧡</footer>
-  <div class="version-tag">v2.6 · actualizada 9 ago 2026 · Creado por Melitalove</div>
+  <div class="version-tag">v3.3 · Creado por Melitalove</div>
 </div>
 
 <nav class="bottom-nav">
@@ -574,7 +571,7 @@ for(let i=1;i<=4;i++){ const key='doc-custom-'+i; buildDocSlot(customDocsContain
 /* ---------- Itinerario ---------- */
 const days = [
   {num:1, date:"Dom 1 nov", zone:"Llegada · Palermo", slots:[
-    {label:"Mañana", text:"Vuelo SCL→AEP (09:13-11:20). Traslado al hostel Play Garden en Palermo Soho."},
+    {label:"Mañana", text:"Vuelo SCL→AEP (09:13-11:20). Traslado desde casa: Uber o Transvip (~$8.000-15.000 CLP p/persona, cotizar en transvip.cl antes de reservar)."},
     {label:"Almuerzo", text:"Algo liviano cerca del hostel."},
     {label:"Tarde", text:"Caminata de reconocimiento por Plaza Serrano."},
     {label:"Tarde (opcional)", text:"Feria de San Telmo (Plaza Dorrego) — cierra tipo 18-19h los domingos. Si sales del hostal antes de las 17h, alcanzas el final."},
@@ -584,12 +581,14 @@ const days = [
   {num:2, date:"Lun 2 nov", zone:"Microcentro · Historia y arquitectura", slots:[
     {label:"Mañana", text:"Café Tortoni, Obelisco, Plaza de Mayo (Casa Rosada, Cabildo, Catedral)."},
     {label:"Almuerzo", text:"Pizzería Güerrín o Paulín sobre Av. Corrientes."},
-    {label:"Tarde", text:"Palacio Barolo (tour guiado)."},
+    {label:"Tarde", text:"🎟️ Palacio Barolo (tour guiado, ~$33.000-64.000 CLP) + Calle Florida + Galería Pacífico (mall histórico, entrada libre)."},
     {label:"🍦 Helado del día", text:"Cadore — Av. Corrientes 1695."},
+    {label:"🎁 Souvenir cercano", text:"Arcor Center — Av. Corrientes 1335."},
     {label:"Noche", text:"Confitería La Ideal."}
   ]},
   {num:3, date:"Mar 3 nov · Cumpleaños 🎂", zone:"Recoleta", slots:[
-    {label:"Mañana", text:"Cementerio de la Recoleta + Centro Cultural Recoleta."},
+    {label:"Mañana", text:"Cementerio de la Recoleta + Centro Cultural Recoleta + Museo Nacional de Bellas Artes (entrada gratuita)."},
+    {label:"Mañana (alternativa)", text:"🎟️ Buenos Aires Bus (turístico amarillo) — sale de Av. Quintana 596, mismo barrio. Recorre Recoleta, Colón, Caminito, Puerto Madero. Precio no confirmado, revisar en buenosairesbus.com."},
     {label:"Almuerzo", text:"Algo en Recoleta."},
     {label:"Tarde", text:"El Ateneo Grand Splendid + Floralis Genérica + El Cuartito."},
     {label:"🍦 Helado del día", text:"Rapanui — Uruguay 1284, Recoleta."},
@@ -598,15 +597,16 @@ const days = [
   ]},
   {num:4, date:"Mié 4 nov", zone:"San Telmo + La Boca", slots:[
     {label:"Mañana", text:"San Telmo — Plaza Dorrego, Paseo de la Historieta."},
-    {label:"Almuerzo", text:"Hierro Parrilla San Telmo."},
+    {label:"Almuerzo", text:"Mercado de San Telmo (Bolívar 970) — Hierro Parrilla, El Hornero (empanadas) o La Choripanería, los tres bajo el mismo techo."},
     {label:"Tarde", text:"La Boca — Caminito, Pizzería Angelin."},
     {label:"🍦 Helado del día", text:"Nonna Bianca — Estados Unidos 425, San Telmo."},
+    {label:"🎁 Souvenir cercano", text:"Mate/talabartería y fileteado porteño — Feria de San Telmo."},
     {label:"Noche", text:"Volver a Palermo."}
   ]},
   {num:5, date:"Jue 5 nov", zone:"Palermo a fondo", slots:[
-    {label:"Mañana", text:"Bosques de Palermo + El Rosedal + Jardín Japonés."},
+    {label:"Mañana", text:"Bosques de Palermo + El Rosedal + 🎟️ Jardín Japonés (~$11.300 CLP, no residente)."},
     {label:"Almuerzo", text:"Palermo Hollywood."},
-    {label:"Tarde", text:"MALBA."},
+    {label:"Tarde", text:"🎟️ MALBA (~$6.000-9.000 CLP, verificar precio actualizado)."},
     {label:"🍦 Helado del día", text:"Rapanui — Malabia 2014, Palermo."},
     {label:"Noche", text:"Cena en Conchinchina, Niño Gordo o La Carnicería."}
   ]},
@@ -614,7 +614,7 @@ const days = [
     {label:"Mañana", text:"Libre / descanso."},
     {label:"Tarde", text:"Shopping o Distrito Arcos."},
     {label:"🍦 Helado del día", text:"Freddo — Arenales 3360, Palermo."},
-    {label:"Alternativa", text:"Tour interior del Teatro Colón (verifica horario esa semana) si prefieres una noche más tranquila antes de salir."},
+    {label:"Alternativa", text:"🎟️ Tour interior del Teatro Colón (~$41.000-46.000 CLP, verifica horario esa semana) si prefieres una noche más tranquila antes de salir."},
     {label:"Noche", text:"Atis Bar → Puticlú o Artlab."}
   ]},
   {num:7, date:"Sáb 7 nov", zone:"Libre + vuelo de regreso", slots:[
@@ -659,16 +659,17 @@ days.forEach(d=>{
 /* ---------- Presupuesto ---------- */
 const budget = [
   {c:"Vuelo (JetSmart, ida/vuelta)", real:"$201.561", aprox:"", status:""},
-  {c:"Hostal (6 noches)", real:"$132.540", aprox:"", status:"Reservado — se paga al llegar"},
+  {c:"Hostal (6 noches)", real:"", aprox:"$132.540", status:"Se paga al llegar con Global66"},
   {c:"Power bank", real:"$23.867", aprox:"", status:""},
   {c:"Seguro de viaje", real:"$29.949", aprox:"", status:""},
   {c:"Depósito garantía hostal", real:"", aprox:"$9.300", status:""},
   {c:"Comida + heladerías (7 días)", real:"", aprox:"$130.000 – $163.000", status:""},
   {c:"Transporte interno", real:"", aprox:"$42.000 – $51.000", status:""},
-  {c:"Vida nocturna", real:"", aprox:"$14.000 – $32.500", status:""},
+  {c:"Vida nocturna (~$30.000/noche, 3-4 noches)", real:"", aprox:"$90.000 – $120.000", status:""},
   {c:"Cena de cumpleaños", real:"", aprox:"$23.000 – $37.000", status:""},
-  {c:"Efectivo de respaldo", real:"", aprox:"$37.000 – $56.000", status:""},
+  {c:"Efectivo de respaldo", real:"", aprox:"$60.000 – $90.000", status:""},
   {c:"Souvenirs", real:"", aprox:"$30.000 – $50.000", status:""},
+  {c:"Entradas y tours pagos (Barolo, MALBA, Jardín Japonés, Colón, bus turístico)", real:"", aprox:"$91.000 – $130.000", status:""},
 ];
 const budgetBody=document.getElementById('budgetBody');
 budget.forEach(b=>{ const tr=document.createElement('tr'); const nc=b.status?`${b.c}<br><span style="font-size:9px; color:var(--gold); font-weight:600;">${b.status}</span>`:b.c;
@@ -699,64 +700,73 @@ document.querySelectorAll('.acc-head').forEach(head=>{
   head.addEventListener('click', ()=> head.closest('.acc-card').classList.toggle('open'));
 });
 
-/* Presupuesto fijo con conversión automática */
-function loadFixedBudget(){ return lsGet('fixed-budget', null); }
+/* Saldos por forma de pago */
+const methodCurrency = {'Débito Global66':'CLP', 'Efectivo USD':'USD', 'Efectivo ARS':'ARS', 'Débito BCI':'CLP'};
+const methodBalInput = {'Débito Global66':'balGlobal66', 'Efectivo USD':'balUSD', 'Efectivo ARS':'balARS', 'Débito BCI':'balBCI'};
+function loadBalances(){ return lsGet('method-balances', {}); }
 function currentRates(){ return { uc: parseFloat(document.getElementById('rateUsdClp')?.value)||930, ua: parseFloat(document.getElementById('rateUsdArs')?.value)||1485 }; }
-function renderFixedBudget(){
-  const fb = loadFixedBudget();
-  const note = document.getElementById('fixedBudgetNote');
-  const conv = document.getElementById('fixedBudgetConversions');
-  const btn = document.getElementById('fixedBudgetBtn');
-  if(fb){
-    const {uc,ua} = currentRates();
-    const usd = fb/uc, ars = usd*ua;
-    conv.innerHTML = `<div class="info-row"><span>Equivalente USD</span><span>$${usd.toFixed(2)}</span></div><div class="info-row"><span>Equivalente ARS</span><span>$${Math.round(ars).toLocaleString('es-CL')}</span></div>`;
-    note.textContent = 'Puedes modificar este monto cuando quieras, incluso estando de viaje.';
-    document.getElementById('fixedBudgetInput').value = fb;
-    btn.textContent = 'Actualizar';
-  } else {
-    conv.innerHTML = '';
-    note.textContent = 'Aún no has fijado un presupuesto — hazlo cuando inicies el viaje. Puedes modificarlo cuantas veces quieras.';
-    btn.textContent = 'Fijar';
-  }
+function convertAmount(amount, fromCur, toCur){
+  if(fromCur===toCur) return amount;
+  const {uc,ua} = currentRates();
+  const usd = fromCur==='USD'?amount : fromCur==='CLP'? amount/uc : amount/ua;
+  return toCur==='USD'?usd : toCur==='CLP'? usd*uc : usd*ua;
+}
+document.getElementById('saveBalancesBtn').addEventListener('click', ()=>{
+  const bal = {};
+  Object.entries(methodBalInput).forEach(([m,id])=>{ bal[m] = parseFloat(document.getElementById(id).value)||0; });
+  lsSet('method-balances', bal);
+  renderBalancesTable();
+});
+function renderBalancesTable(){
+  const bal = loadBalances();
+  Object.entries(methodBalInput).forEach(([m,id])=>{ if(bal[m]!==undefined) document.getElementById(id).value = bal[m]; });
+  const expenses = loadExpenses();
+  const rows = Object.keys(methodCurrency).map(m=>{
+    const cur = methodCurrency[m];
+    const initial = bal[m]||0;
+    const spent = expenses.filter(e=>e.method===m).reduce((s,e)=> s+convertAmount(e.amount, e.currency, cur), 0);
+    const remaining = initial - spent;
+    const isLow = initial>0 && remaining < initial*0.15;
+    const sym = cur==='USD' ? 'US$' : '$';
+    return `<div class="info-row"><span>${m}</span><span class="money ${isLow?'low-balance':''}">${sym}${Math.round(remaining).toLocaleString('es-CL')} ${cur}</span></div>`;
+  }).join('');
+  document.getElementById('balancesTable').innerHTML = rows;
   maskMoneyElements();
 }
-document.getElementById('fixedBudgetBtn').addEventListener('click', ()=>{
-  const v = parseFloat(document.getElementById('fixedBudgetInput').value); if(!v) return;
-  lsSet('fixed-budget', v); renderFixedBudget(); renderExpenses();
-});
-renderFixedBudget();
+renderBalancesTable();
 
-/* Gastos reales con moneda y forma de pago */
+/* Gastos reales con moneda, forma de pago, fecha y edición */
 function loadExpenses(){ return lsGet('expense-log', []); }
 function saveExpenses(l){ lsSet('expense-log', l); }
-function toCLP(amount, currency){
-  const uc=parseFloat(document.getElementById('rateUsdClp')?.value)||930, ua=parseFloat(document.getElementById('rateUsdArs')?.value)||1485;
-  if(currency==='CLP') return amount;
-  if(currency==='USD') return amount*uc;
-  return (amount/ua)*uc; // ARS -> USD -> CLP
-}
+function toCLP(amount, currency){ return convertAmount(amount, currency, 'CLP'); }
 function renderExpenses(){
   const list=loadExpenses(); const container=document.getElementById('expenseList');
-  container.innerHTML = list.map((e,i)=>`<div class="expense-item"><span>${e.concept}<span class="meta">${e.amount.toLocaleString('es-CL')} ${e.currency} <span class="pay-badge">${e.method}</span></span></span><span class="del" data-idx="${i}">✕</span></div>`).join('');
+  container.innerHTML = list.map((e,i)=>`<div class="expense-item" data-idx="${i}"><span>${e.concept}<span class="meta">${e.date||''} · ${e.amount.toLocaleString('es-CL')} ${e.currency} <span class="pay-badge">${e.method}</span></span></span><span class="del" data-idx="${i}">✕</span></div>`).join('');
   const totalCLP = list.reduce((s,e)=> s+toCLP(e.amount, e.currency), 0);
   document.getElementById('expTotal').textContent = '$'+Math.round(totalCLP).toLocaleString('es-CL');
-  const fb = loadFixedBudget();
-  const remEl = document.getElementById('expRemaining');
-  if(fb){ remEl.textContent = '$'+Math.max(0, fb-totalCLP).toLocaleString('es-CL')+' de tu presupuesto fijo'; }
-  else{ remEl.textContent = '$'+Math.max(0,289083-totalCLP).toLocaleString('es-CL')+' – $'+Math.max(0,390083-totalCLP).toLocaleString('es-CL')+' (rango estimado)'; }
-  container.querySelectorAll('.del').forEach(el=> el.addEventListener('click', ()=>{ const l=loadExpenses(); l.splice(parseInt(el.dataset.idx),1); saveExpenses(l); renderExpenses(); }));
+  container.querySelectorAll('.del').forEach(el=> el.addEventListener('click', (ev)=>{ ev.stopPropagation(); const l=loadExpenses(); l.splice(parseInt(el.dataset.idx),1); saveExpenses(l); renderExpenses(); renderBalancesTable(); }));
+  container.querySelectorAll('.expense-item').forEach(el=> el.addEventListener('click', ()=>{
+    const idx = parseInt(el.dataset.idx); const l=loadExpenses(); const e=l[idx]; if(!e) return;
+    document.getElementById('expConcept').value = e.concept;
+    document.getElementById('expAmount').value = e.amount;
+    document.getElementById('expCurrency').value = e.currency;
+    document.getElementById('expMethod').value = e.method;
+    document.getElementById('expDate').value = e.date||'';
+    l.splice(idx,1); saveExpenses(l); renderExpenses(); renderBalancesTable();
+  }));
   maskMoneyElements();
 }
+document.getElementById('expDate').value = new Date().toISOString().slice(0,10);
 document.getElementById('expAddBtn').addEventListener('click', ()=>{
   const concept=document.getElementById('expConcept').value.trim();
   const amount=parseFloat(document.getElementById('expAmount').value);
   const currency=document.getElementById('expCurrency').value;
   const method=document.getElementById('expMethod').value;
+  const date=document.getElementById('expDate').value || new Date().toISOString().slice(0,10);
   if(!concept||!amount) return;
-  const l=loadExpenses(); l.push({concept, amount, currency, method}); saveExpenses(l);
+  const l=loadExpenses(); l.push({concept, amount, currency, method, date}); saveExpenses(l);
   document.getElementById('expConcept').value=''; document.getElementById('expAmount').value='';
-  renderExpenses();
+  renderExpenses(); renderBalancesTable();
 });
 renderExpenses();
 
@@ -768,8 +778,8 @@ function toUSD(a,c){ const uc=parseFloat(rateUsdClp.value)||930, ua=parseFloat(r
 function fromUSD(u,c){ const uc=parseFloat(rateUsdClp.value)||930, ua=parseFloat(rateUsdArs.value)||1485; if(c==='USD')return u; if(c==='CLP')return u*uc; return u*ua; }
 function fmt(n,c){ return c==='USD'?n.toFixed(2):Math.round(n).toLocaleString('es-CL'); }
 function renderConversion(){ const a=parseFloat(convAmount.value)||0, f=convFrom.value, u=toUSD(a,f); convResults.innerHTML=['CLP','USD','ARS'].filter(c=>c!==f).map(c=>`<div class="conv-result-row"><span>${c}</span><span class="val">${fmt(fromUSD(u,c),c)} ${c}</span></div>`).join(''); }
-[convAmount, convFrom, rateUsdClp, rateUsdArs].forEach(el=>el.addEventListener('input', ()=>{ renderConversion(); lsSet('exchange-rates',{usdClp:rateUsdClp.value, usdArs:rateUsdArs.value}); renderExpenses(); renderFixedBudget(); }));
-(function(){ const s=lsGet('exchange-rates', null); if(s){ rateUsdClp.value=s.usdClp; rateUsdArs.value=s.usdArs; } renderConversion(); renderFixedBudget(); })();
+[convAmount, convFrom, rateUsdClp, rateUsdArs].forEach(el=>el.addEventListener('input', ()=>{ renderConversion(); lsSet('exchange-rates',{usdClp:rateUsdClp.value, usdArs:rateUsdArs.value}); renderExpenses(); renderBalancesTable(); }));
+(function(){ const s=lsGet('exchange-rates', null); if(s){ rateUsdClp.value=s.usdClp; rateUsdArs.value=s.usdArs; } renderConversion(); renderBalancesTable(); })();
 
 /* ---------- Noche con íconos por tipo + acciones de evento ---------- */
 const nocheData = [
@@ -817,7 +827,33 @@ function loadNoche(){
 }));
 loadNoche();
 maskMoneyElements();
-if('serviceWorker' in navigator){ window.addEventListener('load', ()=> navigator.serviceWorker.register('sw.js').catch(()=>{})); }
+if('serviceWorker' in navigator){
+  window.addEventListener('load', ()=>{
+    navigator.serviceWorker.register('sw.js').then(reg=>{
+      reg.addEventListener('updatefound', ()=>{
+        const newWorker = reg.installing;
+        if(!newWorker) return;
+        newWorker.addEventListener('statechange', ()=>{
+          if(newWorker.state==='installed' && navigator.serviceWorker.controller){
+            showUpdateBanner(reg);
+          }
+        });
+      });
+    }).catch(()=>{});
+  });
+}
+function showUpdateBanner(reg){
+  if(document.getElementById('updateBanner')) return;
+  const banner = document.createElement('div');
+  banner.id = 'updateBanner';
+  banner.style.cssText = 'position:fixed;top:0;left:0;right:0;background:#4FA8E0;color:white;text-align:center;padding:11px 16px;font-size:12.5px;font-weight:700;z-index:200;cursor:pointer;padding-top:calc(11px + env(safe-area-inset-top,0px));';
+  banner.textContent = '🔄 Hay una actualización disponible — Toca para actualizar';
+  banner.addEventListener('click', ()=>{
+    if(reg.waiting) reg.waiting.postMessage('skipWaiting');
+    setTimeout(()=> window.location.reload(), 300);
+  });
+  document.body.appendChild(banner);
+}
 </script>
 </body>
 </html>
