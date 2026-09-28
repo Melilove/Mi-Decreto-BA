@@ -81,7 +81,7 @@
   .acc-head{display:flex; justify-content:space-between; align-items:center; padding:13px 15px; cursor:pointer;}
   .acc-head-title{font-family:'Bebas Neue'; font-size:17px; letter-spacing:0.5px; color:var(--gold);}
   .acc-body{max-height:0; overflow:hidden; transition:max-height .4s ease; padding:0 15px;}
-  .acc-card.open .acc-body{max-height:1400px; padding-bottom:15px;}
+  .acc-card.open .acc-body{max-height:20000px; padding-bottom:15px;}
   .acc-card.open .chevron{transform:rotate(90deg);}
   .day-head{display:flex; justify-content:space-between; align-items:center; padding:11px 13px; cursor:pointer;}
   .day-head-left{display:flex; align-items:baseline; gap:9px;}
@@ -91,7 +91,7 @@
   .chevron{transition:transform .25s ease; color:var(--gold); font-size:13px;}
   .day-card.open .chevron{transform:rotate(90deg);}
   .day-body{max-height:0; overflow:hidden; transition:max-height .4s ease; padding:0 13px;}
-  .day-card.open .day-body{max-height:1200px; padding-bottom:13px;}
+  .day-card.open .day-body{max-height:4000px; padding-bottom:13px;}
   .slot{margin-top:11px; padding-left:11px; border-left:2px solid rgba(212,161,61,0.4);}
   .slot-label{font-size:9.5px; letter-spacing:1.8px; text-transform:uppercase; color:var(--celeste-soft); font-weight:700;}
   .slot-text{font-size:12.5px; color:#ece6d3; line-height:1.5; margin-top:2px;}
@@ -156,7 +156,7 @@
   .expense-item .meta{color:var(--ink-soft); font-size:10px; display:block;}
   .expense-item .del{color:#a33; cursor:pointer; font-size:11px; margin-left:8px;}
   .pay-badge{font-size:8.5px; background:rgba(79,168,224,0.15); color:var(--celeste); padding:1px 6px; border-radius:999px; font-weight:700;}
-  .low-balance{color:#c1272d !important; font-weight:700;}
+  .low-balance{color:#b8741a !important; font-weight:700;}
   .ticket-icon{font-size:11px; margin-left:4px;}
 
   .doc-slot{background:linear-gradient(160deg, var(--paper) 0%, var(--paper-soft) 100%); border-radius:6px; padding:14px; margin-bottom:12px; color:var(--ink);}
@@ -188,6 +188,49 @@
   .nav-btn .nav-icon{font-size:19px;}
   .nav-btn .nav-label{font-size:8.5px; letter-spacing:0.3px; font-weight:600;}
   .nav-btn.active{color:var(--gold);}
+
+  /* --- Presupuesto v4: billeteras, categorías, ojito global --- */
+  header{position:relative;}
+  #eyeToggle{position:absolute; top:calc(12px + env(safe-area-inset-top,0px)); right:16px; width:36px; height:36px; display:flex; align-items:center; justify-content:center; font-size:18px; line-height:1; cursor:pointer; background:rgba(246,236,217,0.08); border:1px solid rgba(212,161,61,0.3); border-radius:999px; user-select:none;}
+  .money{display:inline-block;}
+  body.hide-amounts .money{color:transparent !important; text-shadow:0 0 9px rgba(140,140,140,0.95); user-select:none;}
+  body.hide-amounts .bar-fill{visibility:hidden;}
+  .neg{color:#c1272d !important; font-weight:700;}
+  .budget-table .neg{color:#ff8a8f !important;}
+  .budget-table .sub, .sub{display:block; font-size:9.5px; color:#a9a58c; font-weight:400; margin-top:1px;}
+  .budget-table tr.tot td{font-weight:700; border-top:1px solid rgba(212,161,61,0.4);}
+  .form-row input[type="date"]{flex:1; padding:9px 11px; border-radius:5px; border:1px solid rgba(42,36,24,0.25); font-size:13px; color:var(--ink); background:#fffdf7; min-width:0;}
+  .wallet{padding:10px 0; border-bottom:1px dashed rgba(42,36,24,0.15);}
+  .wallet:last-child{border-bottom:none;}
+  .wallet-name{font-size:12.5px; font-weight:700; color:var(--ink); margin-bottom:6px;}
+  .wallet-grid{display:grid; grid-template-columns:1.2fr 1fr 1fr; gap:8px; align-items:end;}
+  .wallet-grid label{display:block; font-size:8.5px; letter-spacing:1px; text-transform:uppercase; color:var(--ink-soft); font-weight:700; margin-bottom:3px;}
+  .wallet-grid input{width:100%; padding:7px 8px; border-radius:5px; border:1px solid rgba(42,36,24,0.25); font-size:13px; font-weight:600; color:var(--ink); background:#fffdf7;}
+  .wallet-val{font-size:13px; font-weight:700; color:var(--ink); padding:7px 0;}
+  .est-cmp{font-size:12px; margin-top:8px; padding:8px 10px; border-radius:5px; background:rgba(79,168,224,0.12); color:var(--ink); line-height:1.4;}
+  .bar-bg{background:rgba(42,36,24,0.12); border-radius:999px; height:9px; overflow:hidden; margin-top:8px;}
+  .bar-fill{height:100%; width:0%; background:linear-gradient(90deg,var(--celeste),var(--gold)); border-radius:999px; transition:width .4s ease;}
+  .bar-fill.over{background:#c1272d;}
+  .cat-card{background:rgba(246,236,217,0.06); border:1px solid rgba(212,161,61,0.2); border-radius:6px; margin-bottom:8px; overflow:hidden;}
+  .cat-head{display:flex; align-items:center; padding:11px 13px; cursor:pointer; gap:8px;}
+  .cat-name{font-size:13px; font-weight:600; color:var(--paper);}
+  .cat-total{font-size:12px; color:var(--celeste-soft); font-weight:700; margin-left:auto;}
+  .cat-body{display:none; padding:0 13px 12px;}
+  .cat-card.open .cat-body{display:block;}
+  .cat-card.open .chevron{transform:rotate(90deg);}
+  .cat-empty{font-size:11px; color:#8a8568; font-style:italic; padding:6px 0 2px;}
+  .exp-line{padding:9px 0; border-top:1px dashed rgba(212,161,61,0.2); font-size:12px; color:#ece6d3;}
+  .exp-main{display:flex; justify-content:space-between; gap:8px;}
+  .exp-desc{font-weight:600;}
+  .exp-meta{font-size:10px; color:#a9a58c; margin-top:2px;}
+  .exp-actions{margin-top:5px; display:flex; gap:14px; font-size:10.5px; font-weight:700;}
+  .exp-actions span{cursor:pointer; color:var(--celeste-soft);}
+  .exp-actions .del{color:#ff9a9d;}
+  .edit-form{background:linear-gradient(160deg, var(--paper) 0%, var(--paper-soft) 100%); color:var(--ink); border-radius:6px; padding:10px; margin-top:8px;}
+  .btn-ghost{background:transparent; border:1px solid rgba(212,161,61,0.5); color:var(--gold); padding:9px 14px; border-radius:5px; font-size:12px; font-weight:700; cursor:pointer;}
+  .btn-danger{background:transparent; border:1px dashed rgba(255,138,143,0.6); color:#ff9a9d; padding:8px 14px; border-radius:5px; font-size:11.5px; font-weight:700; cursor:pointer;}
+  .day-spent{margin-top:12px; font-size:11.5px; color:var(--celeste-soft); font-weight:600;}
+  .cd-wallets{font-size:11px; color:var(--ink-soft); text-align:center; padding:2px 6px 4px; font-weight:600;}
 </style>
 </head>
 <body>
@@ -196,6 +239,7 @@
     <div class="eyebrow">Santiago · Buenos Aires</div>
     <h1 class="hero-title">MI DECRETO</h1>
     <div class="hero-sub" id="heroSub">Buenos Aires, ida y vuelta hacia mí</div>
+    <div id="eyeToggle" title="Ocultar / mostrar cifras">👁️</div>
   </header>
 
   <div class="flourish">
@@ -261,7 +305,7 @@
     </div>
 
     <div class="tab-panel" id="tab-budget">
-      <div class="section-title">💰 Presupuesto <span id="eyeToggle" style="cursor:pointer; font-size:16px; margin-left:6px;">👁️</span></div>
+      <div class="section-title">💰 Presupuesto</div>
 
       <div class="info-card" style="border:1px solid rgba(79,168,224,0.4);">
         <div class="subsection-title" style="margin-top:0; color:var(--ink-soft);">💱 Conversor rápido</div>
@@ -274,54 +318,95 @@
         </div>
       </div>
 
-      <div class="acc-card open" id="acc-saldos">
-        <div class="acc-head"><span class="acc-head-title">🎯 Saldos por forma de pago</span><span class="chevron">▶</span></div>
-        <div class="acc-body">
-          <div class="info-card">
-            <div class="note" style="margin-top:0;">Registra cuánto llevas en cada forma de pago al iniciar el viaje. Editable siempre, aunque ya estés viajando.</div>
-            <div class="tip" style="margin:0 0 10px;">✦ El hostal ($132.540, se paga al llegar) lo cubrirás con Global66. Dos formas de reflejarlo: descuéntalo tú misma al calcular tu saldo inicial de Global66, o regístralo como tu primer gasto (concepto "Hostal", forma de pago Global66) el mismo 1 de noviembre — así queda automático.</div>
-            <div class="form-row"><span style="flex:1.3; font-size:12.5px; font-weight:600;">💳 Global66 (CLP)</span><input type="number" id="balGlobal66" placeholder="0"></div>
-            <div class="form-row"><span style="flex:1.3; font-size:12.5px; font-weight:600;">💵 Efectivo USD</span><input type="number" id="balUSD" placeholder="0"></div>
-            <div class="form-row"><span style="flex:1.3; font-size:12.5px; font-weight:600;">🇦🇷 Efectivo ARS</span><input type="number" id="balARS" placeholder="0"></div>
-            <div class="form-row"><span style="flex:1.3; font-size:12.5px; font-weight:600;">💳 Débito BCI (CLP)</span><input type="number" id="balBCI" placeholder="0"></div>
-            <button class="btn" id="saveBalancesBtn" style="width:100%;">Guardar saldos</button>
-            <div id="balancesTable" style="margin-top:12px;"></div>
-          </div>
-        </div>
+      <div class="info-card">
+        <h3>Estimado vs. lo que llevas</h3>
+        <div class="info-row"><span>Presupuesto estimado</span><span class="money" id="estRange">—</span></div>
+        <div class="info-row"><span>Saldo general inicial</span><span class="money" id="generalInitial">$0</span></div>
+        <div class="est-cmp" id="estCompare"></div>
+        <div class="note">El estimado incluye el hostal (se paga al llegar) y no incluye lo ya pagado antes del viaje (vuelo, power bank, seguro). Todo se convierte a CLP al tipo de cambio configurado arriba.</div>
       </div>
 
-      <div class="acc-card open" id="acc-gastosreales">
-        <div class="acc-head"><span class="acc-head-title">Registro de gastos reales</span><span class="chevron">▶</span></div>
+      <div class="acc-card open" id="acc-registro">
+        <div class="acc-head"><span class="acc-head-title">➕ Registro de gasto</span><span class="chevron">▶</span></div>
         <div class="acc-body">
           <div class="info-card">
-            <div class="form-row"><input type="text" id="expConcept" placeholder="Concepto (ej: cena)"></div>
+            <div class="form-row"><input type="text" id="expConcept" placeholder="Descripción (vacía = nombre de la categoría)"></div>
             <div class="form-row">
-              <input type="number" id="expAmount" placeholder="Monto">
+              <input type="number" id="expAmount" placeholder="Monto" step="any" inputmode="decimal">
               <select id="expCurrency"><option value="CLP">CLP</option><option value="ARS">ARS</option><option value="USD">USD</option></select>
             </div>
             <div class="form-row">
-              <select id="expMethod" style="flex:1;"><option>Débito Global66</option><option>Efectivo ARS</option><option>Efectivo USD</option><option>Débito BCI</option></select>
-              <input type="date" id="expDate">
+              <select id="expCategory" style="flex:1;"></select>
+              <select id="expMethod" style="flex:1;"></select>
             </div>
-            <div class="form-row"><button class="btn" id="expAddBtn" style="width:100%;">Agregar</button></div>
-            <div class="note" style="margin-top:0;">Toca un gasto de la lista para editarlo.</div>
-            <div id="expenseList"></div>
-            <div class="info-row" style="margin-top:8px; font-weight:700;"><span>Total gastado (CLP aprox.)</span><span class="money" id="expTotal">$0</span></div>
+            <div class="form-row">
+              <input type="date" id="expDate">
+              <span id="expDayLabel" style="flex:1; font-size:12px; color:var(--ink-soft); font-weight:600;"></span>
+            </div>
+            <div class="form-row"><button class="btn" id="expAddBtn" style="width:100%;">Agregar gasto</button></div>
+            <div class="note" id="expMsg" style="min-height:14px; margin-top:0;"></div>
+            <div class="tip">✦ Hostal (<span class="money">$132.540</span>, se paga al llegar): al pagarlo, regístralo en <b>Alojamiento</b> con forma de pago Global66. Depósito de garantía (reembolsable): regístralo en Alojamiento con la billetera en que lo dejes, y cuando te lo devuelvan agrégalo de nuevo con <b>monto negativo</b>.</div>
           </div>
         </div>
       </div>
 
-      <div class="acc-card" id="acc-gastos">
-        <div class="acc-head"><span class="acc-head-title">Gastos estimados + cuánto ARS llevar</span><span class="chevron">▶</span></div>
+      <div class="acc-card open" id="acc-saldos">
+        <div class="acc-head"><span class="acc-head-title">🎯 Saldos por billetera</span><span class="chevron">▶</span></div>
         <div class="acc-body">
-          <table class="budget-table"><thead><tr><th>Concepto</th><th>Real</th><th>Aprox.</th></tr></thead><tbody id="budgetBody"></tbody></table>
-          <div class="budget-total"><div><div class="lbl">Total estimado</div></div><div class="amt money" id="budgetTotalAmt">$607.840 – $782.840</div></div>
-          <div class="info-card" style="margin-top:12px;">
-            <div class="info-row"><span>Equivalente en ARS</span><span class="money">≈ 997.000 – 1.307.000</span></div>
-            <div class="info-row"><span>Sugerido en efectivo (40-50%)</span><span class="money">≈ 243.000 – 391.000</span></div>
-            <div class="note">Efectivo: ferias, kioscos, propinas, depósito hostal, entradas. Tarjeta: restaurantes, Uber, clubes. Convierte de a poco allá.</div>
+          <div class="info-card">
+            <div class="note" style="margin-top:0;">Anota cuánto llevas en cada forma de pago. Puedes editarlo cuando quieras (por ejemplo si traspasas plata de un medio a otro). Cada billetera es independiente: si se agota una, no toca las otras.</div>
+            <div id="walletsContainer"></div>
           </div>
         </div>
+      </div>
+
+      <div class="acc-card open" id="acc-balance">
+        <div class="acc-head"><span class="acc-head-title">📊 Balance total</span><span class="chevron">▶</span></div>
+        <div class="acc-body">
+          <div class="info-card">
+            <div class="info-row"><span>Presupuesto (saldo general inicial)</span><span class="money" id="balBudget">$0</span></div>
+            <div class="info-row"><span>Gastado</span><span class="money" id="balSpent">$0</span></div>
+            <div class="info-row"><span>Disponible</span><span class="money" id="balAvail">$0</span></div>
+            <div class="info-row"><span>% usado</span><span class="money" id="balPct">—</span></div>
+            <div class="bar-bg"><div class="bar-fill" id="balBar"></div></div>
+            <div class="note">Se calcula solo a partir de tus saldos iniciales y tus gastos. No se edita aquí.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="acc-card open" id="acc-categorias">
+        <div class="acc-head"><span class="acc-head-title">🗂️ Gastos por categoría</span><span class="chevron">▶</span></div>
+        <div class="acc-body">
+          <div id="catList"></div>
+          <div class="form-row" style="margin-top:12px;"><input type="text" id="newCatInput" placeholder="Nueva categoría"><button class="btn" id="addCatBtn">+ Agregar</button></div>
+          <div class="note" id="catMsg" style="min-height:14px; margin-top:0; color:#a9a58c;"></div>
+          <div class="form-row"><button class="btn-ghost" id="csvBtn">⬇️ Descargar CSV</button></div>
+          <div class="note" id="csvMsg" style="min-height:14px; margin-top:0; color:#a9a58c;"></div>
+        </div>
+      </div>
+
+      <div class="acc-card" id="acc-estimados">
+        <div class="acc-head"><span class="acc-head-title">Estimados por categoría + cuánto ARS llevar</span><span class="chevron">▶</span></div>
+        <div class="acc-body">
+          <table class="budget-table"><thead><tr><th>Categoría</th><th>Gastado</th><th>Vs. tope</th></tr></thead><tbody id="estBody"></tbody></table>
+          <div class="info-card" style="margin-top:12px;">
+            <h3>Ya pagado antes del viaje (referencia)</h3>
+            <div id="prepaidList"></div>
+            <div class="note">Esto no descuenta de tus billeteras ni entra en el estimado.</div>
+          </div>
+          <div class="info-card">
+            <h3>Cuánto ARS llevar</h3>
+            <div class="info-row"><span>Estimado total en ARS</span><span class="money" id="estArs">—</span></div>
+            <div class="info-row"><span>Efectivo sugerido (40-50%)</span><span class="money" id="estCashClp">—</span></div>
+            <div class="info-row"><span>…en ARS</span><span class="money" id="estCashArs">—</span></div>
+            <div class="note">Efectivo: ferias, kioscos, propinas, entradas. Tarjeta: restaurantes, Uber, clubes. Convierte de a poco allá. Cálculo según el tipo de cambio de arriba.</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align:center; margin:20px 0 6px;">
+        <button class="btn-danger" id="resetBudgetBtn">Reiniciar presupuesto</button>
+        <div class="note" id="resetMsg" style="color:#a9a58c; text-align:center;">Borra solo gastos, saldos y categorías propias. No toca documentos ni checklist.</div>
       </div>
     </div>
 
@@ -375,7 +460,7 @@
   </main>
 
   <footer>Rinasco a modo mio 🧡</footer>
-  <div class="version-tag">v3.3 · Creado por Melitalove</div>
+  <div class="version-tag">v4.0 · Creado por Melitalove</div>
 </div>
 
 <nav class="bottom-nav">
@@ -429,9 +514,18 @@ function renderCountdownShell(){
     <div class="phrase-box"><div class="phrase" id="phrase">${phrases[0]}</div></div>
   `;
 }
+const TRIP_FIRST_DAY = '2026-11-01'; const TRIP_DAYS = 7;
+function localISO(){ return new Date().toLocaleDateString('en-CA'); }
+function rawDay(iso){
+  if(!iso) return null;
+  const [y,m,d] = iso.split('-').map(Number); const [y0,m0,d0] = TRIP_FIRST_DAY.split('-').map(Number);
+  return Math.round((Date.UTC(y,m-1,d) - Date.UTC(y0,m0-1,d0))/86400000) + 1;
+}
+function dayFromDate(iso){ const n = rawDay(iso); return (n>=1 && n<=TRIP_DAYS) ? n : null; }
+function inTrip(){ const n = Date.now(); return n>=tripStart && n<tripEnd; }
 function renderDuringTrip(){
-  const dayNum = Math.min(7, Math.max(1, Math.floor((Date.now()-tripStart)/86400000)+1));
-  countdownCard.innerHTML = `<div class="cd-big-msg">Día ${dayNum} de 7 — ¡lo estás viviendo! 🧡</div><div class="phrase-box"><div class="phrase" id="phrase">${phrases[0]}</div></div>`;
+  const dayNum = Math.min(TRIP_DAYS, Math.max(1, rawDay(localISO()) || 1));
+  countdownCard.innerHTML = `<div class="cd-big-msg">Día ${dayNum} de ${TRIP_DAYS} — ¡lo estás viviendo! 🧡</div><div class="cd-wallets">${walletsLine()}</div><div class="phrase-box"><div class="phrase" id="phrase">${phrases[0]}</div></div>`;
 }
 function renderAfterTrip(){
   countdownCard.innerHTML = `<div class="cd-big-msg">Ya lo viviste. Rinasco cumplido 🧡</div><div class="phrase-box"><div class="phrase" id="phrase">Il mio decreto, la mia libertà</div></div>`;
@@ -455,7 +549,6 @@ setInterval(()=>{
   p.classList.add('fade');
   setTimeout(()=>{ phraseIdx=(phraseIdx+1)%phrases.length; if(document.getElementById('phrase')) document.getElementById('phrase').textContent=phrases[phraseIdx]; if(p) p.classList.remove('fade'); }, 600);
 }, 4200);
-refreshCountdownState();
 setInterval(()=>{ updateCountdown(); }, 1000);
 setInterval(refreshCountdownState, 60000);
 
@@ -631,7 +724,8 @@ days.forEach((d,i)=>{
   card.innerHTML = `
     <div class="day-head"><div class="day-head-left"><div class="day-num">${String(d.num).padStart(2,'0')}</div><div><div class="day-zone">${d.zone}</div><div class="day-date">${d.date}</div></div></div><div class="chevron">▶</div></div>
     <div class="day-body">
-      ${d.slots.map(s=>`<div class="slot"><div class="slot-label">${s.label}</div><div class="slot-text">${s.text}</div></div>`).join('')}
+      ${d.slots.map(s=>`<div class="slot"><div class="slot-label">${s.label}</div><div class="slot-text">${moneyWrap(s.text)}</div></div>`).join('')}
+      <div class="day-spent">💵 Gastado este día: <span class="money" id="day-spent-${d.num}">$0</span></div>
       <div class="places-row"><input type="text" id="place-input-${d.num}" placeholder="📍 Agrega un lugar que visitaste"><button class="places-add" id="place-add-${d.num}">+</button></div>
       <div class="places-tags" id="places-tags-${d.num}"></div>
     </div>
@@ -656,119 +750,338 @@ days.forEach(d=>{
   document.getElementById('place-input-'+d.num).addEventListener('keypress', e=>{ if(e.key==='Enter') document.getElementById('place-add-'+d.num).click(); });
 });
 
-/* ---------- Presupuesto ---------- */
-const budget = [
-  {c:"Vuelo (JetSmart, ida/vuelta)", real:"$201.561", aprox:"", status:""},
-  {c:"Hostal (6 noches)", real:"", aprox:"$132.540", status:"Se paga al llegar con Global66"},
-  {c:"Power bank", real:"$23.867", aprox:"", status:""},
-  {c:"Seguro de viaje", real:"$29.949", aprox:"", status:""},
-  {c:"Depósito garantía hostal", real:"", aprox:"$9.300", status:""},
-  {c:"Comida + heladerías (7 días)", real:"", aprox:"$130.000 – $163.000", status:""},
-  {c:"Transporte interno", real:"", aprox:"$42.000 – $51.000", status:""},
-  {c:"Vida nocturna (~$30.000/noche, 3-4 noches)", real:"", aprox:"$90.000 – $120.000", status:""},
-  {c:"Cena de cumpleaños", real:"", aprox:"$23.000 – $37.000", status:""},
-  {c:"Efectivo de respaldo", real:"", aprox:"$60.000 – $90.000", status:""},
-  {c:"Souvenirs", real:"", aprox:"$30.000 – $50.000", status:""},
-  {c:"Entradas y tours pagos (Barolo, MALBA, Jardín Japonés, Colón, bus turístico)", real:"", aprox:"$91.000 – $130.000", status:""},
+/* ---------- Presupuesto (billeteras independientes) ---------- */
+const METHODS = [
+  {key:'Débito Global66', label:'💳 Global66 (CLP)', short:'Global66', cur:'CLP'},
+  {key:'Efectivo USD', label:'💵 Efectivo USD', short:'USD', cur:'USD'},
+  {key:'Efectivo ARS', label:'🇦🇷 Efectivo ARS', short:'ARS', cur:'ARS'},
+  {key:'Débito BCI', label:'💳 Débito BCI (CLP)', short:'BCI', cur:'CLP'}
 ];
-const budgetBody=document.getElementById('budgetBody');
-budget.forEach(b=>{ const tr=document.createElement('tr'); const nc=b.status?`${b.c}<br><span style="font-size:9px; color:var(--gold); font-weight:600;">${b.status}</span>`:b.c;
-  tr.innerHTML=`<td>${nc}</td><td>${b.real?'<span class="b-real money">'+b.real+'</span>':'—'}</td><td>${b.aprox?'<span class="b-aprox money">'+b.aprox+'</span>':'—'}</td>`; budgetBody.appendChild(tr); });
+const CURRENCIES = ['CLP','ARS','USD'];
+const BASE_CATEGORIES = ['Alojamiento','Transporte','Comida y helados','Entradas y tours','Vida nocturna','Souvenirs y regalos','Propinas','Otra'];
+const ESTIMATES = {
+  'Alojamiento':        {low:141840, high:141840, note:'Hostal $132.540 (se paga al llegar) + depósito $9.300 (reembolsable)'},
+  'Transporte':         {low:42000,  high:51000,  note:'Uber, subte, traslados'},
+  'Comida y helados':   {low:153000, high:200000, note:'Comidas, heladerías y cena de cumpleaños'},
+  'Entradas y tours':   {low:91000,  high:130000, note:'Barolo, MALBA, Jardín Japonés, Colón, bus turístico'},
+  'Vida nocturna':      {low:90000,  high:120000, note:'~$30.000 por noche, 3-4 noches'},
+  'Souvenirs y regalos':{low:30000,  high:50000,  note:''},
+  'Propinas':           {low:0,      high:0,      note:''},
+  'Otra':               {low:60000,  high:90000,  note:'Efectivo de respaldo / imprevistos'}
+};
+const EST_LOW  = Object.values(ESTIMATES).reduce((s,e)=>s+e.low,0);
+const EST_HIGH = Object.values(ESTIMATES).reduce((s,e)=>s+e.high,0);
+const PREPAID = [
+  {c:'Vuelo (JetSmart, ida/vuelta)', v:201561},
+  {c:'Power bank', v:23867},
+  {c:'Seguro de viaje', v:29949}
+];
 
-/* ---------- Ojito: ocultar/mostrar montos ---------- */
-let amountsHidden = lsGet('amounts-hidden', false);
-function maskMoneyElements(){
-  document.querySelectorAll('.money').forEach(el=>{
-    if(amountsHidden){
-      if(!el.dataset.real) el.dataset.real = el.textContent;
-      el.textContent = '••••••';
-    } else {
-      if(el.dataset.real) el.textContent = el.dataset.real;
-    }
-  });
+function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function uid(){ return Date.now().toString(36)+Math.random().toString(36).slice(2,7); }
+function moneyWrap(t){ return String(t).replace(/(~?\$[\d.]+(?:-\$?[\d.]+)?(?:\s?CLP)?)/g,'<span class="money">$1</span>'); }
+function currentRates(){ return { uc: parseFloat(document.getElementById('rateUsdClp').value)||930, ua: parseFloat(document.getElementById('rateUsdArs').value)||1485 }; }
+function convert(amount, from, to){
+  if(from===to) return amount;
+  const {uc,ua} = currentRates();
+  const usd = from==='USD' ? amount : from==='CLP' ? amount/uc : amount/ua;
+  return to==='USD' ? usd : to==='CLP' ? usd*uc : usd*ua;
 }
-document.getElementById('eyeToggle').addEventListener('click', ()=>{
-  amountsHidden = !amountsHidden;
-  lsSet('amounts-hidden', amountsHidden);
-  document.getElementById('eyeToggle').textContent = amountsHidden ? '🙈' : '👁️';
-  maskMoneyElements();
-});
-document.getElementById('eyeToggle').textContent = amountsHidden ? '🙈' : '👁️';
+function fmtMoney(n, cur){
+  const neg = n < -0.005; const a = Math.abs(n);
+  const num = cur==='USD' ? a.toLocaleString('es-CL',{minimumFractionDigits:2, maximumFractionDigits:2}) : Math.round(a).toLocaleString('es-CL');
+  const sym = cur==='USD' ? 'US$' : cur==='ARS' ? 'AR$' : '$';
+  return (neg?'-':'') + sym + num;
+}
+function mny(n, cur){ return `<span class="money">${fmtMoney(n, cur||'CLP')}</span>`; }
+function optionsHTML(list, selected){
+  return list.map(x=>{ const v = typeof x==='string' ? x : x.key; return `<option value="${esc(v)}" ${v===selected?'selected':''}>${esc(v)}</option>`; }).join('');
+}
 
-/* ---------- Accordion (todas las secciones) ---------- */
+/* Datos: SIEMPRE se recalcula desde la lista de gastos */
+function loadExpenses(){
+  const raw = lsGet('expense-log', []);
+  let changed = false;
+  const list = raw.map(e=>{
+    if(!e.id){ e.id = uid(); changed = true; }
+    if(!e.category){ e.category = 'Otra'; changed = true; }
+    return e;
+  });
+  if(changed) lsSet('expense-log', list);
+  return list;
+}
+function saveExpenses(l){ lsSet('expense-log', l); }
+function loadBalances(){ return lsGet('method-balances', {}); }
+function loadCustomCats(){ return lsGet('bud-categories', []); }
+function allCategories(){ return BASE_CATEGORIES.concat(loadCustomCats().filter(c=>!BASE_CATEGORIES.includes(c))); }
+function catOf(e){ return allCategories().includes(e.category) ? e.category : 'Otra'; }
+
+function computeAll(){
+  const exps = loadExpenses(); const bal = loadBalances();
+  const wallets = METHODS.map(m=>{
+    const initial = Number(bal[m.key]) || 0;
+    const spent = exps.filter(e=>e.method===m.key).reduce((s,e)=> s + convert(e.amount, e.currency, m.cur), 0);
+    return {...m, initial, spent, avail: initial - spent};
+  });
+  const generalInitial = wallets.reduce((s,w)=> s + convert(w.initial, w.cur, 'CLP'), 0);
+  const totalSpent = exps.reduce((s,e)=> s + convert(e.amount, e.currency, 'CLP'), 0);
+  return {exps, wallets, generalInitial, totalSpent, available: generalInitial - totalSpent};
+}
+function spentByCategory(exps){
+  const map = {}; allCategories().forEach(c=> map[c]=0);
+  exps.forEach(e=>{ map[catOf(e)] += convert(e.amount, e.currency, 'CLP'); });
+  return map;
+}
+function walletsLine(){
+  const c = computeAll();
+  if(c.generalInitial <= 0) return 'Registra tus saldos iniciales en la pestaña 💰';
+  return c.wallets.filter(w=> w.initial>0 || w.spent!==0).map(w=> `${w.short} ${mny(w.avail, w.cur)}`).join(' · ');
+}
+
+/* Ojito: oculta todas las cifras de la app */
+let amountsHidden = lsGet('amounts-hidden', false);
+function applyHidden(){
+  document.body.classList.toggle('hide-amounts', !!amountsHidden);
+  document.getElementById('eyeToggle').textContent = amountsHidden ? '🙈' : '👁️';
+}
+document.getElementById('eyeToggle').addEventListener('click', ()=>{ amountsHidden = !amountsHidden; lsSet('amounts-hidden', amountsHidden); applyHidden(); });
+applyHidden();
+
+/* Acordeones estáticos */
 document.querySelectorAll('.acc-head').forEach(head=>{
   head.addEventListener('click', ()=> head.closest('.acc-card').classList.toggle('open'));
 });
 
-/* Saldos por forma de pago */
-const methodCurrency = {'Débito Global66':'CLP', 'Efectivo USD':'USD', 'Efectivo ARS':'ARS', 'Débito BCI':'CLP'};
-const methodBalInput = {'Débito Global66':'balGlobal66', 'Efectivo USD':'balUSD', 'Efectivo ARS':'balARS', 'Débito BCI':'balBCI'};
-function loadBalances(){ return lsGet('method-balances', {}); }
-function currentRates(){ return { uc: parseFloat(document.getElementById('rateUsdClp')?.value)||930, ua: parseFloat(document.getElementById('rateUsdArs')?.value)||1485 }; }
-function convertAmount(amount, fromCur, toCur){
-  if(fromCur===toCur) return amount;
-  const {uc,ua} = currentRates();
-  const usd = fromCur==='USD'?amount : fromCur==='CLP'? amount/uc : amount/ua;
-  return toCur==='USD'?usd : toCur==='CLP'? usd*uc : usd*ua;
+/* Formulario de registro */
+function fillCategorySelect(){
+  const sel = document.getElementById('expCategory'); const cats = allCategories();
+  const cur = sel.value; sel.innerHTML = optionsHTML(cats, cats.includes(cur) ? cur : 'Comida y helados');
 }
-document.getElementById('saveBalancesBtn').addEventListener('click', ()=>{
-  const bal = {};
-  Object.entries(methodBalInput).forEach(([m,id])=>{ bal[m] = parseFloat(document.getElementById(id).value)||0; });
-  lsSet('method-balances', bal);
-  renderBalancesTable();
-});
-function renderBalancesTable(){
-  const bal = loadBalances();
-  Object.entries(methodBalInput).forEach(([m,id])=>{ if(bal[m]!==undefined) document.getElementById(id).value = bal[m]; });
-  const expenses = loadExpenses();
-  const rows = Object.keys(methodCurrency).map(m=>{
-    const cur = methodCurrency[m];
-    const initial = bal[m]||0;
-    const spent = expenses.filter(e=>e.method===m).reduce((s,e)=> s+convertAmount(e.amount, e.currency, cur), 0);
-    const remaining = initial - spent;
-    const isLow = initial>0 && remaining < initial*0.15;
-    const sym = cur==='USD' ? 'US$' : '$';
-    return `<div class="info-row"><span>${m}</span><span class="money ${isLow?'low-balance':''}">${sym}${Math.round(remaining).toLocaleString('es-CL')} ${cur}</span></div>`;
-  }).join('');
-  document.getElementById('balancesTable').innerHTML = rows;
-  maskMoneyElements();
+document.getElementById('expMethod').innerHTML = optionsHTML(METHODS, 'Débito Global66');
+fillCategorySelect();
+document.getElementById('expDate').value = localISO();
+function updateDayLabel(){
+  const d = dayFromDate(document.getElementById('expDate').value);
+  document.getElementById('expDayLabel').textContent = d ? `Día ${d} de ${TRIP_DAYS}` : 'Fuera de las fechas del viaje';
 }
-renderBalancesTable();
+document.getElementById('expDate').addEventListener('input', updateDayLabel);
+updateDayLabel();
 
-/* Gastos reales con moneda, forma de pago, fecha y edición */
-function loadExpenses(){ return lsGet('expense-log', []); }
-function saveExpenses(l){ lsSet('expense-log', l); }
-function toCLP(amount, currency){ return convertAmount(amount, currency, 'CLP'); }
-function renderExpenses(){
-  const list=loadExpenses(); const container=document.getElementById('expenseList');
-  container.innerHTML = list.map((e,i)=>`<div class="expense-item" data-idx="${i}"><span>${e.concept}<span class="meta">${e.date||''} · ${e.amount.toLocaleString('es-CL')} ${e.currency} <span class="pay-badge">${e.method}</span></span></span><span class="del" data-idx="${i}">✕</span></div>`).join('');
-  const totalCLP = list.reduce((s,e)=> s+toCLP(e.amount, e.currency), 0);
-  document.getElementById('expTotal').textContent = '$'+Math.round(totalCLP).toLocaleString('es-CL');
-  container.querySelectorAll('.del').forEach(el=> el.addEventListener('click', (ev)=>{ ev.stopPropagation(); const l=loadExpenses(); l.splice(parseInt(el.dataset.idx),1); saveExpenses(l); renderExpenses(); renderBalancesTable(); }));
-  container.querySelectorAll('.expense-item').forEach(el=> el.addEventListener('click', ()=>{
-    const idx = parseInt(el.dataset.idx); const l=loadExpenses(); const e=l[idx]; if(!e) return;
-    document.getElementById('expConcept').value = e.concept;
-    document.getElementById('expAmount').value = e.amount;
-    document.getElementById('expCurrency').value = e.currency;
-    document.getElementById('expMethod').value = e.method;
-    document.getElementById('expDate').value = e.date||'';
-    l.splice(idx,1); saveExpenses(l); renderExpenses(); renderBalancesTable();
-  }));
-  maskMoneyElements();
-}
-document.getElementById('expDate').value = new Date().toISOString().slice(0,10);
+function setMsg(id, text){ const el = document.getElementById(id); if(el) el.textContent = text; }
 document.getElementById('expAddBtn').addEventListener('click', ()=>{
-  const concept=document.getElementById('expConcept').value.trim();
-  const amount=parseFloat(document.getElementById('expAmount').value);
-  const currency=document.getElementById('expCurrency').value;
-  const method=document.getElementById('expMethod').value;
-  const date=document.getElementById('expDate').value || new Date().toISOString().slice(0,10);
-  if(!concept||!amount) return;
-  const l=loadExpenses(); l.push({concept, amount, currency, method, date}); saveExpenses(l);
-  document.getElementById('expConcept').value=''; document.getElementById('expAmount').value='';
-  renderExpenses(); renderBalancesTable();
+  const amount = parseFloat(document.getElementById('expAmount').value);
+  if(!isFinite(amount) || amount===0){ setMsg('expMsg','Ingresa un monto (distinto de 0).'); return; }
+  const category = document.getElementById('expCategory').value;
+  const concept = document.getElementById('expConcept').value.trim() || category;
+  const currency = document.getElementById('expCurrency').value;
+  const method = document.getElementById('expMethod').value;
+  const date = document.getElementById('expDate').value || localISO();
+  const l = loadExpenses(); l.push({id:uid(), concept, amount, currency, method, date, category}); saveExpenses(l);
+  document.getElementById('expConcept').value = ''; document.getElementById('expAmount').value = '';
+  setMsg('expMsg', `✓ Guardado en ${method}. Mira cómo cambian tus saldos.`);
+  renderBudgetAll();
+  const target = document.getElementById('acc-saldos'); const r = target.getBoundingClientRect();
+  if(r.top > window.innerHeight*0.6) target.scrollIntoView({behavior:'smooth', block:'start'});
 });
-renderExpenses();
+
+/* Billeteras: una fila por medio de pago (Inicial editable, Gastado, Disponible) */
+function buildWallets(){
+  const bal = loadBalances();
+  document.getElementById('walletsContainer').innerHTML = METHODS.map((m,i)=>`
+    <div class="wallet">
+      <div class="wallet-name">${m.label}</div>
+      <div class="wallet-grid">
+        <div><label>Inicial (${m.cur})</label><input type="number" step="any" inputmode="decimal" id="w-init-${i}" value="${bal[m.key] ? bal[m.key] : ''}" placeholder="0"></div>
+        <div><label>Gastado</label><div class="wallet-val money" id="w-spent-${i}">—</div></div>
+        <div><label>Disponible</label><div class="wallet-val money" id="w-avail-${i}">—</div></div>
+      </div>
+    </div>`).join('');
+  METHODS.forEach((m,i)=>{
+    document.getElementById('w-init-'+i).addEventListener('input', e=>{
+      const b = loadBalances(); b[m.key] = parseFloat(e.target.value) || 0; lsSet('method-balances', b);
+      renderBudgetAll({keepCats:true});
+    });
+  });
+}
+buildWallets();
+
+/* Gastos por categoría: acordeones, edición en línea, eliminar con doble toque */
+const openCats = new Set(); let editingId = null; let pendingDel = null; let pendingTimer = null;
+function expLineHTML(e){
+  if(e.id === editingId) return editFormHTML(e);
+  const d = dayFromDate(e.date);
+  const meta = `${d ? 'Día '+d : 'Día —'} · ${esc(e.date || 'sin fecha')} · ${esc(e.method)}`;
+  const delLabel = pendingDel===e.id ? '⚠️ Toca de nuevo para eliminar' : '🗑️ Eliminar';
+  return `<div class="exp-line"><div class="exp-main"><span class="exp-desc">${esc(e.concept)}</span><span class="money">${fmtMoney(e.amount, e.currency)}</span></div><div class="exp-meta">${meta}</div><div class="exp-actions"><span data-act="edit" data-id="${e.id}">✏️ Editar</span><span class="del" data-act="del" data-id="${e.id}">${delLabel}</span></div></div>`;
+}
+function editFormHTML(e){
+  return `<div class="edit-form">
+    <div class="form-row"><input type="text" data-f="concept" value="${esc(e.concept)}" placeholder="Descripción"></div>
+    <div class="form-row"><input type="number" step="any" inputmode="decimal" data-f="amount" value="${e.amount}"><select data-f="currency">${optionsHTML(CURRENCIES, e.currency)}</select></div>
+    <div class="form-row"><select data-f="category">${optionsHTML(allCategories(), catOf(e))}</select><select data-f="method">${optionsHTML(METHODS, e.method)}</select></div>
+    <div class="form-row"><input type="date" data-f="date" value="${esc(e.date||'')}"></div>
+    <div class="form-row"><button class="btn" data-act="save" data-id="${e.id}">Guardar</button><button class="btn-outline" data-act="cancel">Cancelar</button></div>
+    <div class="note" data-f="msg" style="min-height:12px; margin-top:0;"></div>
+  </div>`;
+}
+function renderCategories(c){
+  const cats = allCategories(); const byCat = {}; cats.forEach(k=> byCat[k]=[]);
+  c.exps.forEach(e=> byCat[catOf(e)].push(e));
+  document.getElementById('catList').innerHTML = cats.map(cat=>{
+    const items = byCat[cat].slice().sort((a,b)=> (a.date||'').localeCompare(b.date||''));
+    const total = items.reduce((s,e)=> s + convert(e.amount, e.currency, 'CLP'), 0);
+    const body = items.length ? items.map(expLineHTML).join('') : '<div class="cat-empty">Sin gastos en esta categoría aún</div>';
+    return `<div class="cat-card ${openCats.has(cat)?'open':''}" data-cat="${esc(cat)}"><div class="cat-head"><span class="cat-name">${esc(cat)}</span><span class="cat-total money">${fmtMoney(total,'CLP')}</span><span class="chevron">▶</span></div><div class="cat-body">${body}</div></div>`;
+  }).join('');
+}
+function handleAct(el){
+  const act = el.dataset.act, id = el.dataset.id;
+  const list = loadExpenses(); const idx = list.findIndex(x=> x.id===id);
+  if(act==='edit'){
+    if(idx<0) return; editingId = id; pendingDel = null; openCats.add(catOf(list[idx])); renderBudgetAll();
+  } else if(act==='cancel'){
+    editingId = null; renderBudgetAll();
+  } else if(act==='save'){
+    if(idx<0) return;
+    const form = el.closest('.edit-form'); const val = f => form.querySelector(`[data-f="${f}"]`).value;
+    const amount = parseFloat(val('amount'));
+    if(!isFinite(amount) || amount===0){ form.querySelector('[data-f="msg"]').textContent = 'Ingresa un monto válido.'; return; }
+    const category = val('category'); const concept = val('concept').trim() || category;
+    list[idx] = {...list[idx], concept, amount, currency: val('currency'), category, method: val('method'), date: val('date') || list[idx].date || localISO()};
+    saveExpenses(list); editingId = null; openCats.add(category); renderBudgetAll();
+  } else if(act==='del'){
+    if(pendingDel !== id){
+      pendingDel = id; clearTimeout(pendingTimer);
+      pendingTimer = setTimeout(()=>{ pendingDel = null; renderBudgetAll({keepCats:true}); renderCategories(computeAll()); }, 4000);
+      renderBudgetAll();
+    } else {
+      clearTimeout(pendingTimer); pendingDel = null;
+      if(idx>=0){ list.splice(idx,1); saveExpenses(list); }
+      if(editingId===id) editingId = null;
+      renderBudgetAll();
+    }
+  }
+}
+document.getElementById('catList').addEventListener('click', ev=>{
+  const actEl = ev.target.closest('[data-act]');
+  if(actEl){ handleAct(actEl); return; }
+  const head = ev.target.closest('.cat-head');
+  if(head){
+    const card = head.closest('.cat-card'); const cat = card.dataset.cat;
+    if(openCats.has(cat)) openCats.delete(cat); else openCats.add(cat);
+    card.classList.toggle('open');
+  }
+});
+
+document.getElementById('addCatBtn').addEventListener('click', ()=>{
+  const inp = document.getElementById('newCatInput'); const name = inp.value.trim();
+  if(!name){ setMsg('catMsg','Escribe un nombre para la categoría.'); return; }
+  if(allCategories().some(c=> c.toLowerCase()===name.toLowerCase())){ setMsg('catMsg','Esa categoría ya existe.'); return; }
+  const custom = loadCustomCats(); custom.push(name); lsSet('bud-categories', custom);
+  inp.value = ''; openCats.add(name); fillCategorySelect(); renderBudgetAll();
+  setMsg('catMsg', `✓ Categoría "${name}" agregada.`);
+});
+
+function buildCSV(){
+  const exps = loadExpenses().slice().sort((a,b)=> (a.date||'').localeCompare(b.date||''));
+  const q = s => '"' + String(s==null?'':s).replace(/"/g,'""') + '"';
+  const rows = [['Fecha','Día','Categoría','Descripción','Forma de pago','Monto','Moneda'].map(q).join(';')];
+  exps.forEach(e=> rows.push([q(e.date||''), dayFromDate(e.date)||'', q(catOf(e)), q(e.concept), q(e.method), String(e.amount).replace('.',','), q(e.currency)].join(';')));
+  return '\uFEFF' + rows.join('\r\n');
+}
+document.getElementById('csvBtn').addEventListener('click', ()=>{
+  if(!loadExpenses().length){ setMsg('csvMsg','Aún no hay gastos para descargar.'); return; }
+  const blob = new Blob([buildCSV()], {type:'text/csv;charset=utf-8;'});
+  const url = URL.createObjectURL(blob); const a = document.createElement('a');
+  a.href = url; a.download = 'gastos-mi-decreto.csv'; document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(()=> URL.revokeObjectURL(url), 1500);
+  setMsg('csvMsg','✓ Descarga iniciada (revisa tus descargas).');
+});
+
+/* Resumen, balance, estimados */
+function compareMessage(S){
+  if(S <= 0) return 'Registra tus saldos iniciales para compararlos con el estimado.';
+  if(S < EST_LOW) return `Llevas ${mny(EST_LOW - S)} menos que el mínimo estimado.`;
+  if(S > EST_HIGH) return `Llevas ${mny(S - EST_HIGH)} más que el máximo estimado.`;
+  return 'Tu saldo está dentro del rango estimado. 👌';
+}
+function estStatus(est, spent){
+  if(!est || est.high===0) return spent>0 ? '<span class="sub">sin estimado</span>' : '—';
+  if(spent<=0) return '—';
+  if(spent > est.high) return `<span class="neg money">+${fmtMoney(spent - est.high,'CLP')}</span>`;
+  return `<span class="money">queda ${fmtMoney(est.high - spent,'CLP')}</span>`;
+}
+function rangeText(lo, hi){ return lo===hi ? fmtMoney(lo,'CLP') : fmtMoney(lo,'CLP') + ' – ' + fmtMoney(hi,'CLP'); }
+function renderEstimates(c){
+  const spentBy = spentByCategory(c.exps); let tSpent = 0;
+  const rows = allCategories().map(cat=>{
+    const est = ESTIMATES[cat]; const spent = spentBy[cat] || 0; tSpent += spent;
+    const range = est ? rangeText(est.low, est.high) : 'sin estimado';
+    const note = est && est.note ? `<span class="sub">${moneyWrap(esc(est.note))}</span>` : '';
+    return `<tr><td>${esc(cat)}<span class="sub"><span class="money">${range}</span></span>${note}</td><td><span class="money">${fmtMoney(spent,'CLP')}</span></td><td>${estStatus(est, spent)}</td></tr>`;
+  }).join('');
+  const total = `<tr class="tot"><td>Total<span class="sub"><span class="money">${rangeText(EST_LOW, EST_HIGH)}</span></span></td><td><span class="money">${fmtMoney(tSpent,'CLP')}</span></td><td>${estStatus({low:EST_LOW, high:EST_HIGH}, tSpent)}</td></tr>`;
+  document.getElementById('estBody').innerHTML = rows + total;
+  const {uc,ua} = currentRates(); const toARS = clp => clp/uc*ua; const r1000 = n => Math.round(n/1000)*1000;
+  document.getElementById('estArs').textContent = fmtMoney(r1000(toARS(EST_LOW)),'ARS') + ' – ' + fmtMoney(r1000(toARS(EST_HIGH)),'ARS');
+  document.getElementById('estCashClp').textContent = fmtMoney(r1000(EST_LOW*0.4),'CLP') + ' – ' + fmtMoney(r1000(EST_HIGH*0.5),'CLP');
+  document.getElementById('estCashArs').textContent = fmtMoney(r1000(toARS(EST_LOW*0.4)),'ARS') + ' – ' + fmtMoney(r1000(toARS(EST_HIGH*0.5)),'ARS');
+}
+function renderPrepaid(){
+  const sum = PREPAID.reduce((s,p)=> s+p.v, 0);
+  document.getElementById('prepaidList').innerHTML = PREPAID.map(p=> `<div class="info-row"><span>${p.c}</span><span class="money">${fmtMoney(p.v,'CLP')}</span></div>`).join('')
+    + `<div class="info-row" style="font-weight:700;"><span>Subtotal</span><span class="money">${fmtMoney(sum,'CLP')}</span></div>`;
+}
+renderPrepaid();
+function updateDaySpent(c){
+  for(let n=1; n<=TRIP_DAYS; n++){
+    const el = document.getElementById('day-spent-'+n); if(!el) continue;
+    const s = c.exps.filter(e=> dayFromDate(e.date)===n).reduce((t,e)=> t + convert(e.amount, e.currency, 'CLP'), 0);
+    el.textContent = fmtMoney(s,'CLP');
+  }
+}
+function renderBudgetAll(opts){
+  const c = computeAll();
+  document.getElementById('estRange').textContent = rangeText(EST_LOW, EST_HIGH);
+  document.getElementById('generalInitial').textContent = fmtMoney(c.generalInitial,'CLP');
+  document.getElementById('estCompare').innerHTML = compareMessage(c.generalInitial);
+  c.wallets.forEach((w,i)=>{
+    document.getElementById('w-spent-'+i).textContent = fmtMoney(w.spent, w.cur);
+    const av = document.getElementById('w-avail-'+i);
+    av.textContent = fmtMoney(w.avail, w.cur);
+    av.classList.toggle('neg', w.avail < -0.005);
+    av.classList.toggle('low-balance', w.avail >= -0.005 && w.initial>0 && w.avail < w.initial*0.15);
+  });
+  document.getElementById('balBudget').textContent = fmtMoney(c.generalInitial,'CLP');
+  document.getElementById('balSpent').textContent = fmtMoney(c.totalSpent,'CLP');
+  const balAvail = document.getElementById('balAvail');
+  balAvail.textContent = fmtMoney(c.available,'CLP'); balAvail.classList.toggle('neg', c.available < -0.005);
+  const pct = c.generalInitial>0 ? (c.totalSpent / c.generalInitial * 100) : null;
+  document.getElementById('balPct').textContent = pct===null ? '—' : Math.round(pct) + '%';
+  const bar = document.getElementById('balBar');
+  bar.style.width = pct===null ? '0%' : Math.min(100, Math.max(0, pct)) + '%';
+  bar.classList.toggle('over', pct!==null && pct>100);
+  if(!(opts && opts.keepCats && editingId)) renderCategories(c);
+  renderEstimates(c); updateDaySpent(c);
+  if(inTrip()) refreshCountdownState();
+}
+
+/* Reiniciar (solo presupuesto), con doble toque */
+let resetArmed = false, resetTimer = null;
+document.getElementById('resetBudgetBtn').addEventListener('click', ()=>{
+  const btn = document.getElementById('resetBudgetBtn');
+  if(!resetArmed){
+    resetArmed = true; btn.textContent = 'Toca otra vez para borrar el presupuesto';
+    resetTimer = setTimeout(()=>{ resetArmed = false; btn.textContent = 'Reiniciar presupuesto'; }, 4000);
+    return;
+  }
+  clearTimeout(resetTimer); resetArmed = false; btn.textContent = 'Reiniciar presupuesto';
+  ['expense-log','method-balances','bud-categories'].forEach(k=>{ try{ localStorage.removeItem(k); }catch(e){} });
+  editingId = null; pendingDel = null; openCats.clear();
+  buildWallets(); fillCategorySelect(); renderBudgetAll();
+  setMsg('resetMsg','Presupuesto reiniciado. Todo parte de cero.');
+});
+renderBudgetAll();
 
 /* ---------- Conversor ---------- */
 const convAmount=document.getElementById('convAmount'), convFrom=document.getElementById('convFrom'), convResults=document.getElementById('convResults');
@@ -778,8 +1091,8 @@ function toUSD(a,c){ const uc=parseFloat(rateUsdClp.value)||930, ua=parseFloat(r
 function fromUSD(u,c){ const uc=parseFloat(rateUsdClp.value)||930, ua=parseFloat(rateUsdArs.value)||1485; if(c==='USD')return u; if(c==='CLP')return u*uc; return u*ua; }
 function fmt(n,c){ return c==='USD'?n.toFixed(2):Math.round(n).toLocaleString('es-CL'); }
 function renderConversion(){ const a=parseFloat(convAmount.value)||0, f=convFrom.value, u=toUSD(a,f); convResults.innerHTML=['CLP','USD','ARS'].filter(c=>c!==f).map(c=>`<div class="conv-result-row"><span>${c}</span><span class="val">${fmt(fromUSD(u,c),c)} ${c}</span></div>`).join(''); }
-[convAmount, convFrom, rateUsdClp, rateUsdArs].forEach(el=>el.addEventListener('input', ()=>{ renderConversion(); lsSet('exchange-rates',{usdClp:rateUsdClp.value, usdArs:rateUsdArs.value}); renderExpenses(); renderBalancesTable(); }));
-(function(){ const s=lsGet('exchange-rates', null); if(s){ rateUsdClp.value=s.usdClp; rateUsdArs.value=s.usdArs; } renderConversion(); renderBalancesTable(); })();
+[convAmount, convFrom, rateUsdClp, rateUsdArs].forEach(el=>el.addEventListener('input', ()=>{ renderConversion(); lsSet('exchange-rates',{usdClp:rateUsdClp.value, usdArs:rateUsdArs.value}); renderBudgetAll({keepCats:true}); }));
+(function(){ const s=lsGet('exchange-rates', null); if(s){ rateUsdClp.value=s.usdClp; rateUsdArs.value=s.usdArs; } renderConversion(); renderBudgetAll(); })();
 
 /* ---------- Noche con íconos por tipo + acciones de evento ---------- */
 const nocheData = [
@@ -826,7 +1139,7 @@ function loadNoche(){
   const ex={}; ['niceto-cortesia','niceto-ra'].forEach(id=>{ const el=document.getElementById(id); if(el) ex[id]=el.checked; }); lsSet('noche-extra', ex);
 }));
 loadNoche();
-maskMoneyElements();
+refreshCountdownState();
 if('serviceWorker' in navigator){
   window.addEventListener('load', ()=>{
     navigator.serviceWorker.register('sw.js').then(reg=>{
