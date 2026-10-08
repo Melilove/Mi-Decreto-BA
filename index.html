@@ -17,13 +17,15 @@
     --celeste:#4FA8E0; --celeste-soft:#8ec9ed; --gold:#d4a13d; --ink:#2a2418; --ink-soft:#5a5340;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
-  html,body{height:100%;}
+  html,body{min-height:100%;}
   body{
     background:var(--navy); color:var(--paper); font-family:'Work Sans',sans-serif;
     background-image:radial-gradient(circle at 15% 10%, rgba(79,168,224,0.10), transparent 40%),
       radial-gradient(circle at 85% 90%, rgba(212,161,61,0.10), transparent 40%);
-    padding-bottom: calc(95px + env(safe-area-inset-bottom,0px));
+    padding-bottom: 0;
   }
+  .nav-spacer{height:calc(96px + env(safe-area-inset-bottom,0px));}
+  .ver-top{margin-top:6px; font-size:11px; letter-spacing:0.4px; color:var(--celeste-soft); font-weight:700;}
   .scroll-frame{max-width:480px; margin:0 auto;}
   header{padding:22px 22px 10px; text-align:center; padding-top: calc(22px + env(safe-area-inset-top,0px));}
   .eyebrow{font-size:10.5px; letter-spacing:4px; text-transform:uppercase; color:var(--gold); font-weight:600;}
@@ -177,7 +179,7 @@
   #imgModal .close-modal{position:absolute; top:20px; right:20px; color:white; font-size:28px; cursor:pointer;}
 
   footer{text-align:center; padding:22px 20px 4px; font-family:'Caveat'; font-size:18px; color:var(--gold);}
-  .version-tag{text-align:center; padding:8px 20px 18px; margin-bottom:20px; font-size:13px; color:var(--celeste); font-weight:700; letter-spacing:0.3px;}
+  .version-tag{text-align:center; padding:8px 20px 10px; margin-bottom:0; font-size:13px; color:var(--celeste); font-weight:700; letter-spacing:0.3px;}
 
   .bottom-nav{
     position:fixed; bottom:0; left:0; right:0; background:var(--navy-deep);
@@ -229,6 +231,17 @@
   .edit-form{background:linear-gradient(160deg, var(--paper) 0%, var(--paper-soft) 100%); color:var(--ink); border-radius:6px; padding:10px; margin-top:8px;}
   .btn-ghost{background:transparent; border:1px solid rgba(212,161,61,0.5); color:var(--gold); padding:9px 14px; border-radius:5px; font-size:12px; font-weight:700; cursor:pointer;}
   .btn-danger{background:transparent; border:1px dashed rgba(255,138,143,0.6); color:#ff9a9d; padding:8px 14px; border-radius:5px; font-size:11.5px; font-weight:700; cursor:pointer;}
+  .day-entry{margin-top:12px; font-size:11.5px; color:var(--paper); font-weight:600; background:rgba(212,161,61,0.12); border-left:2px solid var(--gold); padding:6px 9px; border-radius:4px; line-height:1.45;}
+  .ent-row{display:flex; gap:7px; align-items:baseline; margin-top:6px; font-weight:400; font-size:11.5px; flex-wrap:wrap;}
+  .ent-row input{width:auto; margin:0; accent-color:var(--gold);}
+  .ent-row .money{margin-left:auto; font-weight:600;}
+  .ent-sub{margin-top:6px; font-weight:700;}
+  #convResults{display:flex; gap:10px; flex-wrap:wrap;}
+  #convResults .conv-result-row{flex:1; min-width:110px;}
+  .day-entry .opt{display:block; font-weight:400; color:#c7c3ad; font-size:11px;}
+  .daily-big{font-family:'Bebas Neue'; font-size:34px; letter-spacing:0.5px; color:var(--ink); line-height:1.1; margin:2px 0 2px;}
+  .daily-sub{font-size:12px; color:var(--ink-soft); margin-bottom:6px;}
+  .wx-note{display:block; margin-top:2px; font-style:normal;}
   .day-spent{margin-top:12px; font-size:11.5px; color:var(--celeste-soft); font-weight:600;}
   .cd-wallets{font-size:11px; color:var(--ink-soft); text-align:center; padding:2px 6px 4px; font-weight:600;}
 </style>
@@ -239,6 +252,7 @@
     <div class="eyebrow">Santiago · Buenos Aires</div>
     <h1 class="hero-title">MI DECRETO</h1>
     <div class="hero-sub" id="heroSub">Buenos Aires, ida y vuelta hacia mí</div>
+    <div class="ver-top">Rinasco a modo mio 🧡 · v4.5</div>
     <div id="eyeToggle" title="Ocultar / mostrar cifras">👁️</div>
   </header>
 
@@ -255,9 +269,9 @@
     <div class="live-tile"><div class="lt-label">Santiago</div><div class="lt-value" id="clockCL">--:--</div><div class="lt-sub" id="dateCL">—</div></div>
     <div class="live-tile"><div class="lt-label">Buenos Aires</div><div class="lt-value" id="clockAR">--:--</div><div class="lt-sub" id="dateAR">—</div></div>
     <div class="live-tile moon-tile"><div class="lt-label">Luna hoy</div><div class="lt-value" id="moonToday">🌙</div><div class="lt-sub" id="moonTodayName">—</div></div>
-    <div class="live-tile"><div class="lt-label">Clima esperado nov.</div><div class="lt-value" style="font-size:16px;">17–25°C</div><div class="lt-sub">Primavera</div></div>
+    <div class="live-tile"><div class="lt-label">Clima BA ahora</div><div class="lt-value" id="wxTemp" style="font-size:19px;">17–25°C</div><div class="lt-sub" id="wxSub">Estimado nov.</div></div>
   </div>
-  <div class="tz-note">Horarios en vivo · hoy comparten huso horario, se ajusta solo según temporada</div>
+  <div class="tz-note">Horarios en vivo · hoy comparten huso horario, se ajusta solo según temporada<span class="wx-note" id="wxNote">Clima: sin conexión todavía, mostrando el estimado de noviembre (17–25°C)</span></div>
 
   <main>
     <div class="tab-panel active" id="tab-prep">
@@ -308,7 +322,7 @@
       <div class="section-title">💰 Presupuesto</div>
 
       <div class="info-card" style="border:1px solid rgba(79,168,224,0.4);">
-        <div class="subsection-title" style="margin-top:0; color:var(--ink-soft);">💱 Conversor rápido</div>
+        <div class="subsection-title" style="margin:0 0 4px; color:var(--ink-soft); font-size:11px;">💱 Conversor</div>
         <div class="form-row"><input type="number" id="convAmount" value="1000" min="0"><select id="convFrom"><option value="CLP">CLP</option><option value="USD">USD</option><option value="ARS">ARS</option></select></div>
         <div id="convResults"></div>
         <div class="rate-toggle" id="rateToggle">Ajustar tipo de cambio</div>
@@ -318,12 +332,12 @@
         </div>
       </div>
 
-      <div class="info-card">
-        <h3>Estimado vs. lo que llevas</h3>
-        <div class="info-row"><span>Presupuesto estimado</span><span class="money" id="estRange">—</span></div>
-        <div class="info-row"><span>Saldo general inicial</span><span class="money" id="generalInitial">$0</span></div>
-        <div class="est-cmp" id="estCompare"></div>
-        <div class="note">El estimado incluye el hostal (se paga al llegar) y no incluye lo ya pagado antes del viaje (vuelo, power bank, seguro). Todo se convierte a CLP al tipo de cambio configurado arriba.</div>
+      <div class="info-card" id="dailyCard" style="border:1px solid rgba(212,161,61,0.55);">
+        <h3>🎯 Cuánto puedes gastar por día</h3>
+        <div class="daily-big money" id="dailyTotal">—</div>
+        <div class="daily-sub" id="dailySub"></div>
+        <div id="dailyWallets"></div>
+        <div class="note" id="dailyNote"></div>
       </div>
 
       <div class="acc-card open" id="acc-registro">
@@ -345,7 +359,7 @@
             </div>
             <div class="form-row"><button class="btn" id="expAddBtn" style="width:100%;">Agregar gasto</button></div>
             <div class="note" id="expMsg" style="min-height:14px; margin-top:0;"></div>
-            <div class="tip">✦ Hostal (<span class="money">$132.540</span>, se paga al llegar): al pagarlo, regístralo en <b>Alojamiento</b> con forma de pago Global66. Depósito de garantía (reembolsable): regístralo en Alojamiento con la billetera en que lo dejes, y cuando te lo devuelvan agrégalo de nuevo con <b>monto negativo</b>.</div>
+            <div class="tip">✦ Hostal (<span class="money">CLP 132,5 mil</span>, se paga al llegar): al pagarlo, regístralo en <b>Alojamiento</b> con la palabra <b>Hostal</b> en la descripción y forma de pago Global66. Depósito de garantía (reembolsable): regístralo en Alojamiento con la billetera en que lo dejes, y cuando te lo devuelvan agrégalo de nuevo con <b>monto negativo</b>.</div>
           </div>
         </div>
       </div>
@@ -360,7 +374,18 @@
         </div>
       </div>
 
-      <div class="acc-card open" id="acc-balance">
+      <div class="info-card">
+        <h3>Estimado vs. lo que llevas</h3>
+        <div class="info-row"><span>🏠 Hostal Play Garden</span><span class="money" id="estHostal">—</span></div>
+        <div class="note" id="estHostalStatus" style="margin:0 0 6px;"></div>
+        <div class="info-row"><span>Resto del viaje (sin hostal)</span><span class="money" id="estRest">—</span></div>
+        <div class="info-row" style="font-weight:700;"><span>Total estimado</span><span class="money" id="estRange">—</span></div>
+        <div class="info-row"><span>Saldo general inicial</span><span class="money" id="generalInitial">$0</span></div>
+        <div class="est-cmp" id="estCompare"></div>
+        <div class="note">El hostal va aparte porque se paga al llegar (Global66). No incluye lo ya pagado antes del viaje (vuelo, power bank, seguro). Todo se convierte a CLP al tipo de cambio configurado arriba.</div>
+      </div>
+
+      <div class="acc-card" id="acc-balance">
         <div class="acc-head"><span class="acc-head-title">📊 Balance total</span><span class="chevron">▶</span></div>
         <div class="acc-body">
           <div class="info-card">
@@ -374,7 +399,7 @@
         </div>
       </div>
 
-      <div class="acc-card open" id="acc-categorias">
+      <div class="acc-card" id="acc-categorias">
         <div class="acc-head"><span class="acc-head-title">🗂️ Gastos por categoría</span><span class="chevron">▶</span></div>
         <div class="acc-body">
           <div id="catList"></div>
@@ -456,11 +481,27 @@
           <div class="tip">✦ Franquicia aduanera chilena: hasta USD 4.050 sin impuestos. Con souvenirs normales no te acercas a ese límite.</div>
         </div>
       </div>
+
+      <div class="acc-card" id="acc-souv-tarot">
+        <div class="acc-head"><span class="acc-head-title">🔮 Tarot &amp; Esoterismo</span><span class="chevron">▶</span></div>
+        <div class="acc-body">
+          <div class="info-card"><h3>🃏 Mi mazo (Vibración 33)</h3><div class="form-row"><input type="text" id="deckName" placeholder="Nombre exacto del mazo que quieres comprar"></div><div class="note">Se guarda en tu teléfono. El Rider-Waite-Smith es el más común: pregunta en cada tienda por "Rider Waite Smith, 78 cartas, edición original" (también sirve la edición "Pamela Colman Smith"). Confirma stock por Instagram antes de ir; si no lo tienen, prueba en El Ateneo (Día 3) o en otra librería.</div></div>
+          <div class="info-card"><h3>Magia Libros</h3><div class="info-row"><span>Dirección</span><span>Thames 1619, Palermo</span></div><div class="note">Tarot, astrología y psicodelia. Día 5 en el itinerario.</div><a class="maps-link" href="https://www.google.com/maps/search/?api=1&query=Magia+Libros+Thames+1619+Buenos+Aires" target="_blank" rel="noopener">Abrir en Maps</a></div>
+          <div class="info-card"><h3>FE</h3><div class="info-row"><span>Dirección</span><span>Av. Santa Fe 2729 (Galería Patio del Liceo)</span></div><div class="note">Piedras, sahumerios, cartas, escuela y lecturas en inglés. Cerca de Recoleta: calza con tu cumpleaños (día 3).</div><a class="maps-link" href="https://www.google.com/maps/search/?api=1&query=FE+Av+Santa+Fe+2729+Buenos+Aires" target="_blank" rel="noopener">Abrir en Maps</a></div>
+          <div class="info-card"><h3>Librería Esotérica de La Diosa</h3><div class="info-row"><span>Zona</span><span>Palermo</span></div><div class="note">Dirección por confirmar en su Instagram antes de ir.</div><a class="maps-link" href="https://www.google.com/maps/search/?api=1&query=Libreria+Esoterica+La+Diosa+Palermo+Buenos+Aires" target="_blank" rel="noopener">Abrir en Maps</a></div>
+          <div class="info-card"><h3>The West of the Moon</h3><div class="info-row"><span>Zona</span><span>Palermo</span></div><div class="note">Dirección por confirmar: ubícala por su Instagram.</div><a class="maps-link" href="https://www.google.com/maps/search/?api=1&query=The+West+of+the+Moon+Palermo+Buenos+Aires" target="_blank" rel="noopener">Abrir en Maps</a></div>
+          <div class="info-card"><h3>Altar</h3><div class="info-row"><span>Zona</span><span>Colegiales</span></div><div class="note">Café con lecturas de tarot. Dirección por confirmar en su Instagram.</div><a class="maps-link" href="https://www.google.com/maps/search/?api=1&query=Altar+Colegiales+Buenos+Aires+tarot" target="_blank" rel="noopener">Abrir en Maps</a></div>
+          <div class="info-card"><h3>Un día en Venus</h3><div class="note">Librería esotérica "secreta". Ubícala por su Instagram.</div><a class="maps-link" href="https://www.google.com/maps/search/?api=1&query=Un+dia+en+Venus+libreria+Buenos+Aires" target="_blank" rel="noopener">Abrir en Maps</a></div>
+          <div class="info-card"><h3>Editorial Fera</h3><div class="note">Mazos y oráculos ilustrados; talleres de tarot + arte + emprendimiento. Ideal para llevarte un mazo.</div><a class="maps-link" href="https://www.google.com/maps/search/?api=1&query=Editorial+Fera+Buenos+Aires" target="_blank" rel="noopener">Abrir en Maps</a></div>
+          <div class="tip">✦ Confirma horarios y si atienden sin reserva (lecturas) por Instagram antes de ir.</div>
+        </div>
+      </div>
     </div>
   </main>
 
   <footer>Rinasco a modo mio 🧡</footer>
-  <div class="version-tag">v4.0 · Creado por Melitalove</div>
+  <div class="version-tag">v4.5 · Creado por Melitalove</div>
+  <div class="nav-spacer"></div>
 </div>
 
 <nav class="bottom-nav">
@@ -562,6 +603,54 @@ function updateClocks(){
 }
 updateClocks(); setInterval(updateClocks, 30000);
 
+/* ---------- Clima actual de Buenos Aires (Open-Meteo, con respaldo sin internet) ---------- */
+const WX_URL = 'https://api.open-meteo.com/v1/forecast?latitude=-34.6037&longitude=-58.3816&current=temperature_2m,apparent_temperature,weather_code&timezone=America%2FArgentina%2FBuenos_Aires';
+function wxInfo(code){
+  if(code===0) return ['☀️','Despejado'];
+  if(code===1) return ['🌤️','Mayormente despejado'];
+  if(code===2) return ['⛅','Parcialmente nublado'];
+  if(code===3) return ['☁️','Nublado'];
+  if(code===45||code===48) return ['🌫️','Niebla'];
+  if(code>=51&&code<=57) return ['🌦️','Llovizna'];
+  if(code>=61&&code<=67) return ['🌧️','Lluvia'];
+  if(code>=71&&code<=77) return ['❄️','Nieve'];
+  if(code>=80&&code<=82) return ['🌦️','Chubascos'];
+  if(code===85||code===86) return ['❄️','Chubascos de nieve'];
+  if(code>=95) return ['⛈️','Tormenta'];
+  return ['🌡️','Clima'];
+}
+function showWeather(w, live){
+  const [ic, txt] = wxInfo(w.code);
+  document.getElementById('wxTemp').textContent = Math.round(w.t) + '°C';
+  document.getElementById('wxSub').textContent = ic + ' ' + txt;
+  const hh = new Date(w.ts).toLocaleTimeString('es-CL',{hour:'2-digit',minute:'2-digit',hour12:false});
+  document.getElementById('wxNote').textContent = 'Clima en Buenos Aires: sensación ' + Math.round(w.feels) + '°C · ' + (live ? 'actualizado ' : 'última lectura guardada ') + hh;
+}
+function showWeatherFallback(){
+  document.getElementById('wxTemp').textContent = '17–25°C';
+  document.getElementById('wxSub').textContent = 'Estimado nov.';
+  document.getElementById('wxNote').textContent = 'Clima: sin conexión todavía, mostrando el estimado de noviembre (17–25°C)';
+}
+async function loadWeather(){
+  const cached = lsGet('ba-weather', null);
+  try{
+    const ctrl = new AbortController(); const tm = setTimeout(()=>ctrl.abort(), 8000);
+    const r = await fetch(WX_URL, {signal: ctrl.signal}); clearTimeout(tm);
+    if(!r.ok) throw new Error('http');
+    const j = await r.json(); const cu = j.current;
+    if(!cu || typeof cu.temperature_2m !== 'number') throw new Error('data');
+    const w = {t: cu.temperature_2m, feels: typeof cu.apparent_temperature==='number' ? cu.apparent_temperature : cu.temperature_2m, code: cu.weather_code, ts: Date.now()};
+    lsSet('ba-weather', w); showWeather(w, true);
+  }catch(e){
+    if(cached && typeof cached.t==='number') showWeather(cached, false); else showWeatherFallback();
+  }
+}
+(function(){ const el=document.getElementById('deckName'); if(!el) return; el.value = lsGet('deck-name','') || 'Rider-Waite-Smith (clásico, 78 cartas)'; el.addEventListener('input', ()=> lsSet('deck-name', el.value)); })();
+loadWeather();
+setInterval(loadWeather, 15*60*1000);
+window.addEventListener('online', loadWeather);
+document.addEventListener('visibilitychange', ()=>{ if(!document.hidden) loadWeather(); });
+
 /* ---------- Moon ---------- */
 function moonPhase(date){ const s=29.53058867, k=Date.UTC(2000,0,6,18,14,0); let p=((date.getTime()-k)/86400000 % s)/s; if(p<0)p+=1; return p; }
 function moonInfo(p){ const st=[{max:0.03,icon:'🌑',name:'Luna Nueva'},{max:0.22,icon:'🌒',name:'Creciente'},{max:0.28,icon:'🌓',name:'Cuarto Creciente'},{max:0.47,icon:'🌔',name:'Gibosa Creciente'},{max:0.53,icon:'🌕',name:'Luna Llena'},{max:0.72,icon:'🌖',name:'Gibosa Menguante'},{max:0.78,icon:'🌗',name:'Cuarto Menguante'},{max:0.97,icon:'🌘',name:'Menguante'},{max:1.01,icon:'🌑',name:'Luna Nueva'}]; for(const s2 of st){if(p<=s2.max)return s2;} return st[0]; }
@@ -595,7 +684,7 @@ const pendientesData = [
   "Hacer check-in online vuelo de IDA (24-48h antes del 1 nov)",
   "Hacer check-in online vuelo de VUELTA (24-48h antes del 7 nov)",
   "Guardar ambas tarjetas de embarque en el celular",
-  "Guardar N° de póliza y teléfono de emergencia del seguro en Documentos",
+  "Subir el voucher del seguro (con el teléfono de emergencia) en Documentos",
   "Revisar vigencia del roaming Claro unos días antes de viajar",
   "Descargar app Mi Claro (monitoreo de datos)",
   "Sacar efectivo (ARS) para el depósito de garantía del hostal (USD 10)",
@@ -662,6 +751,19 @@ const savedTitles=lsGet('custom-doc-titles',{});
 for(let i=1;i<=4;i++){ const key='doc-custom-'+i; buildDocSlot(customDocsContainer, key, savedTitles[key]||`Documento ${i}`, '', true); }
 
 /* ---------- Itinerario ---------- */
+const ENTRY_ITEMS = {
+  barolo:{day:2, name:'Palacio Barolo (tour guiado)', lo:33000, hi:64000, def:true},
+  jardin:{day:5, name:'Jardín Japonés', lo:11300, hi:11300, def:true},
+  malba:{day:5, name:'MALBA (verificar precio)', lo:6000, hi:9000, def:true},
+  colon:{day:6, name:'Teatro Colón (alternativa)', lo:41000, hi:46000, def:false}
+};
+const DAY_NOTES = {1:'Sin entradas pagadas', 3:'Museos y cementerio gratis', 4:'Sin entradas pagadas', 6:'Sin otras entradas', 7:'Sin entradas pagadas'};
+const DAY_OPTS = {3:'Bus turístico amarillo (opcional): precio por confirmar'};
+function entState(id){ const st = lsGet('planned-entries', {}); return (id in st) ? !!st[id] : ENTRY_ITEMS[id].def; }
+function plannedEntries(){
+  let lo=0, hi=0; Object.keys(ENTRY_ITEMS).forEach(id=>{ if(entState(id)){ lo+=ENTRY_ITEMS[id].lo; hi+=ENTRY_ITEMS[id].hi; } });
+  return {lo, hi};
+}
 const days = [
   {num:1, date:"Dom 1 nov", zone:"Llegada · Palermo", slots:[
     {label:"Mañana", text:"Vuelo SCL→AEP (09:13-11:20). Traslado desde casa: Uber o Transvip (~$8.000-15.000 CLP p/persona, cotizar en transvip.cl antes de reservar)."},
@@ -684,6 +786,7 @@ const days = [
     {label:"Mañana (alternativa)", text:"🎟️ Buenos Aires Bus (turístico amarillo) — sale de Av. Quintana 596, mismo barrio. Recorre Recoleta, Colón, Caminito, Puerto Madero. Precio no confirmado, revisar en buenosairesbus.com."},
     {label:"Almuerzo", text:"Algo en Recoleta."},
     {label:"Tarde", text:"El Ateneo Grand Splendid + Floralis Genérica + El Cuartito."},
+    {label:"🔮 Tarot cercano", text:"FE — Av. Santa Fe 2729 (Galería Patio del Liceo): cartas, piedras y lecturas en inglés. Ideal para una lectura de cumpleaños."},
     {label:"🍦 Helado del día", text:"Rapanui — Uruguay 1284, Recoleta."},
     {label:"♏ Tu decreto de cumpleaños", text:"Escorpio · La Muerte (transformación): 'Hoy cierro un ciclo y abro otro. Decreto que este año es mío, y lo vivo sin pedir permiso.'"},
     {label:"Noche", text:"Cena especial de cumpleaños."}
@@ -700,6 +803,7 @@ const days = [
     {label:"Mañana", text:"Bosques de Palermo + El Rosedal + 🎟️ Jardín Japonés (~$11.300 CLP, no residente)."},
     {label:"Almuerzo", text:"Palermo Hollywood."},
     {label:"Tarde", text:"🎟️ MALBA (~$6.000-9.000 CLP, verificar precio actualizado)."},
+    {label:"🔮 Tarot en Palermo", text:"Magia Libros (Thames 1619), Librería Esotérica de La Diosa o The West of the Moon (ubicar por Instagram)."},
     {label:"🍦 Helado del día", text:"Rapanui — Malabia 2014, Palermo."},
     {label:"Noche", text:"Cena en Conchinchina, Niño Gordo o La Carnicería."}
   ]},
@@ -719,12 +823,26 @@ const days = [
   ]}
 ];
 const daysContainer=document.getElementById('daysContainer');
+function kTxt(n){ return (n/1000).toLocaleString('es-CL',{maximumFractionDigits:1}); }
+function entRange(lo,hi){ return lo===hi ? 'CLP '+kTxt(lo)+' mil' : 'CLP '+kTxt(lo)+' – '+kTxt(hi)+' mil'; }
+function dayEntrySub(n){
+  let lo=0, hi=0; Object.keys(ENTRY_ITEMS).forEach(id=>{ const it=ENTRY_ITEMS[id]; if(it.day===n && entState(id)){ lo+=it.lo; hi+=it.hi; } });
+  return lo===0&&hi===0 ? 'CLP 0' : entRange(lo,hi);
+}
+function entryHTML(d){
+  const ids = Object.keys(ENTRY_ITEMS).filter(id=> ENTRY_ITEMS[id].day===d.num);
+  const opt = DAY_OPTS[d.num] ? `<span class="opt">${esc(DAY_OPTS[d.num])}</span>` : '';
+  if(!ids.length) return `<div class="day-entry">🎟️ Entradas <span class="money">CLP 0</span> · ${esc(DAY_NOTES[d.num]||'')}${opt}</div>`;
+  const rows = ids.map(id=>{ const it=ENTRY_ITEMS[id]; return `<label class="ent-row"><input type="checkbox" data-ent="${id}" ${entState(id)?'checked':''}> <span>${esc(it.name)}</span> <span class="money">${entRange(it.lo,it.hi)}</span></label>`; }).join('');
+  return `<div class="day-entry">🎟️ Entradas (marca las que sí vas a pagar)${rows}<div class="ent-sub">Subtotal del día: <span class="money" id="ent-sub-${d.num}">${dayEntrySub(d.num)}</span></div>${opt}</div>`;
+}
 days.forEach((d,i)=>{
   const card=document.createElement('div'); card.className='day-card'+(i===0?' open':'');
   card.innerHTML = `
     <div class="day-head"><div class="day-head-left"><div class="day-num">${String(d.num).padStart(2,'0')}</div><div><div class="day-zone">${d.zone}</div><div class="day-date">${d.date}</div></div></div><div class="chevron">▶</div></div>
     <div class="day-body">
       ${d.slots.map(s=>`<div class="slot"><div class="slot-label">${s.label}</div><div class="slot-text">${moneyWrap(s.text)}</div></div>`).join('')}
+      ${entryHTML(d)}
       <div class="day-spent">💵 Gastado este día: <span class="money" id="day-spent-${d.num}">$0</span></div>
       <div class="places-row"><input type="text" id="place-input-${d.num}" placeholder="📍 Agrega un lugar que visitaste"><button class="places-add" id="place-add-${d.num}">+</button></div>
       <div class="places-tags" id="places-tags-${d.num}"></div>
@@ -732,6 +850,12 @@ days.forEach((d,i)=>{
   `;
   card.querySelector('.day-head').addEventListener('click', ()=>card.classList.toggle('open'));
   daysContainer.appendChild(card);
+});
+daysContainer.addEventListener('change', ev=>{
+  const id = ev.target && ev.target.dataset && ev.target.dataset.ent; if(!id) return;
+  const st = lsGet('planned-entries', {}); st[id] = ev.target.checked; lsSet('planned-entries', st);
+  days.forEach(d=>{ const el=document.getElementById('ent-sub-'+d.num); if(el) el.textContent = dayEntrySub(d.num); });
+  renderBudgetAll({keepCats:true});
 });
 function renderPlaces(dayNum){
   const list = lsGet('day-places-'+dayNum, []);
@@ -752,7 +876,7 @@ days.forEach(d=>{
 
 /* ---------- Presupuesto (billeteras independientes) ---------- */
 const METHODS = [
-  {key:'Débito Global66', label:'💳 Global66 (CLP)', short:'Global66', cur:'CLP'},
+  {key:'Débito Global66', label:'💳 Global66 (USD)', short:'Global66', cur:'USD'},
   {key:'Efectivo USD', label:'💵 Efectivo USD', short:'USD', cur:'USD'},
   {key:'Efectivo ARS', label:'🇦🇷 Efectivo ARS', short:'ARS', cur:'ARS'},
   {key:'Débito BCI', label:'💳 Débito BCI (CLP)', short:'BCI', cur:'CLP'}
@@ -771,6 +895,8 @@ const ESTIMATES = {
 };
 const EST_LOW  = Object.values(ESTIMATES).reduce((s,e)=>s+e.low,0);
 const EST_HIGH = Object.values(ESTIMATES).reduce((s,e)=>s+e.high,0);
+const HOSTAL_COST = 132540;
+const HOSTAL_RE = /host(a|e)l|play|garden/i;
 const PREPAID = [
   {c:'Vuelo (JetSmart, ida/vuelta)', v:201561},
   {c:'Power bank', v:23867},
@@ -787,11 +913,20 @@ function convert(amount, from, to){
   const usd = from==='USD' ? amount : from==='CLP' ? amount/uc : amount/ua;
   return to==='USD' ? usd : to==='CLP' ? usd*uc : usd*ua;
 }
+/* Siempre con el código de moneda (CLP / ARS / USD). Montos grandes en forma corta: 132,5 mil · 1,49 M */
 function fmtMoney(n, cur){
-  const neg = n < -0.005; const a = Math.abs(n);
-  const num = cur==='USD' ? a.toLocaleString('es-CL',{minimumFractionDigits:2, maximumFractionDigits:2}) : Math.round(a).toLocaleString('es-CL');
-  const sym = cur==='USD' ? 'US$' : cur==='ARS' ? 'AR$' : '$';
-  return (neg?'-':'') + sym + num;
+  const neg = n < -0.005; const a = Math.abs(n); const code = cur || 'CLP';
+  let num;
+  if(code==='USD') num = a.toLocaleString('es-CL',{minimumFractionDigits:2, maximumFractionDigits:2});
+  else if(a >= 1e6) num = (a/1e6).toLocaleString('es-CL',{maximumFractionDigits:2}) + ' M';
+  else if(a >= 10000) num = (a/1000).toLocaleString('es-CL',{maximumFractionDigits:1}) + ' mil';
+  else num = Math.round(a).toLocaleString('es-CL');
+  return (neg?'-':'') + code + ' ' + num;
+}
+function fmtExact(n, cur){
+  const neg = n < -0.005; const a = Math.abs(n); const code = cur || 'CLP';
+  const num = code==='USD' ? a.toLocaleString('es-CL',{minimumFractionDigits:2, maximumFractionDigits:2}) : Math.round(a).toLocaleString('es-CL');
+  return (neg?'-':'') + code + ' ' + num;
 }
 function mny(n, cur){ return `<span class="money">${fmtMoney(n, cur||'CLP')}</span>`; }
 function optionsHTML(list, selected){
@@ -836,6 +971,55 @@ function walletsLine(){
   const c = computeAll();
   if(c.generalInitial <= 0) return 'Registra tus saldos iniciales en la pestaña 💰';
   return c.wallets.filter(w=> w.initial>0 || w.spent!==0).map(w=> `${w.short} ${mny(w.avail, w.cur)}`).join(' · ');
+}
+
+/* Hostal aparte + gasto diario */
+function hostalPaid(exps){
+  return exps.filter(e=> catOf(e)==='Alojamiento' && e.amount>0 && HOSTAL_RE.test(e.concept||'')).reduce((s,e)=> s + convert(e.amount, e.currency, 'CLP'), 0);
+}
+function tripDaysLeft(){
+  const now = Date.now();
+  if(now < tripStart) return TRIP_DAYS;
+  if(now >= tripEnd) return 0;
+  const n = Math.min(TRIP_DAYS, Math.max(1, rawDay(localISO()) || 1));
+  return TRIP_DAYS - n + 1;
+}
+function renderDaily(c){
+  const days = tripDaysLeft();
+  const tot = document.getElementById('dailyTotal'), sub = document.getElementById('dailySub');
+  const wl = document.getElementById('dailyWallets'), note = document.getElementById('dailyNote');
+  if(c.generalInitial <= 0){
+    tot.textContent = '—'; tot.classList.remove('neg');
+    sub.textContent = 'Anota tus saldos iniciales en "Saldos por billetera" y aquí verás cuánto puedes gastar cada día.';
+    wl.innerHTML = ''; note.textContent = ''; return;
+  }
+  if(days === 0){
+    tot.textContent = '—'; tot.classList.remove('neg');
+    sub.textContent = 'El viaje ya terminó.'; wl.innerHTML = ''; note.textContent = ''; return;
+  }
+  const paid = hostalPaid(c.exps);
+  const reserve = Math.max(0, HOSTAL_COST - paid);
+  const entSpent = c.exps.filter(e=> catOf(e)==='Entradas y tours').reduce((t,e)=> t + convert(e.amount, e.currency, 'CLP'), 0);
+  const entReserve = Math.max(0, plannedEntries().hi - entSpent);
+  const net = c.available - reserve - entReserve;
+  const perDay = net / days;
+  tot.textContent = fmtMoney(perDay,'CLP'); tot.classList.toggle('neg', perDay < -0.005);
+  const started = Date.now() >= tripStart;
+  let subTxt = started ? `Quedan ${days} ${days===1?'día':'días'} (contando hoy).` : `Repartido en ${days} días (1–7 nov).`;
+  if(started){
+    const today = c.exps.filter(e=> e.date===localISO() && catOf(e)!=='Alojamiento').reduce((s,e)=> s + convert(e.amount, e.currency, 'CLP'), 0);
+    const allowToday = (net + today) / days;
+    const over = today > allowToday + 0.5;
+    subTxt += ` Hoy: gastado ${mny(today)} de ${mny(allowToday)}` + (over ? ` — <span class="neg money">te pasaste por ${fmtMoney(today-allowToday,'CLP')}</span>` : ' ✓') + '.';
+  }
+  sub.innerHTML = subTxt;
+  wl.innerHTML = c.wallets.filter(w=> w.initial>0 || w.spent!==0).map(w=>{
+    const av = w.avail - (w.key==='Débito Global66' ? convert(reserve,'CLP','USD') : 0);
+    const pd = av / days;
+    const approx = w.cur==='CLP' ? '' : ` <span style="font-weight:400;">(≈ ${fmtMoney(convert(pd,w.cur,'CLP'),'CLP')})</span>`;
+    return `<div class="info-row"><span>${esc(w.label)}</span><span class="money ${pd<-0.005?'neg':''}">${fmtMoney(pd,w.cur)} / día${approx}</span></div>`;
+  }).join('');
+  note.innerHTML = (reserve>0 ? `Descontado: hostal pendiente ${mny(reserve)} (de Global66). ` : '') + (entReserve>0 ? `Descontado: entradas marcadas en el itinerario ${mny(entReserve)} (solo en el total, no por billetera). ` : '') + 'Los montos grandes se abrevian: 132,5 mil = 132.500.';
 }
 
 /* Ojito: oculta todas las cifras de la app */
@@ -912,7 +1096,7 @@ function expLineHTML(e){
   const d = dayFromDate(e.date);
   const meta = `${d ? 'Día '+d : 'Día —'} · ${esc(e.date || 'sin fecha')} · ${esc(e.method)}`;
   const delLabel = pendingDel===e.id ? '⚠️ Toca de nuevo para eliminar' : '🗑️ Eliminar';
-  return `<div class="exp-line"><div class="exp-main"><span class="exp-desc">${esc(e.concept)}</span><span class="money">${fmtMoney(e.amount, e.currency)}</span></div><div class="exp-meta">${meta}</div><div class="exp-actions"><span data-act="edit" data-id="${e.id}">✏️ Editar</span><span class="del" data-act="del" data-id="${e.id}">${delLabel}</span></div></div>`;
+  return `<div class="exp-line"><div class="exp-main"><span class="exp-desc">${esc(e.concept)}</span><span class="money">${fmtExact(e.amount, e.currency)}</span></div><div class="exp-meta">${meta}</div><div class="exp-actions"><span data-act="edit" data-id="${e.id}">✏️ Editar</span><span class="del" data-act="del" data-id="${e.id}">${delLabel}</span></div></div>`;
 }
 function editFormHTML(e){
   return `<div class="edit-form">
@@ -1011,7 +1195,8 @@ function estStatus(est, spent){
   if(spent > est.high) return `<span class="neg money">+${fmtMoney(spent - est.high,'CLP')}</span>`;
   return `<span class="money">queda ${fmtMoney(est.high - spent,'CLP')}</span>`;
 }
-function rangeText(lo, hi){ return lo===hi ? fmtMoney(lo,'CLP') : fmtMoney(lo,'CLP') + ' – ' + fmtMoney(hi,'CLP'); }
+function rangeText(lo, hi){ return lo===hi ? fmtMoney(lo,'CLP') : fmtMoney(lo,'CLP') + ' – ' + fmtMoney(hi,'CLP').replace(/^CLP /,''); }
+function rangeCur(lo, hi, cur){ return fmtMoney(lo,cur) + ' – ' + fmtMoney(hi,cur).replace(/^[A-Z]{3} /,''); }
 function renderEstimates(c){
   const spentBy = spentByCategory(c.exps); let tSpent = 0;
   const rows = allCategories().map(cat=>{
@@ -1023,9 +1208,9 @@ function renderEstimates(c){
   const total = `<tr class="tot"><td>Total<span class="sub"><span class="money">${rangeText(EST_LOW, EST_HIGH)}</span></span></td><td><span class="money">${fmtMoney(tSpent,'CLP')}</span></td><td>${estStatus({low:EST_LOW, high:EST_HIGH}, tSpent)}</td></tr>`;
   document.getElementById('estBody').innerHTML = rows + total;
   const {uc,ua} = currentRates(); const toARS = clp => clp/uc*ua; const r1000 = n => Math.round(n/1000)*1000;
-  document.getElementById('estArs').textContent = fmtMoney(r1000(toARS(EST_LOW)),'ARS') + ' – ' + fmtMoney(r1000(toARS(EST_HIGH)),'ARS');
-  document.getElementById('estCashClp').textContent = fmtMoney(r1000(EST_LOW*0.4),'CLP') + ' – ' + fmtMoney(r1000(EST_HIGH*0.5),'CLP');
-  document.getElementById('estCashArs').textContent = fmtMoney(r1000(toARS(EST_LOW*0.4)),'ARS') + ' – ' + fmtMoney(r1000(toARS(EST_HIGH*0.5)),'ARS');
+  document.getElementById('estArs').textContent = rangeCur(r1000(toARS(EST_LOW)), r1000(toARS(EST_HIGH)),'ARS');
+  document.getElementById('estCashClp').textContent = rangeCur(r1000(EST_LOW*0.4), r1000(EST_HIGH*0.5),'CLP');
+  document.getElementById('estCashArs').textContent = rangeCur(r1000(toARS(EST_LOW*0.4)), r1000(toARS(EST_HIGH*0.5)),'ARS');
 }
 function renderPrepaid(){
   const sum = PREPAID.reduce((s,p)=> s+p.v, 0);
@@ -1043,6 +1228,11 @@ function updateDaySpent(c){
 function renderBudgetAll(opts){
   const c = computeAll();
   document.getElementById('estRange').textContent = rangeText(EST_LOW, EST_HIGH);
+  document.getElementById('estHostal').textContent = fmtMoney(HOSTAL_COST,'CLP');
+  document.getElementById('estRest').textContent = rangeText(EST_LOW - HOSTAL_COST, EST_HIGH - HOSTAL_COST);
+  const hp = hostalPaid(c.exps);
+  document.getElementById('estHostalStatus').innerHTML = hp >= HOSTAL_COST - 0.5 ? '✓ Registrado como pagado.' : (hp>0 ? `Registrado ${mny(hp)}; faltan ${mny(HOSTAL_COST-hp)}.` : 'Pendiente: se paga al llegar con Global66. Al registrarlo en Alojamiento (con "hostal" en la descripción) pasa a pagado.');
+  renderDaily(c);
   document.getElementById('generalInitial').textContent = fmtMoney(c.generalInitial,'CLP');
   document.getElementById('estCompare').innerHTML = compareMessage(c.generalInitial);
   c.wallets.forEach((w,i)=>{
