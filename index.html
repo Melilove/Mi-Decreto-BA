@@ -122,6 +122,8 @@
   .noche-tag{display:inline-block; font-size:8.5px; letter-spacing:1px; text-transform:uppercase; font-weight:700; padding:2px 7px; border-radius:999px; margin:3px 5px 2px 0;}
   .tag-club{background:rgba(79,168,224,0.25); color:var(--celeste-soft);}
   .tag-bar{background:rgba(212,161,61,0.25); color:var(--gold);}
+  .tag-rooftop{background:rgba(180,120,220,0.25); color:#d9bdf2;}
+  .day-est{margin-top:10px; font-size:11.5px; color:var(--paper); font-weight:600;}
   .tag-cultura{background:rgba(246,236,217,0.15); color:#ece6d3;}
   .noche-note{font-size:11px; color:#c7c3ad; margin-top:4px; line-height:1.4;}
   .noche-footer{display:flex; justify-content:space-between; align-items:center; margin-top:8px;}
@@ -229,6 +231,9 @@
   .exp-actions span{cursor:pointer; color:var(--celeste-soft);}
   .exp-actions .del{color:#ff9a9d;}
   .edit-form{background:linear-gradient(160deg, var(--paper) 0%, var(--paper-soft) 100%); color:var(--ink); border-radius:6px; padding:10px; margin-top:8px;}
+  .seg{display:flex; gap:6px; margin:8px 0;}
+  .seg button{flex:1; padding:9px 6px; border-radius:6px; border:1px solid rgba(79,168,224,0.6); background:transparent; color:var(--ink); font:inherit; font-size:13px; cursor:pointer;}
+  .seg button.on{background:var(--celeste); color:var(--navy); font-weight:700;}
   .btn-ghost{background:transparent; border:1px solid rgba(212,161,61,0.5); color:var(--gold); padding:9px 14px; border-radius:5px; font-size:12px; font-weight:700; cursor:pointer;}
   .btn-danger{background:transparent; border:1px dashed rgba(255,138,143,0.6); color:#ff9a9d; padding:8px 14px; border-radius:5px; font-size:11.5px; font-weight:700; cursor:pointer;}
   .day-entry{margin-top:12px; font-size:11.5px; color:var(--paper); font-weight:600; background:rgba(212,161,61,0.12); border-left:2px solid var(--gold); padding:6px 9px; border-radius:4px; line-height:1.45;}
@@ -252,7 +257,7 @@
     <div class="eyebrow">Santiago · Buenos Aires</div>
     <h1 class="hero-title">MI DECRETO</h1>
     <div class="hero-sub" id="heroSub">Buenos Aires, ida y vuelta hacia mí</div>
-    <div class="ver-top">Rinasco a modo mio 🧡 · v4.5</div>
+    <div class="ver-top">Rinasco a modo mio 🧡 · v5.3</div>
     <div id="eyeToggle" title="Ocultar / mostrar cifras">👁️</div>
   </header>
 
@@ -316,6 +321,27 @@
     <div class="tab-panel" id="tab-itin">
       <div class="section-title">🗓️ Día a día</div>
       <div id="daysContainer"></div>
+
+      <div class="acc-card" id="acc-comer">
+        <div class="acc-head"><span class="acc-head-title">🍝 Para comer bien</span><span class="chevron">▶</span></div>
+        <div class="acc-body">
+          <div class="info-card"><h3>🧀 L'adesso Ristorante</h3><div class="info-row"><span>Dirección</span><span>Fray Justo Sta. María de Oro 2047, Palermo</span></div><div class="info-row"><span>Horario</span><span>Mar-sáb 20:00-00:00 · dom 12:30-16:30 · lunes cerrado</span></div><div class="note">Pasta dentro de una rueda de queso gigante. Precio por persona AR$30.000-70.000 (≈ CLP 18.800-43.800). Reserva en ladesso.com.ar: se abre 10 días antes (24 oct para el martes 3 nov). Propuesto para la cena de cumpleaños.</div><a class="maps-link" href="https://www.google.com/maps/search/?api=1&query=L%27adesso+Ristorante+Fray+Justo+Santa+Maria+de+Oro+2047+Buenos+Aires" target="_blank" rel="noopener">Abrir en Maps</a></div>
+          <div class="info-card"><h3>🥩 Fogón Asado (opcional, premium)</h3><div class="info-row"><span>Dirección</span><span>Gorriti 3780, Palermo</span></div><div class="note">Puesto 22 en World's Best Steak Restaurants 2026 y mención Michelin 2024. Menú degustación de 9 pasos desde AR$131.000 (≈ USD 90, ≈ <span class="money">CLP 82.000</span>) sin maridaje; incluye cóctel de bienvenida, agua, café y clase de chimichurri. Con vinos, unos 100-150 euros (≈ <span class="money">CLP 110.000-160.000</span>); el estimado de la app usa este valor. Reserva en fogonasado.com o Instagram. Actívalo en 💰 "Estimado vs. lo que llevas" para ver el efecto en tu tope.</div><a class="maps-link" href="https://www.google.com/maps/search/?api=1&query=Fogon+Asado+Gorriti+3780+Buenos+Aires" target="_blank" rel="noopener">Abrir en Maps</a></div>
+          <div class="info-card"><h3>🧀 Italpast (Hotel Faena, Puerto Madero)</h3><div class="note">Sirve pasta a la horma de queso. No verifiqué precio ni carta de esta sucursal: revisa antes de ir.</div><a class="maps-link" href="https://www.google.com/maps/search/?api=1&query=Italpast+Faena+Puerto+Madero+Buenos+Aires" target="_blank" rel="noopener">Abrir en Maps</a></div>
+          <div class="info-card"><h3>🍝 Pasta económica</h3><div class="info-row"><span>Cantina Palermo</span><span>Fitz Roy 2238</span></div><div class="info-row"><span>Pippo (Microcentro)</span><span>Paraná 356</span></div><div class="note">Precios de una nota de marzo (AR$7.500-10.500 por plato), pueden estar desactualizados.</div></div>
+        </div>
+      </div>
+
+      <div class="acc-card" id="acc-reservas">
+        <div class="acc-head"><span class="acc-head-title">🎟️ Reservas y entradas</span><span class="chevron">▶</span></div>
+        <div class="acc-body">
+          <div class="info-card"><h3>📅 Cuándo se abren las reservas</h3><div class="info-row"><span>L'adesso (mar 3 nov)</span><span>desde el 24 oct</span></div><div class="note">Usa solo el enlace oficial de cada lugar. Trade Sky Bar y Uptown BA quedaron fuera del plan (mínimo de consumo de AR$35.000 y ambiente sofisticado); si cambias de idea, sus reservas se abrían el 18 y el 22 de octubre.</div></div>
+          <div class="info-card"><h3>✅ Ya reservado: Misión BA</h3><div class="info-row"><span>Cuándo</span><span>Vie 6 nov · 20:00 · Barra · 1 persona</span></div><div class="info-row"><span>Código</span><span>PVFGT1</span></div><div class="info-row"><span>Dirección</span><span>Godoy Cruz 1715, Palermo</span></div><div class="info-row"><span>Sushi y vino libre</span><span>20:00-21:30 · AR$35.000</span></div><div class="info-row"><span>Instagram</span><span>@misionclub.ba</span></div><div class="info-row"><span>Reservas</span><span>mision.meitre.com</span></div><div class="note">Mix de piezas elegido por la cocina (sin nigiris ni calientes), con opción veggie; no se acumula con otras promos. Zapatillas permitidas, con derecho de admisión. Tolerancia de 15 min. Cancelación por WhatsApp +54 9 11 7099-1715: con más de 24 h se reintegra el 50% del pago (tú no pagaste nada); dentro de las 24 h, sin reintegro.</div><a class="maps-link" href="https://www.google.com/maps/search/?api=1&query=Mision+Godoy+Cruz+1715+Buenos+Aires" target="_blank" rel="noopener">Abrir en Maps</a></div>
+          <div class="info-card"><h3>🏛️ Palacio Barolo (lun 2 nov)</h3><div class="info-row"><span>Dirección</span><span>Av. de Mayo 1370</span></div><div class="info-row"><span>Tour</span><span>90 min con mirador · 11:00, 13:00 y 16:00</span></div><div class="info-row"><span>Civitatis</span><span>≈ CLP 37.500</span></div><div class="info-row"><span>Web oficial</span><span>AR$54.000 ≈ CLP 33.800</span></div><div class="note">Civitatis: se reserva hasta 3 h antes; cancelación gratis hasta 6 h antes; el de las 11:00 es sin degustación. Operador oficial: WhatsApp +54 9 11 6915-2385 (cerrado los martes). Decides allá.</div><a class="maps-link" href="https://www.google.com/maps/search/?api=1&query=Palacio+Barolo+Av+de+Mayo+1370+Buenos+Aires" target="_blank" rel="noopener">Abrir en Maps</a></div>
+          <div class="info-card"><h3>🎭 Teatro Colón (Día 6)</h3><div class="info-row"><span>Visita</span><span>50 min · todos los días 10:00-16:45</span></div><div class="info-row"><span>Idiomas</span><span>Español cada 15 min · inglés 10 a 15 h</span></div><div class="info-row"><span>Entrada general</span><span>AR$34.000 ≈ CLP 21.300</span></div><div class="note">Compra en teatrocolon.org.ar o en la boletería (Tucumán 1171). Efectivo y tarjeta en 1 pago; no acepta moneda extranjera. Tolerancia de 5 min. El circuito puede cambiar por ensayos o eventos, sin devolución.</div><a class="maps-link" href="https://www.google.com/maps/search/?api=1&query=Teatro+Colon+Tucuman+1171+Buenos+Aires" target="_blank" rel="noopener">Abrir en Maps</a></div>
+          <div class="info-card"><h3>🌿 Jardín Japonés y MALBA (Día 5)</h3><div class="info-row"><span>Jardín Japonés</span><span>Av. Casares 3500 · 10:00-18:45</span></div><div class="info-row"><span>Entrada no residentes</span><span>AR$24.000 ≈ CLP 15.000</span></div><div class="info-row"><span>MALBA</span><span>Av. Figueroa Alcorta 3415 · jue 12:00-20:00</span></div><div class="info-row"><span>Entrada general</span><span>AR$7.000 ≈ CLP 4.400</span></div><div class="note">El MALBA cierra los martes y abre a las 11:00 los miércoles. El Rosedal abre 8:00-18:00 de martes a domingo. Confirma vigencia en sus webs.</div></div>
+        </div>
+      </div>
     </div>
 
     <div class="tab-panel" id="tab-budget">
@@ -337,6 +363,7 @@
         <div class="daily-big money" id="dailyTotal">—</div>
         <div class="daily-sub" id="dailySub"></div>
         <div id="dailyWallets"></div>
+        <div class="note" id="dailyPlan" style="margin-top:6px;"></div>
         <div class="note" id="dailyNote"></div>
       </div>
 
@@ -359,7 +386,7 @@
             </div>
             <div class="form-row"><button class="btn" id="expAddBtn" style="width:100%;">Agregar gasto</button></div>
             <div class="note" id="expMsg" style="min-height:14px; margin-top:0;"></div>
-            <div class="tip">✦ Hostal (<span class="money">CLP 132,5 mil</span>, se paga al llegar): al pagarlo, regístralo en <b>Alojamiento</b> con la palabra <b>Hostal</b> en la descripción y forma de pago Global66. Depósito de garantía (reembolsable): regístralo en Alojamiento con la billetera en que lo dejes, y cuando te lo devuelvan agrégalo de nuevo con <b>monto negativo</b>.</div>
+            <div class="tip">✦ Hostal (<span class="money">CLP 132.500</span>, se paga al llegar): al pagarlo, regístralo en <b>Alojamiento</b> con la palabra <b>Hostal</b> en la descripción y forma de pago Global66. Depósito de garantía (reembolsable): regístralo en Alojamiento con la billetera en que lo dejes, y cuando te lo devuelvan agrégalo de nuevo con <b>monto negativo</b>.</div>
           </div>
         </div>
       </div>
@@ -380,6 +407,11 @@
         <div class="note" id="estHostalStatus" style="margin:0 0 6px;"></div>
         <div class="info-row"><span>Resto del viaje (sin hostal)</span><span class="money" id="estRest">—</span></div>
         <div class="info-row" style="font-weight:700;"><span>Total estimado</span><span class="money" id="estRange">—</span></div>
+        <div class="info-row"><span>Tu tope máximo</span><span class="money" id="capVal">—</span></div>
+        <div class="est-cmp" id="capMsg" style="margin-top:4px;"></div>
+        <div class="seg" id="scenSeg"><button data-scen="normal">Plan normal</button><button data-scen="eco">Plan económico</button></div>
+        <div class="note" id="scenNote" style="margin:0 0 6px;"></div>
+        <label class="ent-row" style="color:var(--ink); margin:8px 0;"><input type="checkbox" id="fogonToggle"> <span>Incluir Fogón Asado en la cena de cumpleaños (≈ CLP 110.000-160.000)</span></label>
         <div class="info-row"><span>Saldo general inicial</span><span class="money" id="generalInitial">$0</span></div>
         <div class="est-cmp" id="estCompare"></div>
         <div class="note">El hostal va aparte porque se paga al llegar (Global66). No incluye lo ya pagado antes del viaje (vuelo, power bank, seguro). Todo se convierte a CLP al tipo de cambio configurado arriba.</div>
@@ -410,10 +442,23 @@
         </div>
       </div>
 
+      <div class="acc-card" id="acc-entradas">
+        <div class="acc-head"><span class="acc-head-title">🎟️ Entradas por día (precios confirmados)</span><span class="chevron">▶</span></div>
+        <div class="acc-body">
+          <div id="entDayList"></div>
+          <div class="info-card"><div class="info-row" style="font-weight:700;"><span>Total entradas marcadas</span><span class="money" id="entTotalClp">—</span></div><div class="info-row"><span>…en pesos argentinos</span><span class="money" id="entTotalArs">—</span></div><div class="note">Solo cuenta las entradas marcadas en el itinerario. El bus turístico está desactivado. En el Teatro Colón no se paga con moneda extranjera: lleva pesos o tarjeta. Barolo: CLP según Civitatis (más caro) o la web oficial.</div></div>
+        </div>
+      </div>
+
       <div class="acc-card" id="acc-estimados">
         <div class="acc-head"><span class="acc-head-title">Estimados por categoría + cuánto ARS llevar</span><span class="chevron">▶</span></div>
         <div class="acc-body">
-          <table class="budget-table"><thead><tr><th>Categoría</th><th>Gastado</th><th>Vs. tope</th></tr></thead><tbody id="estBody"></tbody></table>
+          <table class="budget-table"><thead><tr><th>Día</th><th>Estimado</th><th>Gastado</th><th>Estado</th></tr></thead><tbody id="dayEstBody"></tbody></table>
+          <div class="note">Gasto diario estimado sin hostal. Semáforo según lo gastado ese día: ⚪ sin gastos · 🟢 menos del 80% del máximo · 🟡 entre 80% y 100% · 🔴 sobre el máximo. Cambia si marcas o desmarcas entradas, activas Fogón o eliges el plan económico.</div>
+          <h3 style="margin:14px 0 4px;">💵 Efectivo vs. tarjeta por día</h3>
+          <table class="budget-table"><thead><tr><th>Día</th><th>Efectivo (ARS)</th><th>Tarjeta (CLP)</th></tr></thead><tbody id="cashDayBody"></tbody></table>
+          <div class="note">Supuestos: efectivo ≈ 50% de la comida (ferias, kioscos, helados), 40% de traslados, 25% de la noche y 50% de las entradas; el resto va con tarjeta. Souvenirs 70% en efectivo e imprevistos 100% efectivo.</div>
+          <table class="budget-table" style="margin-top:12px;"><thead><tr><th>Categoría</th><th>Gastado</th><th>Vs. tope</th></tr></thead><tbody id="estBody"></tbody></table>
           <div class="info-card" style="margin-top:12px;">
             <h3>Ya pagado antes del viaje (referencia)</h3>
             <div id="prepaidList"></div>
@@ -421,10 +466,13 @@
           </div>
           <div class="info-card">
             <h3>Cuánto ARS llevar</h3>
-            <div class="info-row"><span>Estimado total en ARS</span><span class="money" id="estArs">—</span></div>
-            <div class="info-row"><span>Efectivo sugerido (40-50%)</span><span class="money" id="estCashClp">—</span></div>
-            <div class="info-row"><span>…en ARS</span><span class="money" id="estCashArs">—</span></div>
-            <div class="note">Efectivo: ferias, kioscos, propinas, entradas. Tarjeta: restaurantes, Uber, clubes. Convierte de a poco allá. Cálculo según el tipo de cambio de arriba.</div>
+            <div class="info-row"><span>Gasto en Argentina (sin hostal)</span><span class="money" id="estArsBaseClp">—</span></div>
+            <div class="info-row"><span>…en ARS</span><span class="money" id="estArs">—</span></div>
+            <div class="info-row"><span>Efectivo a llevar (según la tabla por día), en ARS</span><span class="money" id="estCashArs">—</span></div>
+            <div class="info-row"><span>…equivale a</span><span class="money" id="estCashClp">—</span></div>
+            <div class="info-row"><span>Ya anotado en "Efectivo ARS"</span><span class="money" id="estArsHave">—</span></div>
+            <div class="est-cmp" id="estArsGap"></div>
+            <div class="note">El hostal no entra: se paga aparte con Global66. De ese gasto, lleva en efectivo solo la parte de ferias, kioscos, propinas y entradas; el resto va con tarjeta (restaurantes, Uber, clubes). Convierte de a poco allá. Cálculo según el tipo de cambio de arriba.</div>
           </div>
         </div>
       </div>
@@ -446,6 +494,11 @@
       <div class="acc-card" id="acc-noche-bar">
         <div class="acc-head"><span class="acc-head-title">🍸 Bares</span><span class="chevron">▶</span></div>
         <div class="acc-body"><div id="nocheContainerBar"></div></div>
+      </div>
+
+      <div class="acc-card" id="acc-noche-roof">
+        <div class="acc-head"><span class="acc-head-title">🌆 Rooftops y vistas</span><span class="chevron">▶</span></div>
+        <div class="acc-body"><div id="nocheContainerRoof"></div></div>
       </div>
 
       <div class="acc-card" id="acc-noche-cultura">
@@ -472,7 +525,7 @@
       <div class="acc-card" id="acc-souv-clasicos">
         <div class="acc-head"><span class="acc-head-title">Clásicos para comer y beber</span><span class="chevron">▶</span></div>
         <div class="acc-body">
-          <div class="info-card"><h3>🍬 Arcor Center</h3><div class="info-row"><span>Dirección</span><span>Av. Corrientes 1335</span></div><div class="note">Golosinas a granel — día 2 de Microcentro.</div><a class="maps-link" href="https://www.google.com/maps/search/?api=1&query=Arcor+Center+Av+Corrientes+1335+Buenos+Aires" target="_blank" rel="noopener">Abrir en Maps</a></div>
+          <div class="info-card"><h3>🍬 Arcor Center</h3><div class="info-row"><span>Dirección</span><span>Av. Corrientes 1335</span></div><div class="info-row"><span>Horario</span><span>Lun-sáb 10-20 · dom 12-19</span></div><div class="note">Golosinas a granel — día 2 de Microcentro.</div><a class="maps-link" href="https://www.google.com/maps/search/?api=1&query=Arcor+Center+Av+Corrientes+1335+Buenos+Aires" target="_blank" rel="noopener">Abrir en Maps</a></div>
           <div class="info-card"><h3>🍮 Dulce de leche</h3><div class="info-row"><span>La Serenísima / Chimbote</span><span>Cualquier súper</span></div></div>
           <div class="info-card"><h3>🥜 Mantecol</h3><div class="info-row"><span>Georgalos</span><span>Kiosco o súper</span></div></div>
           <div class="info-card"><h3>🍪 Alfajores</h3><div class="info-row"><span>Balcarce / Cofler / Guaymallén</span><span>Kiosco</span></div><div class="info-row"><span>Alfajor de maicena</span><span>En confiterías</span></div></div>
@@ -486,9 +539,9 @@
         <div class="acc-head"><span class="acc-head-title">🔮 Tarot &amp; Esoterismo</span><span class="chevron">▶</span></div>
         <div class="acc-body">
           <div class="info-card"><h3>🃏 Mi mazo (Vibración 33)</h3><div class="form-row"><input type="text" id="deckName" placeholder="Nombre exacto del mazo que quieres comprar"></div><div class="note">Se guarda en tu teléfono. El Rider-Waite-Smith es el más común: pregunta en cada tienda por "Rider Waite Smith, 78 cartas, edición original" (también sirve la edición "Pamela Colman Smith"). Confirma stock por Instagram antes de ir; si no lo tienen, prueba en El Ateneo (Día 3) o en otra librería.</div></div>
-          <div class="info-card"><h3>Magia Libros</h3><div class="info-row"><span>Dirección</span><span>Thames 1619, Palermo</span></div><div class="note">Tarot, astrología y psicodelia. Día 5 en el itinerario.</div><a class="maps-link" href="https://www.google.com/maps/search/?api=1&query=Magia+Libros+Thames+1619+Buenos+Aires" target="_blank" rel="noopener">Abrir en Maps</a></div>
-          <div class="info-card"><h3>FE</h3><div class="info-row"><span>Dirección</span><span>Av. Santa Fe 2729 (Galería Patio del Liceo)</span></div><div class="note">Piedras, sahumerios, cartas, escuela y lecturas en inglés. Cerca de Recoleta: calza con tu cumpleaños (día 3).</div><a class="maps-link" href="https://www.google.com/maps/search/?api=1&query=FE+Av+Santa+Fe+2729+Buenos+Aires" target="_blank" rel="noopener">Abrir en Maps</a></div>
-          <div class="info-card"><h3>Librería Esotérica de La Diosa</h3><div class="info-row"><span>Zona</span><span>Palermo</span></div><div class="note">Dirección por confirmar en su Instagram antes de ir.</div><a class="maps-link" href="https://www.google.com/maps/search/?api=1&query=Libreria+Esoterica+La+Diosa+Palermo+Buenos+Aires" target="_blank" rel="noopener">Abrir en Maps</a></div>
+          <div class="info-card"><h3>Magia Libros</h3><div class="info-row"><span>Dirección</span><span>Thames 1619, Palermo</span></div><div class="info-row"><span>Horario</span><span>Mar-vie 11-19 · sáb-dom 12-19</span></div><div class="note">Tarot, astrología y psicodelia. Día 5 en el itinerario. Su web tiene Tarot de Marsella, Rider Waite Smith y oráculos. Precio de referencia: un Tarot de Marsella AR$59.500 (≈ CLP 37.000); confirma que sea el mazo y cuál tienen en stock. Instagram @magialibros · WhatsApp +54 9 11 5137-0117.</div><a class="maps-link" href="https://www.google.com/maps/search/?api=1&query=Magia+Libros+Thames+1619+Buenos+Aires" target="_blank" rel="noopener">Abrir en Maps</a></div>
+          <div class="info-card"><h3>FE</h3><div class="info-row"><span>Dirección</span><span>Av. Santa Fe 2729, PB local 9 (Galería Patio del Liceo)</span></div><div class="info-row"><span>Horario</span><span>Galería lun-sáb, típico 11-20 (por confirmar)</span></div><div class="note">Su web tiene mazos de tarot (Marsella, Rider Waite, Thoth, Egipcio, históricos). Se mencionan lecturas en inglés: pregunta si las hacen en castellano. Subte más cercano: Agüero. Cerca de Recoleta: calza con tu cumpleaños (día 3).</div><a class="maps-link" href="https://www.google.com/maps/search/?api=1&query=FE+Av+Santa+Fe+2729+Buenos+Aires" target="_blank" rel="noopener">Abrir en Maps</a></div>
+          <div class="info-card"><h3>Librería Esotérica de La Diosa</h3><div class="info-row"><span>Zona</span><span>Su sitio habla de un local en Núñez (dirección por confirmar)</span></div><div class="info-row"><span>Horario</span><span>Jue-dom 13-20 · "La Nocturna" 22-01</span></div><div class="note">Solo libros esotéricos nuevos (no es claro que vendan mazos). Para visitar el local hay que pedir turno y pagar una entrada de AR$40.000 (≈ CLP 25.000, valor de septiembre) que se descuenta de tu compra. Ya escribiste a libreria@esotericadeladiosa.com.ar: espera la respuesta (dirección, turno y entrada).</div><a class="maps-link" href="https://www.google.com/maps/search/?api=1&query=Libreria+Esoterica+La+Diosa+Palermo+Buenos+Aires" target="_blank" rel="noopener">Abrir en Maps</a></div>
           <div class="info-card"><h3>The West of the Moon</h3><div class="info-row"><span>Zona</span><span>Palermo</span></div><div class="note">Dirección por confirmar: ubícala por su Instagram.</div><a class="maps-link" href="https://www.google.com/maps/search/?api=1&query=The+West+of+the+Moon+Palermo+Buenos+Aires" target="_blank" rel="noopener">Abrir en Maps</a></div>
           <div class="info-card"><h3>Altar</h3><div class="info-row"><span>Zona</span><span>Colegiales</span></div><div class="note">Café con lecturas de tarot. Dirección por confirmar en su Instagram.</div><a class="maps-link" href="https://www.google.com/maps/search/?api=1&query=Altar+Colegiales+Buenos+Aires+tarot" target="_blank" rel="noopener">Abrir en Maps</a></div>
           <div class="info-card"><h3>Un día en Venus</h3><div class="note">Librería esotérica "secreta". Ubícala por su Instagram.</div><a class="maps-link" href="https://www.google.com/maps/search/?api=1&query=Un+dia+en+Venus+libreria+Buenos+Aires" target="_blank" rel="noopener">Abrir en Maps</a></div>
@@ -500,7 +553,7 @@
   </main>
 
   <footer>Rinasco a modo mio 🧡</footer>
-  <div class="version-tag">v4.5 · Creado por Melitalove</div>
+  <div class="version-tag">v5.3 · Creado por Melitalove</div>
   <div class="nav-spacer"></div>
 </div>
 
@@ -690,7 +743,17 @@ const pendientesData = [
   "Sacar efectivo (ARS) para el depósito de garantía del hostal (USD 10)",
   "Lavar la toalla de microfibra antes de usarla",
   "Revisar el pronóstico real la semana antes de viajar",
-  "Avisar a alguien de confianza tu itinerario completo"
+  "Avisar a alguien de confianza tu itinerario completo",
+  "Reservar L'adesso (pasta en rueda de queso) para el martes 3 nov en ladesso.com.ar (se abre el 24 oct); según la respuesta, decidir la cena de cumpleaños",
+  "Escribir a Helka Wine Bar por Instagram para pedir tarot",
+  "Decidir si va Fogón Asado (desde AR$131.000 sin vinos; con vinos ~€100-150) y reservar en fogonasado.com",
+  "Elegir una cena de barrio para el jueves 5 nov en Palermo y otra para el lunes 2 nov en el centro (bodegón o pizzería)",
+  "Esperar la respuesta de la Librería La Diosa (dirección, turno y entrada de AR$40.000)",
+  "Preguntar al hostal por check-in temprano (llegas 11:20) y por guardar equipaje el 7 nov",
+  "Preguntar a Misión BA si la pista tiene entrada aparte (reserva vie 6 nov, 20:00, Barra)",
+  "Elegir el tour del Palacio Barolo (11, 13 o 16 h) y reservarlo por Civitatis",
+  "Confirmar horario de Pot (helado del Día 6, Montevideo 1208) y de Nonna Bianca",
+  "Pedir un Uber en el aeropuerto de Santiago al llegar (00:42 del 8 nov)"
 ];
 const pendContainer=document.getElementById('pendientesContainer');
 let pendItems=[];
@@ -752,13 +815,51 @@ for(let i=1;i<=4;i++){ const key='doc-custom-'+i; buildDocSlot(customDocsContain
 
 /* ---------- Itinerario ---------- */
 const ENTRY_ITEMS = {
-  barolo:{day:2, name:'Palacio Barolo (tour guiado)', lo:33000, hi:64000, def:true},
-  jardin:{day:5, name:'Jardín Japonés', lo:11300, hi:11300, def:true},
-  malba:{day:5, name:'MALBA (verificar precio)', lo:6000, hi:9000, def:true},
-  colon:{day:6, name:'Teatro Colón (alternativa)', lo:41000, hi:46000, def:false}
+  barolo:{day:2, name:'Palacio Barolo (tour guiado)', lo:34000, hi:38000, ars:54000, def:true},
+  jardin:{day:5, name:'Jardín Japonés', lo:15000, hi:15000, ars:24000, def:true},
+  malba:{day:5, name:'MALBA (AR$7.000)', lo:4400, hi:4400, ars:7000, def:true},
+  bus:{day:3, name:'Bus turístico 24 h (AR$58.500, tarifa extranjero)', lo:36600, hi:36600, ars:58500, def:false},
+  colon:{day:6, name:'Teatro Colón (tour 50 min, AR$34.000)', lo:21300, hi:21300, ars:34000, def:true}
 };
 const DAY_NOTES = {1:'Sin entradas pagadas', 3:'Museos y cementerio gratis', 4:'Sin entradas pagadas', 6:'Sin otras entradas', 7:'Sin entradas pagadas'};
-const DAY_OPTS = {3:'Bus turístico amarillo (opcional): precio por confirmar'};
+const DAY_OPTS = {};
+const DAY_PLAN = {
+  1:{comida:[28000,34000], transp:[15000,20000], noche:[12000,18000]},
+  2:{comida:[18000,22000], transp:[6000,10000], noche:[10000,16000]},
+  3:{comida:[28000,40000], transp:[10000,15000], noche:[19000,40000]},
+  4:{comida:[18000,22000], transp:[6000,10000],  noche:[28000,35000]},
+  5:{comida:[18000,22000], transp:[6000,12000], noche:[14000,22000]},
+  6:{comida:[16000,20000], transp:[6000,12000],  noche:[25000,35000]},
+  7:{comida:[15000,18000], transp:[15000,25000],  noche:[0,0]}
+};
+const FOGON_DAY3 = [120000,175000]; /* almuerzo liviano + Fogón Asado (reemplaza la cena de cumpleaños) */
+const BUDGET_CAP = 780000;
+/* Escenarios: el plan "Normal" es el base; "Económico" recorta comida, traslados y noches (las reservas fijas no bajan) */
+const SCEN = {
+  normal:{label:'Normal', f:{comida:1, transp:1, noche:1}, souv:[30000,45000], otra:[35000,45000]},
+  eco:{label:'Económico', f:{comida:0.85, transp:0.75, noche:0.8}, souv:[30000,37000], otra:[25000,35000]}
+};
+function scenKey(){ const v = lsGet('plan-scenario','normal'); return SCEN[v] ? v : 'normal'; }
+function sc(r,k){ const f = SCEN[scenKey()].f[k]; return [Math.round(r[0]*f/1000)*1000, Math.round(r[1]*f/1000)*1000]; }
+/* Parte estimada en efectivo por categoría (el resto va con tarjeta) */
+const CASH_SHARE = {comida:0.5, transp:0.4, noche:0.25, ent:0.5};
+function dayCash(n){
+  const e = dayEst(n); let cl=0, ch=0;
+  Object.keys(CASH_SHARE).forEach(k=>{ cl += e[k][0]*CASH_SHARE[k]; ch += e[k][1]*CASH_SHARE[k]; });
+  return {cash:[cl,ch], card:[e.lo-cl, e.hi-ch]};
+}
+function extrasCash(){ const x = SCEN[scenKey()]; return [x.souv[0]*0.7 + x.otra[0], x.souv[1]*0.7 + x.otra[1]]; }
+function fogonOn(){ return !!lsGet('plan-fogon', false); }
+function entDay(n){
+  let lo=0, hi=0; Object.keys(ENTRY_ITEMS).forEach(id=>{ const it=ENTRY_ITEMS[id]; if(it.day===n && entState(id)){ lo+=it.lo; hi+=it.hi; } });
+  return [lo,hi];
+}
+function dayEst(n){
+  const pl = DAY_PLAN[n]; let com = sc(pl.comida,'comida'); if(n===3 && fogonOn()) com = FOGON_DAY3;
+  const tr = sc(pl.transp,'transp'), no = sc(pl.noche,'noche');
+  const e = entDay(n);
+  return {comida:com, transp:tr, noche:no, ent:e, lo: com[0]+tr[0]+no[0]+e[0], hi: com[1]+tr[1]+no[1]+e[1]};
+}
 function entState(id){ const st = lsGet('planned-entries', {}); return (id in st) ? !!st[id] : ENTRY_ITEMS[id].def; }
 function plannedEntries(){
   let lo=0, hi=0; Object.keys(ENTRY_ITEMS).forEach(id=>{ if(entState(id)){ lo+=ENTRY_ITEMS[id].lo; hi+=ENTRY_ITEMS[id].hi; } });
@@ -769,62 +870,64 @@ const days = [
     {label:"Mañana", text:"Vuelo SCL→AEP (09:13-11:20). Traslado desde casa: Uber o Transvip (~$8.000-15.000 CLP p/persona, cotizar en transvip.cl antes de reservar)."},
     {label:"Almuerzo", text:"Algo liviano cerca del hostel."},
     {label:"Tarde", text:"Caminata de reconocimiento por Plaza Serrano."},
-    {label:"Tarde (opcional)", text:"Feria de San Telmo (Plaza Dorrego) — cierra tipo 18-19h los domingos. Si sales del hostal antes de las 17h, alcanzas el final."},
-    {label:"🍦 Helado del día", text:"Persicco — Honduras 4900, Palermo."},
-    {label:"Noche", text:"Cena de pastas."}
+    {label:"Tarde (opcional)", text:"Feria de San Telmo (Plaza Dorrego) — domingos de 10:00 a 17:00 (algunos puestos y actividades hasta las 18:00). Si sales del hostal antes de las 16:00, alcanzas a recorrerla."},
+    {label:"🍦 Helado del día", text:"Persicco Riobamba — Riobamba 1295, esquina Juncal, Recoleta · todos los días 9:00–00:00."},
+    {label:"Noche", text:"Cena de pastas (lugar por elegir) + un trago tranquilo: La Uat Bar (Thames 1627 · domingo 19:00–00:00)."}
   ]},
   {num:2, date:"Lun 2 nov", zone:"Microcentro · Historia y arquitectura", slots:[
-    {label:"Mañana", text:"Café Tortoni, Obelisco, Plaza de Mayo (Casa Rosada, Cabildo, Catedral)."},
-    {label:"Almuerzo", text:"Pizzería Güerrín o Paulín sobre Av. Corrientes."},
-    {label:"Tarde", text:"🎟️ Palacio Barolo (tour guiado, ~$33.000-64.000 CLP) + Calle Florida + Galería Pacífico (mall histórico, entrada libre)."},
-    {label:"🍦 Helado del día", text:"Cadore — Av. Corrientes 1695."},
-    {label:"🎁 Souvenir cercano", text:"Arcor Center — Av. Corrientes 1335."},
-    {label:"Noche", text:"Confitería La Ideal."}
+    {label:"Mañana", text:"Café Tortoni (Av. de Mayo 825 · todos los días 8:00–21:00 · unos AR$20.000–30.000 por persona), Obelisco, Plaza de Mayo (Casa Rosada, Cabildo, Catedral)."},
+    {label:"Almuerzo", text:"Pizzería Güerrín — Av. Corrientes 1368 (11:00–01:00; vie y sáb hasta las 02:00)."},
+    {label:"Mediodía y tarde", text:"🎟️ Palacio Barolo (Av. de Mayo 1370): tour guiado de 90 min con subida al mirador, salidas a las 11:00, 13:00 y 16:00 (el de las 11 es sin degustación) · ≈ CLP 34–38 mil. Reserva por Civitatis (hasta 3 h antes; cancelación gratis hasta 6 h antes) o en la web oficial: eliges allá. + Calle Florida + Galería Pacífico (entrada libre)."},
+    {label:"🍦 Helado del día", text:"Cadore — Av. Corrientes 1695 (dom–jue 12:00–24:00 · vie y sáb 12:00–02:00)."},
+    {label:"🎁 Souvenir cercano", text:"Arcor Center — Av. Corrientes 1335 (lun–sáb 10:00–20:00 · dom 12:00–19:00)."},
+    {label:"Noche", text:"Noche de centro clásico: Av. Corrientes iluminada (teatros, librerías y el Obelisco), cena en una pizzería o bodegón de barrio (lugar por elegir; unos AR$12.000-20.000) y Confitería La Ideal. Tango callejero si lo encuentras."}
   ]},
   {num:3, date:"Mar 3 nov · Cumpleaños 🎂", zone:"Recoleta", slots:[
     {label:"Mañana", text:"Cementerio de la Recoleta + Centro Cultural Recoleta + Museo Nacional de Bellas Artes (entrada gratuita)."},
-    {label:"Mañana (alternativa)", text:"🎟️ Buenos Aires Bus (turístico amarillo) — sale de Av. Quintana 596, mismo barrio. Recorre Recoleta, Colón, Caminito, Puerto Madero. Precio no confirmado, revisar en buenosairesbus.com."},
+    {label:"Mañana (alternativa)", text:"🎟️ Buenos Aires Bus (turístico amarillo) — sale de Av. Quintana 596, mismo barrio. Recorre Recoleta, Colón, Caminito, Puerto Madero. Ticket de 24 h adulto AR$58.500 (≈ CLP 36.600, tarifa extranjero; también hay de 48 y 72 h). Confirma en buenosairesbus.com cómo se cuentan las 24 h. No está sumado al presupuesto: márcalo en 🎟️ Entradas si lo eliges."},
     {label:"Almuerzo", text:"Algo en Recoleta."},
     {label:"Tarde", text:"El Ateneo Grand Splendid + Floralis Genérica + El Cuartito."},
-    {label:"🔮 Tarot cercano", text:"FE — Av. Santa Fe 2729 (Galería Patio del Liceo): cartas, piedras y lecturas en inglés. Ideal para una lectura de cumpleaños."},
-    {label:"🍦 Helado del día", text:"Rapanui — Uruguay 1284, Recoleta."},
+    {label:"🔮 Tarot cercano", text:"FE — Av. Santa Fe 2729, local 9 (Galería Patio del Liceo): mazos de tarot (Marsella, Rider-Waite, Thoth), piedras y sahumerios. Horario por confirmar: la galería abre de lunes a sábado, típicamente de 11:00 a 20:00. Se mencionan lecturas en inglés: pregunta si las hacen en castellano."},
+    {label:"🍦 Helado del día", text:"Rapanui — Uruguay 1284, Recoleta (horario por confirmar)."},
     {label:"♏ Tu decreto de cumpleaños", text:"Escorpio · La Muerte (transformación): 'Hoy cierro un ciclo y abro otro. Decreto que este año es mío, y lo vivo sin pedir permiso.'"},
-    {label:"Noche", text:"Cena especial de cumpleaños."}
+    {label:"Noche", text:"Cena especial de cumpleaños: L'adesso (pasta en rueda de queso, Fray Justo Sta. María de Oro 2047 · mar–sáb 20:00–00:00 · AR$30.000–70.000 por persona). Reserva en ladesso.com.ar: se abre 10 días antes (24 oct). La cena final depende de la respuesta que recibas al reservar (cupo, horario y precio). Opción premium: Fogón Asado (ver 💰)."},
+    {label:"Noche (baile)", text:"Fiesta HYPE! (martes, Honduras 5339: reggaeton y trap). Confirma que abra el martes."}
   ]},
   {num:4, date:"Mié 4 nov", zone:"San Telmo + La Boca", slots:[
     {label:"Mañana", text:"San Telmo — Plaza Dorrego, Paseo de la Historieta."},
-    {label:"Almuerzo", text:"Mercado de San Telmo (Bolívar 970) — Hierro Parrilla, El Hornero (empanadas) o La Choripanería, los tres bajo el mismo techo."},
-    {label:"Tarde", text:"La Boca — Caminito, Pizzería Angelin."},
-    {label:"🍦 Helado del día", text:"Nonna Bianca — Estados Unidos 425, San Telmo."},
+    {label:"Almuerzo", text:"Mercado de San Telmo (esquina Bolívar y Carlos Calvo) — Hierro Parrilla, El Hornero (empanadas) o La Choripanería, los tres bajo el mismo techo (horarios por confirmar)."},
+    {label:"Tarde", text:"La Boca — Caminito. Pizza en Banchero (Av. Almirante Brown 1200)."},
+    {label:"🍦 Helado del día", text:"Nonna Bianca (también Nonna San Telmo) — Chile 501, esquina Bolívar y Perú, San Telmo · martes a domingo 9:00–21:00 (lunes cerrado) · +54 11 6093-1778. Cafetería y heladería artesanal de estilo clásico (datos de Google)."},
     {label:"🎁 Souvenir cercano", text:"Mate/talabartería y fileteado porteño — Feria de San Telmo."},
-    {label:"Noche", text:"Volver a Palermo."}
+    {label:"Noche", text:"Volver a Palermo y noche libre: tango callejero por el centro o una milonga si te dan ganas (por ejemplo La Del Centro Milonga, Rodríguez Peña 361, miércoles 20:30–02:00, con clase para principiantes)."}
   ]},
   {num:5, date:"Jue 5 nov", zone:"Palermo a fondo", slots:[
-    {label:"Mañana", text:"Bosques de Palermo + El Rosedal + 🎟️ Jardín Japonés (~$11.300 CLP, no residente)."},
-    {label:"Almuerzo", text:"Palermo Hollywood."},
-    {label:"Tarde", text:"🎟️ MALBA (~$6.000-9.000 CLP, verificar precio actualizado)."},
-    {label:"🔮 Tarot en Palermo", text:"Magia Libros (Thames 1619), Librería Esotérica de La Diosa o The West of the Moon (ubicar por Instagram)."},
-    {label:"🍦 Helado del día", text:"Rapanui — Malabia 2014, Palermo."},
-    {label:"Noche", text:"Cena en Conchinchina, Niño Gordo o La Carnicería."}
+    {label:"Mañana", text:"Bosques de Palermo + El Rosedal (8:00–18:00) + 🎟️ Jardín Japonés (Av. Casares 3500 · 10:00–18:45 · AR$24.000 no residentes ≈ CLP 15.000)."},
+    {label:"Almuerzo", text:"Palermo Hollywood (lugar por elegir)."},
+    {label:"Tarde", text:"🎟️ MALBA (Av. Figueroa Alcorta 3415 · jueves 12:00–20:00 · AR$7.000 ≈ CLP 4.400; cierra los martes)."},
+    {label:"📚 Otra opción (reemplaza el tarot)", text:"El Ateneo Grand Splendid — Av. Santa Fe 1860, Recoleta · lunes a jueves 9:00–22:00 (viernes y sábado hasta 00:00; domingo 12:00–22:00). Librería dentro de un teatro de 1919, con palcos y escenario convertido en café; entrada libre (de memoria, por confirmar). El tarot lo compras en FE el día de tu cumpleaños; si quieres un segundo mazo, Magia Libros (Thames 1619 · mar–vie 11:00–19:00) queda como respaldo."},
+    {label:"🍦 Helado del día", text:"Rapanui — Malabia 2014, Palermo (horario por confirmar)."},
+    {label:"Noche", text:"Cena de barrio en Palermo (un bodegón o parrilla tradicional, lugar por elegir; unos AR$15.000-25.000) en vez de un restaurante sofisticado."},
+    {label:"Noche (bares)", text:"🔮 Helka Wine Bar (Freire 1117, Colegiales): tarot express, pedir por Instagram. Luego, si te queda energía, un bar de Palermo (Bestial Skybar, Humboldt 2495, piso 11, es opcional y más caro)."}
   ]},
   {num:6, date:"Vie 6 nov", zone:"Palermo · Noche electrónica", slots:[
-    {label:"Mañana", text:"Libre / descanso."},
-    {label:"Tarde", text:"Shopping o Distrito Arcos."},
-    {label:"🍦 Helado del día", text:"Freddo — Arenales 3360, Palermo."},
-    {label:"Alternativa", text:"🎟️ Tour interior del Teatro Colón (~$41.000-46.000 CLP, verifica horario esa semana) si prefieres una noche más tranquila antes de salir."},
-    {label:"Noche", text:"Atis Bar → Puticlú o Artlab."}
+    {label:"Mañana", text:"🎟️ Teatro Colón — visita guiada de 50 min (salidas cada 15 min de 10:00 a 16:45; en español cada 15 min; AR$34.000 ≈ CLP 21.300). Entradas en teatrocolon.org.ar o en la boletería (Tucumán 1171); acepta efectivo y tarjeta de débito o crédito en 1 pago, no moneda extranjera. Tolerancia de 5 min."},
+    {label:"Tarde", text:"Shopping o Distrito Arcos (dirección y horario por confirmar)."},
+    {label:"🍦 Helado del día", text:"Pot — Montevideo 1208, Recoleta (a pocas cuadras del Teatro Colón; horario por confirmar): heladería boutique con toppings propios y fruta orgánica. Respaldo: Via Maggiore, Callao 777."},
+    {label:"Alternativa", text:"Puerto Madero y Puente de la Mujer si te sobra tiempo antes de la noche."},
+    {label:"Noche", text:"🍸 Misión BA (Godoy Cruz 1715): reserva confirmada para 1 persona, viernes 6, 20:00, en la Barra (código PVFGT1; tolerancia de 15 min; cancelación por WhatsApp +54 9 11 7099-1715, sin reintegro dentro de las 24 h). Sushi y vino libre AR$35.000 (≈ CLP 21.900), de 20:00 a 21:30 (llega puntual): mix de piezas elegido por la cocina, sin nigiris ni platos calientes, con opción veggie; no se acumula con otras promos. Happy hour también 20:00-21:30. La pista abre a las 00:00 y suelen cerrar hacia las 06:00. Zapatillas permitidas, pero la casa se reserva el derecho de admisión; la música depende de la noche (mira @misionclub.ba ese día). Más tarde, opcional: Puticlú o Artlab (direcciones por confirmar)."}
   ]},
   {num:7, date:"Sáb 7 nov", zone:"Libre + vuelo de regreso", slots:[
     {label:"Mañana", text:"Checkout 11:00 — deja mochila en recepción."},
     {label:"Tarde", text:"Últimas compras, souvenirs."},
     {label:"Alternativa", text:"Puerto Madero y Puente de la Mujer — caminata final con vista al río antes del aeropuerto."},
     {label:"🍦 Helado del día", text:"Vuelve a tu favorita de la semana."},
-    {label:"Noche", text:"Vuelo AEP→SCL, 22:20 → 00:42 (+1)."}
+    {label:"Noche", text:"Vuelo AEP→SCL, 22:20 → 00:42 (+1). Al llegar a Santiago, pide un Uber a casa."}
   ]}
 ];
 const daysContainer=document.getElementById('daysContainer');
-function kTxt(n){ return (n/1000).toLocaleString('es-CL',{maximumFractionDigits:1}); }
-function entRange(lo,hi){ return lo===hi ? 'CLP '+kTxt(lo)+' mil' : 'CLP '+kTxt(lo)+' – '+kTxt(hi)+' mil'; }
+function nTxt(n){ return Math.round(n).toLocaleString('es-CL'); }
+function entRange(lo,hi){ return lo===hi ? 'CLP '+nTxt(lo) : 'CLP '+nTxt(lo)+' – '+nTxt(hi); }
 function dayEntrySub(n){
   let lo=0, hi=0; Object.keys(ENTRY_ITEMS).forEach(id=>{ const it=ENTRY_ITEMS[id]; if(it.day===n && entState(id)){ lo+=it.lo; hi+=it.hi; } });
   return lo===0&&hi===0 ? 'CLP 0' : entRange(lo,hi);
@@ -843,6 +946,7 @@ days.forEach((d,i)=>{
     <div class="day-body">
       ${d.slots.map(s=>`<div class="slot"><div class="slot-label">${s.label}</div><div class="slot-text">${moneyWrap(s.text)}</div></div>`).join('')}
       ${entryHTML(d)}
+      <div class="day-est">📊 Gasto estimado del día: <span class="money" id="day-est-${d.num}">—</span><span style="font-weight:400; color:#c7c3ad;"> (comida, transporte, noche y entradas; sin hostal)</span></div>
       <div class="day-spent">💵 Gastado este día: <span class="money" id="day-spent-${d.num}">$0</span></div>
       <div class="places-row"><input type="text" id="place-input-${d.num}" placeholder="📍 Agrega un lugar que visitaste"><button class="places-add" id="place-add-${d.num}">+</button></div>
       <div class="places-tags" id="places-tags-${d.num}"></div>
@@ -883,18 +987,24 @@ const METHODS = [
 ];
 const CURRENCIES = ['CLP','ARS','USD'];
 const BASE_CATEGORIES = ['Alojamiento','Transporte','Comida y helados','Entradas y tours','Vida nocturna','Souvenirs y regalos','Propinas','Otra'];
-const ESTIMATES = {
-  'Alojamiento':        {low:141840, high:141840, note:'Hostal $132.540 (se paga al llegar) + depósito $9.300 (reembolsable)'},
-  'Transporte':         {low:42000,  high:51000,  note:'Uber, subte, traslados'},
-  'Comida y helados':   {low:153000, high:200000, note:'Comidas, heladerías y cena de cumpleaños'},
-  'Entradas y tours':   {low:91000,  high:130000, note:'Barolo, MALBA, Jardín Japonés, Colón, bus turístico'},
-  'Vida nocturna':      {low:90000,  high:120000, note:'~$30.000 por noche, 3-4 noches'},
-  'Souvenirs y regalos':{low:30000,  high:50000,  note:''},
-  'Propinas':           {low:0,      high:0,      note:''},
-  'Otra':               {low:60000,  high:90000,  note:'Efectivo de respaldo / imprevistos'}
-};
-const EST_LOW  = Object.values(ESTIMATES).reduce((s,e)=>s+e.low,0);
-const EST_HIGH = Object.values(ESTIMATES).reduce((s,e)=>s+e.high,0);
+let ESTIMATES = {}, EST_LOW = 0, EST_HIGH = 0;
+function recomputeEstimates(){
+  const sum = (k,i)=> [1,2,3,4,5,6,7].reduce((t,n)=> t + dayEst(n)[k][i], 0);
+  const fog = fogonOn();
+  ESTIMATES = {
+    'Alojamiento':        {low:141840, high:141840, note:'Hostal $132.540 (se paga al llegar) + depósito $9.300 (reembolsable)'},
+    'Transporte':         {low:sum('transp',0), high:sum('transp',1), note:'Uber, subte, traslados; incluye Uber desde el aeropuerto de Santiago el día 7'},
+    'Comida y helados':   {low:sum('comida',0), high:sum('comida',1), note: fog ? "Incluye Fogón Asado (cena de cumpleaños) y helados" : "Incluye cena de cumpleaños en L'adesso y helados"},
+    'Entradas y tours':   {low:sum('ent',0), high:sum('ent',1), note:'Solo las entradas marcadas en el itinerario (Barolo, Jardín, MALBA, Teatro Colón; bus turístico desactivado)'},
+    'Vida nocturna':      {low:sum('noche',0), high:sum('noche',1), note:'6 noches: cenas de barrio, L\'adesso (cumpleaños), Misión BA, bares y baile'},
+    'Souvenirs y regalos':{low:SCEN[scenKey()].souv[0], high:SCEN[scenKey()].souv[1], note:'Incluye el mazo de tarot (referencia ≈ CLP 37.000 en Magia Libros)'},
+    'Propinas':           {low:0,      high:0,      note:''},
+    'Otra':               {low:SCEN[scenKey()].otra[0],  high:SCEN[scenKey()].otra[1],  note:'Efectivo de respaldo / imprevistos'}
+  };
+  EST_LOW  = Object.values(ESTIMATES).reduce((t,e)=>t+e.low,0);
+  EST_HIGH = Object.values(ESTIMATES).reduce((t,e)=>t+e.high,0);
+}
+recomputeEstimates();
 const HOSTAL_COST = 132540;
 const HOSTAL_RE = /host(a|e)l|play|garden/i;
 const PREPAID = [
@@ -913,14 +1023,10 @@ function convert(amount, from, to){
   const usd = from==='USD' ? amount : from==='CLP' ? amount/uc : amount/ua;
   return to==='USD' ? usd : to==='CLP' ? usd*uc : usd*ua;
 }
-/* Siempre con el código de moneda (CLP / ARS / USD). Montos grandes en forma corta: 132,5 mil · 1,49 M */
+/* Siempre con el código de moneda (CLP / ARS / USD). CLP y ARS completos y sin decimales (132.540); USD con 2 decimales */
 function fmtMoney(n, cur){
   const neg = n < -0.005; const a = Math.abs(n); const code = cur || 'CLP';
-  let num;
-  if(code==='USD') num = a.toLocaleString('es-CL',{minimumFractionDigits:2, maximumFractionDigits:2});
-  else if(a >= 1e6) num = (a/1e6).toLocaleString('es-CL',{maximumFractionDigits:2}) + ' M';
-  else if(a >= 10000) num = (a/1000).toLocaleString('es-CL',{maximumFractionDigits:1}) + ' mil';
-  else num = Math.round(a).toLocaleString('es-CL');
+  const num = code==='USD' ? a.toLocaleString('es-CL',{minimumFractionDigits:2, maximumFractionDigits:2}) : Math.round(a).toLocaleString('es-CL');
   return (neg?'-':'') + code + ' ' + num;
 }
 function fmtExact(n, cur){
@@ -1208,9 +1314,34 @@ function renderEstimates(c){
   const total = `<tr class="tot"><td>Total<span class="sub"><span class="money">${rangeText(EST_LOW, EST_HIGH)}</span></span></td><td><span class="money">${fmtMoney(tSpent,'CLP')}</span></td><td>${estStatus({low:EST_LOW, high:EST_HIGH}, tSpent)}</td></tr>`;
   document.getElementById('estBody').innerHTML = rows + total;
   const {uc,ua} = currentRates(); const toARS = clp => clp/uc*ua; const r1000 = n => Math.round(n/1000)*1000;
-  document.getElementById('estArs').textContent = rangeCur(r1000(toARS(EST_LOW)), r1000(toARS(EST_HIGH)),'ARS');
-  document.getElementById('estCashClp').textContent = rangeCur(r1000(EST_LOW*0.4), r1000(EST_HIGH*0.5),'CLP');
-  document.getElementById('estCashArs').textContent = rangeCur(r1000(toARS(EST_LOW*0.4)), r1000(toARS(EST_HIGH*0.5)),'ARS');
+  const aloj = ESTIMATES['Alojamiento'] || {low:0, high:0};
+  const bLo = EST_LOW - aloj.low, bHi = EST_HIGH - aloj.high;
+  document.getElementById('estArsBaseClp').textContent = rangeCur(r1000(bLo), r1000(bHi),'CLP');
+  document.getElementById('estArs').textContent = rangeCur(r1000(toARS(bLo)), r1000(toARS(bHi)),'ARS');
+  let kLo = extrasCash()[0], kHi = extrasCash()[1];
+  [1,2,3,4,5,6,7].forEach(n=>{ const d = dayCash(n); kLo += d.cash[0]; kHi += d.cash[1]; });
+  document.getElementById('estCashClp').textContent = rangeCur(r1000(kLo), r1000(kHi),'CLP');
+  const cLo = r1000(toARS(kLo)), cHi = r1000(toARS(kHi));
+  document.getElementById('estCashArs').textContent = rangeCur(cLo, cHi,'ARS');
+  const wArs = (c.wallets||[]).find(w=> w.cur==='ARS'); const have = wArs ? wArs.initial : 0;
+  document.getElementById('estArsHave').textContent = fmtMoney(have,'ARS');
+  document.getElementById('estArsGap').innerHTML = have<=0 ? 'Anota cuánto ARS llevas en "Saldos por billetera" para ver cuánto te falta.' : have < cLo ? `Te faltan ${mny(cLo-have,'ARS')} para el mínimo de efectivo.` : have > cHi ? `Llevas ${mny(have-cHi,'ARS')} sobre el máximo de efectivo sugerido.` : 'Tu efectivo en ARS está dentro del rango sugerido. 👌';
+  renderEntradasDia();
+}
+function renderEntradasDia(){
+  const box = document.getElementById('entDayList'); if(!box) return;
+  let tLo=0, tHi=0, tArs=0, html='';
+  for(let n=1;n<=TRIP_DAYS;n++){
+    const its = Object.keys(ENTRY_ITEMS).filter(id=> ENTRY_ITEMS[id].day===n && entState(id)).map(id=>ENTRY_ITEMS[id]);
+    if(!its.length) continue;
+    let lo=0, hi=0, ars=0;
+    const rows = its.map(it=>{ lo+=it.lo; hi+=it.hi; ars+=it.ars||0; return `<div class="info-row"><span>${esc(it.name)}</span><span class="money">${it.ars?fmtMoney(it.ars,'ARS')+' · ':''}${entRange(it.lo,it.hi)}</span></div>`; }).join('');
+    tLo+=lo; tHi+=hi; tArs+=ars;
+    html += `<div class="info-card"><h3>Día ${n} · ${esc(days[n-1].date)}</h3>${rows}<div class="info-row" style="font-weight:700;"><span>Subtotal del día</span><span class="money">${entRange(lo,hi)}</span></div></div>`;
+  }
+  box.innerHTML = html || '<div class="note">No hay entradas marcadas.</div>';
+  document.getElementById('entTotalClp').textContent = entRange(tLo,tHi);
+  document.getElementById('entTotalArs').textContent = fmtMoney(tArs,'ARS');
 }
 function renderPrepaid(){
   const sum = PREPAID.reduce((s,p)=> s+p.v, 0);
@@ -1225,8 +1356,36 @@ function updateDaySpent(c){
     el.textContent = fmtMoney(s,'CLP');
   }
 }
+function renderDayEst(c){
+  document.getElementById('dayEstBody').innerHTML = [1,2,3,4,5,6,7].map(n=>{
+    const e = dayEst(n);
+    const spent = c.exps.filter(x=> dayFromDate(x.date)===n && catOf(x)!=='Alojamiento').reduce((t,x)=> t + convert(x.amount, x.currency, 'CLP'), 0);
+    const el = document.getElementById('day-est-'+n); if(el) el.textContent = rangeText(e.lo, e.hi);
+    const dot = spent<=0 ? '⚪' : spent>e.hi ? '🔴' : spent>=0.8*e.hi ? '🟡' : '🟢';
+    return `<tr><td>Día ${n}</td><td><span class="money">${rangeText(e.lo,e.hi)}</span></td><td><span class="money">${fmtMoney(spent,'CLP')}</span></td><td style="text-align:center;">${dot}</td></tr>`;
+  }).join('');
+  const {uc:_uc, ua:_ua} = currentRates(); const toA = clp => clp/_uc*_ua; const r1k = n => Math.round(n/1000)*1000;
+  let cl=0, ch=0, kl=0, kh=0;
+  const crow = [1,2,3,4,5,6,7].map(n=>{ const d = dayCash(n); cl+=d.cash[0]; ch+=d.cash[1]; kl+=d.card[0]; kh+=d.card[1];
+    return `<tr><td>Día ${n}</td><td><span class="money">${rangeCur(r1k(toA(d.cash[0])), r1k(toA(d.cash[1])),'ARS')}</span></td><td><span class="money">${rangeText(r1k(d.card[0]), r1k(d.card[1]))}</span></td></tr>`; }).join('');
+  const sx = SCEN[scenKey()]; const xc = extrasCash(); cl+=xc[0]; ch+=xc[1]; kl+=sx.souv[0]*0.3; kh+=sx.souv[1]*0.3;
+  const xrow = `<tr><td>Souvenirs e imprevistos</td><td><span class="money">${rangeCur(r1k(toA(xc[0])), r1k(toA(xc[1])),'ARS')}</span></td><td><span class="money">${rangeText(r1k(sx.souv[0]*0.3), r1k(sx.souv[1]*0.3))}</span></td></tr>`;
+  const trow = `<tr class="tot"><td>Total</td><td><span class="money">${rangeCur(r1k(toA(cl)), r1k(toA(ch)),'ARS')}</span></td><td><span class="money">${rangeText(r1k(kl), r1k(kh))}</span></td></tr>`;
+  const cb = document.getElementById('cashDayBody'); if(cb) cb.innerHTML = crow + xrow + trow;
+  const tl = [1,2,3,4,5,6,7].reduce((t,n)=> t+dayEst(n).lo,0), th = [1,2,3,4,5,6,7].reduce((t,n)=> t+dayEst(n).hi,0);
+  const avgEl = document.getElementById('dailyPlan');
+  if(avgEl) avgEl.innerHTML = `Tu plan estima unos ${mny(tl/7)} – ${fmtMoney(th/7,'CLP').replace(/^CLP /,'')} por día (sin hostal).`;
+}
 function renderBudgetAll(opts){
+  recomputeEstimates();
   const c = computeAll();
+  document.getElementById('fogonToggle').checked = fogonOn();
+  document.querySelectorAll('#scenSeg button').forEach(b=> b.classList.toggle('on', b.dataset.scen===scenKey()));
+  document.getElementById('scenNote').textContent = scenKey()==='eco' ? 'Económico: comidas −15%, traslados −25% (más subte y caminata), noches −20% e imprevistos menores. L\'adesso y Misión BA (reservas con precio fijo) no bajan.' : 'Normal: es el plan base del itinerario, calculado para no pasar tu tope.';
+  document.getElementById('capVal').textContent = fmtMoney(BUDGET_CAP,'CLP');
+  const m = BUDGET_CAP - EST_HIGH;
+  document.getElementById('capMsg').innerHTML = m >= 0 ? `Con el estimado más alto te quedan ${mny(m)} bajo tu tope.` : `<span class="neg">El estimado más alto supera tu tope por ${fmtMoney(-m,'CLP')}.</span> Recorta entradas, noches o desactiva Fogón.`;
+  renderDayEst(c);
   document.getElementById('estRange').textContent = rangeText(EST_LOW, EST_HIGH);
   document.getElementById('estHostal').textContent = fmtMoney(HOSTAL_COST,'CLP');
   document.getElementById('estRest').textContent = rangeText(EST_LOW - HOSTAL_COST, EST_HIGH - HOSTAL_COST);
@@ -1258,6 +1417,8 @@ function renderBudgetAll(opts){
 
 /* Reiniciar (solo presupuesto), con doble toque */
 let resetArmed = false, resetTimer = null;
+document.querySelectorAll('#scenSeg button').forEach(b=> b.addEventListener('click', ()=>{ lsSet('plan-scenario', b.dataset.scen); renderBudgetAll({keepCats:true}); }));
+document.getElementById('fogonToggle').addEventListener('change', e=>{ lsSet('plan-fogon', e.target.checked); renderBudgetAll({keepCats:true}); });
 document.getElementById('resetBudgetBtn').addEventListener('click', ()=>{
   const btn = document.getElementById('resetBudgetBtn');
   if(!resetArmed){
@@ -1296,16 +1457,33 @@ const nocheData = [
   {name:"Artlab", tag:"club", icon:"🎧", zone:"Palermo", addr:"Verificar en Instagram", note:""},
   {name:"Atis Bar", tag:"bar", icon:"🍸", zone:"Palermo", addr:"Verificar en Instagram", note:"Cocktail bar, antes de salir a bailar."},
   {name:"Frank's", tag:"bar", icon:"🍸", zone:"Palermo Hollywood", addr:"Arévalo 1445", note:"Speakeasy años 20, contraseña semanal."},
-  {name:"Uptown BA", tag:"bar", icon:"🍸", zone:"Palermo Hollywood", addr:"Arévalo 2030", note:"Estación de subte NY, pista tras medianoche."},
+  {name:"Uptown BA", tag:"bar", icon:"🍸", zone:"Palermo Hollywood", addr:"Arévalo 2030", note:"OPCIONAL, fuera del plan por ahora (restaurante sofisticado). Se entra como a una estación de subte de Nueva York (pasas un torniquete y un vagón). Reserva solo para cenar: turnos 20:00, 20:30, 22:00 y 22:30, mesa por 2 h; para solo tragos, ingreso por orden de llegada. Se reserva hasta 2 semanas antes (jueves 5 nov: desde el 22 oct) por el enlace de su Instagram. Consumo mínimo AR$35.000 (≈ CLP 21.900). Dress to impress: sin bermudas, ojotas, ropa deportiva ni mochilas. Solo mayores de 21. Cancelas hasta 2 h antes; no-show AR$20.000 (piden tarjeta de garantía)."},
   {name:"Victoria Brown", tag:"bar", icon:"🍸", zone:"Palermo", addr:"Costa Rica 4827", note:"Speakeasy steampunk/victoriano."},
   {name:"Harrison", tag:"bar", icon:"🍸", zone:"Palermo", addr:"Malabia 1764", note:"Speakeasy clásico."},
-  {name:"La Bomba de Tiempo", tag:"cultura", icon:"🥁", zone:"Ciudad Cultural Konex", addr:"Sarmiento 3131", note:"Percusión en vivo — lunes."},
-  {name:"Una milonga", tag:"cultura", icon:"💃", zone:"Varias zonas", addr:"Según la milonga", note:"Clase de tango + show."}
+  {name:"La Bomba de Tiempo", tag:"cultura", icon:"🥁", zone:"Ciudad Cultural Konex", addr:"Sarmiento 3131", note:"Fuera del plan por ahora. Función del lunes 2 nov a las 19:00; entrada Patio AR$22.000 anticipada o AR$27.000 el día, más service charge. La siguiente es el 9 nov."},
+  {name:"Una milonga", tag:"cultura", icon:"💃", zone:"Varias zonas", addr:"Según la milonga", note:"Clase de tango + show."},
+  {name:"Trade Sky Club", tag:"rooftop", icon:"🌆", zone:"Palermo", addr:"Av. Juan B. Justo 1517 (piso 28, Torre Qiub)", note:"OPCIONAL, fuera del plan. Vista de 360° a más de 100 m. After Office 18:00-20:00, restaurante 20:00-00:00, DJ de 00:00 a 03:00. Cóctel ~AR$18.000 (≈ CLP 11.000); platos AR$27.000-57.000. Abrió a fines de agosto o septiembre de 2026 y hay pocas reseñas; algunas dicen que la comida no destaca, así que mejor solo tragos. Confirma que abra el martes."},
+  {name:"Bestial Skybar", tag:"rooftop", icon:"🌆", zone:"Palermo", addr:"Humboldt 2495 (piso 11)", note:"Mar-mié 19-01, jue-sáb 19-02:30. Cócteles de autor y platos pequeños."},
+  {name:"Trade Sky Bar (Piso 19)", tag:"rooftop", icon:"🌆", zone:"Microcentro", addr:"Av. Corrientes 222 (piso 19)", note:"OPCIONAL, fuera del plan por ahora (mínimo AR$35.000). Vista al Obelisco, Retiro y Puerto Madero. Reserva After Office (18:00 o 18:30, 1 h 30) o cena (desde 20:00, 2 h); para solo tragos, ingreso por orden de llegada. Reserva desde 15 días antes (lunes 2 nov: desde el 18 oct). Consumo mínimo AR$35.000 (≈ CLP 21.900). Elegante casual, sin ropa deportiva; mayores de 18. Cancelas hasta 2 h antes; no-show AR$20.000."},
+  {name:"Alvear Roof Bar", tag:"rooftop", icon:"🌆", zone:"Recoleta", addr:"Av. Alvear 1891 (piso 11)", note:"Mié-dom 19-23:30, house y coctelería de autor. Requiere reserva."},
+  {name:"Salón 1923 (Palacio Barolo)", tag:"rooftop", icon:"🌆", zone:"Microcentro", addr:"Av. de Mayo 1370 (piso 16)", note:"Mié-dom 18-00. Los lunes cierra: no sirve para el Día 2."},
+  {name:"Crystal Bar", tag:"rooftop", icon:"🌆", zone:"Puerto Madero", addr:"Aimé Painé 1130 (piso 32)", note:"18-01:30, cierra los lunes. Requiere reserva."},
+  {name:"Misión BA", tag:"bar", icon:"🍸", zone:"Palermo", addr:"Godoy Cruz 1715", note:"RESERVADO: viernes 6 nov, 20:00, Barra, 1 persona (código PVFGT1). Sushi y vino libre AR$35.000 (≈ CLP 21.900), mié-dom de 20:00 a 21:30, mix elegido por la cocina (sin nigiris ni calientes), opción veggie, no acumulable con otras promos; happy hour en el mismo horario. No hay el 25% en efectivo que muestra su página de reservas. Pista desde las 00:00; cierran hacia las 06:00. Zapatillas permitidas, con derecho de admisión; la música depende de la noche. Por preguntar: entrada a la pista. Reservas en mision.meitre.com. Cancelación por WhatsApp +54 9 11 7099-1715 (sin reintegro dentro de las 24 h). Instagram @misionclub.ba."},
+  {name:"La Uat Bar", tag:"bar", icon:"🍸", zone:"Palermo", addr:"Thames 1627", note:"Escondido tras una rotisería; música de los 80 y 90. Pegado a Magia Libros. Horario (según Google): domingo 19:00-00:00 y jueves 20:00-00:00; vie y sáb también de madrugada."},
+  {name:"Helka Wine Bar", tag:"bar", icon:"🔮", zone:"Colegiales", addr:"Capitán Gral. Ramón Freire 1117", note:"Casona de 1917 con tarot express (~15 min). Pídelo por mensaje directo a su Instagram."},
+  {name:"CIMA", tag:"bar", icon:"🍸", zone:"Palermo", addr:"Guatemala 4701 (sobre pizzería Orno)", note:"Cócteles de autor; noches de bingo con drag queens."},
+  {name:"Augusto y Augusta", tag:"bar", icon:"🍸", zone:"Palermo", addr:"Av. Ernesto Tornquist 6385", note:"Restaurante que se vuelve pista; público mayor de 30."},
+  {name:"Fiesta HYPE!", tag:"club", icon:"🎧", zone:"Palermo", addr:"Honduras 5339", note:"Martes: hip hop, trap, reggaeton, afrobeat. Calza con tu cumpleaños."},
+  {name:"Club Lucero", tag:"club", icon:"🎧", zone:"Palermo", addr:"Nicaragua 6048", note:"Selección de DJs, mié-sáb."},
+  {name:"La Del Centro Milonga", tag:"cultura", icon:"💃", zone:"Microcentro", addr:"Rodríguez Peña 361 (Sala La Argentina)", note:"Miércoles 20:30-02:00, con clases simultáneas para principiantes. Sin código de vestimenta; recibe turistas. Precio por confirmar. Según una nota de Time Out (dic 2025)."},
+  {name:"Yira Yira (Club Gricel)", tag:"cultura", icon:"💃", zone:"Almagro", addr:"La Rioja 1180", note:"Viernes: clase 19:30 y milonga 21:00-03:00, para todos los niveles. Precio por confirmar. Según Time Out (dic 2025)."},
+  {name:"La Viruta", tag:"cultura", icon:"💃", zone:"Palermo", addr:"Armenia 1366 (1er subsuelo)", note:"Los días varían según la fuente (Time Out: mié, vie y dom; su web: milonga los sábados desde las 00:00, clases lun y mar). Reservas por WhatsApp desde su web. Precio por confirmar."}
 ];
 const nocheContainerClub=document.getElementById('nocheContainerClub');
 const nocheContainerBar=document.getElementById('nocheContainerBar');
 const nocheContainerCultura=document.getElementById('nocheContainerCultura');
-const nocheTargets = {club: nocheContainerClub, bar: nocheContainerBar, cultura: nocheContainerCultura};
+const nocheContainerRoof=document.getElementById('nocheContainerRoof');
+const nocheTargets = {club: nocheContainerClub, bar: nocheContainerBar, cultura: nocheContainerCultura, rooftop: nocheContainerRoof};
 nocheData.forEach((v,i)=>{
   const id='noche-'+i;
   const mapsUrl='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(v.name+' '+v.addr+' Buenos Aires');
@@ -1324,7 +1502,7 @@ function loadNoche(){
   const s=lsGet('noche-visited',{}); nocheData.forEach((v,i)=>{ const el=document.getElementById('noche-'+i); if(s['noche-'+i]) el.checked=true; });
   const ex=lsGet('noche-extra',{}); ['niceto-cortesia','niceto-ra'].forEach(id=>{ const el=document.getElementById(id); if(el && ex[id]) el.checked=true; });
 }
-[nocheContainerClub, nocheContainerBar, nocheContainerCultura].forEach(cont=> cont.addEventListener('change', ()=>{
+[nocheContainerClub, nocheContainerBar, nocheContainerCultura, nocheContainerRoof].forEach(cont=> cont.addEventListener('change', ()=>{
   const s={}; nocheData.forEach((v,i)=> s['noche-'+i]=document.getElementById('noche-'+i).checked); lsSet('noche-visited', s);
   const ex={}; ['niceto-cortesia','niceto-ra'].forEach(id=>{ const el=document.getElementById(id); if(el) ex[id]=el.checked; }); lsSet('noche-extra', ex);
 }));

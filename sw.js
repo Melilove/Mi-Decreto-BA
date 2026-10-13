@@ -1,4 +1,4 @@
-const CACHE_NAME = 'mi-decreto-v13';
+const CACHE_NAME = 'mi-decreto-v21';
 const urlsToCache = ['./', './index.html', './manifest.json', './icon-192.png', './icon-512.png'];
 
 self.addEventListener('install', (event) => {
